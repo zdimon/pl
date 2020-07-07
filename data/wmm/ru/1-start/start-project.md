@@ -37,6 +37,21 @@
 
     . ./venv/bin/activate
 
+Установка
 
+    pip install name
+
+
+Старт проекта 
+
+    dgango-admin startproject name
+
+Создание БД
+
+    ./manage.py migrate
+
+Запуск сервера разработки.
+
+    ./manage.py runserver 
 
 
