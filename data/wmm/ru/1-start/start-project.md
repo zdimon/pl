@@ -33,7 +33,9 @@
 
     git pull
 
+Активирование ВО
 
+    . ./venv/bin/activate
 
 
 
