@@ -19,4 +19,22 @@
 
     git checkout name
 
+Генерация ключей
+
+    ssh-keygen
+
+    cat ~/.ssh/id_rsa.pub
+
+Клонирование непозитория
+
+    git clone 
+
+Обновить репу.
+
+    git pull
+
+
+
+
+
 
