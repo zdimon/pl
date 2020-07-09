@@ -1,0 +1,17 @@
+slug: wmm-cource-import
+name: Импорт курсов.
+meta_title: Импорт курсов.
+meta_keywords: Импорт курсов.
+meta_description: Импорт курсов.
+is_active: true
+desc:
+        
+files:
+    -
+        file:  cource-import.md
+        title: Импорт курсов.
+        meta_title: Импорт курсов.
+        meta_description:  Импорт курсов.
+        meta_keywords: Импорт курсов.
+        desc: 
+           
