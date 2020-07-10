@@ -1,0 +1,17 @@
+slug: pl-topic-meta
+name: Страница урока. Мета теги.
+meta_title: Страница урока. Мета теги.
+meta_keywords: Страница урока. Мета теги.
+meta_description: Страница урока. Мета теги.
+is_active: true
+desc:
+        
+files:
+    -
+        file:  pl-topic-meta.md
+        title: Страница урока. Мета теги.
+        meta_title: Страница урока. Мета теги.
+        meta_description: Страница урока. Мета теги.
+        meta_keywords: Страница урока. Мета теги.
+        desc: 
+           

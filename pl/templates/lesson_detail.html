@@ -8,16 +8,16 @@
             <div class="col-md-12 layout_padding_2">
                 <div class="full">
                     <div class="heading_main text_align_left">
-                       <h2>{{ course.name }}</h2>
+                       <h2>{{ lesson.title }}</h2>
 
                     </div>
-                    <div class="full">
-                        <ul class="lessons-list">
-                            {% for lesson in course.lesson_set.all %}
-                                 <li><a href="{{ lesson.get_absolute_url }}">{{ lesson.title }}</a></li>
-                            {% endfor %}
-                         </ul>
-                    </div>
+                    {% for topic in lesson.topic_set.all %}
+                        <div class="full">      
+
+                            {{ topic.content }}
+
+                        </div>   
+                    {% endfor %}                 
                 </div>
             </div>
         </div>        
