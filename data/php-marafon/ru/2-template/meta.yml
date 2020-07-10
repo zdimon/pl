@@ -1,0 +1,18 @@
+slug: php-template-seed
+name: Ставим шаблон. Наполняем базу данных.
+meta_title: Ставим шаблон. Наполняем базу данных.
+meta_keywords: Ставим шаблон. Наполняем базу данных.
+meta_description: Ставим шаблон. Наполняем базу данных.
+is_active: true
+desc:
+        
+files:
+    -
+        file:  php-template-seed.md
+        title: Ставим шаблон. Наполняем базу данных.
+        meta_title: Ставим шаблон. Наполняем базу данных.
+        meta_description:  Ставим шаблон. Наполняем базу данных.
+        meta_keywords: Ставим шаблон. Наполняем базу данных.
+        desc: 
+            
+           

@@ -1,0 +1,310 @@
+<h1>Статичные страницы. Админка.</h1>
+
+<p>Создадим миграцию и добавим новое поле alias к станицам.</p>
+
+<pre><code>php artisan make:migration add_alias_to_page_table
+
+// database/migrations/2020_06_22_112935_add_alias_to_page_table.php
+
+public function up()
+{
+    Schema::table('page', function (Blueprint $table) {
+        $table-&gt;string('alias');
+    });
+}
+</code></pre>
+
+<p>Запуситим миграцию.</p>
+
+<pre><code>php artisan migrate
+</code></pre>
+
+<p>Добавим alias в сеятель и скопируем картинки.</p>
+
+<pre><code>DB::table('page')-&gt;insert([
+    'title' =&gt; $item-&gt;title,
+    'alias' =&gt; $item-&gt;alias,
+    'content' =&gt; $item-&gt;content,
+    'image' =&gt; $item-&gt;image
+]);
+
+$file_path = base_path().'/fixture-data/images/posts/'.$item-&gt;image;
+$destination = base_path().'/public/storage/posts/'.$item-&gt;image;
+\File::copy($file_path,$destination);
+</code></pre>
+
+<p>Предварительно необходимо создать каталоги под картинки.</p>
+
+<p>Так же в файл fixtures.json</p>
+
+<pre><code>"pages": [
+    {
+        "title": "Dmitry Zharikov",
+        "content": "Full stack developer",
+        "image": "logo.jpg",
+        "alias": "header"
+    }, 
+    {
+        "title": "About me",
+        "content": "PHP Python Javascript developer",
+        "image": "my.jpg",
+        "alias": "about_me"
+    }        
+],
+</code></pre>
+
+<p>Запуск сеятеля.</p>
+
+<pre><code>php artisan db:seed --class=PageSeeder
+</code></pre>
+
+<p>Выбираем нужные записи в app/Providers/AppServiceProvider.php и передаем в шаблон.</p>
+
+<pre><code>&lt;?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $header = DB::table('page')-&gt;where('alias', 'header')-&gt;first();
+        $about = DB::table('page')-&gt;where('alias', 'about_me')-&gt;first();
+        View::share('header', $header);
+        View::share('about', $about);
+    }
+}
+</code></pre>
+
+<p>Выводим в шаблоне.</p>
+
+<pre><code>&lt;div class="container"&gt;                       
+            &lt;img class="profile-image img-responsive pull-left" width="150" src="storage/pages/{{ $header-&gt;image }}" alt="James Lee" /&gt;
+            ....
+    &lt;/header&gt;&lt;!--//header--&gt;
+
+    &lt;div class="container sections-wrapper"&gt;
+        &lt;div class="row"&gt;
+            &lt;div class="primary col-md-8 col-sm-12 col-xs-12"&gt;
+                &lt;section class="about section"&gt;
+                    &lt;div class="section-inner"&gt;
+                        &lt;h2 class="heading"&gt;{{ $about-&gt;title }}&lt;/h2&gt;
+                        &lt;div class="content"&gt;
+                            &lt;p&gt;{{ $about-&gt;content }}&lt;/p&gt;    
+                        &lt;/div&gt;&lt;!--//content--&gt;
+                    &lt;/div&gt;&lt;!--//section-inner--&gt;                 
+                &lt;/section&gt;&lt;!--//section--&gt;
+</code></pre>
+
+<p><img src="https://webmonstr.com/media/course/php-marafon/ru/4-pages-admin/images/1.png" alt="admin" /></p>
+
+<h2>Форма авторизации resources/views/auth.blade.php.</h2>
+
+<pre><code>@extends('layout')
+
+@section('content')
+    &lt;form method="POST" action="login"&gt;
+        @csrf
+        Пароль: &lt;input name="password" /&gt; &lt;input type="submit" value="Вход" /&gt;
+    &lt;/form&gt;
+@endsection
+</code></pre>
+
+<p>Роутинг.</p>
+
+<p>Для формы.</p>
+
+<pre><code>Route::get('/auth', function () {
+    return view('auth');
+});
+</code></pre>
+
+<p>Для авторизации.</p>
+
+<pre><code>use \Illuminate\Http\Request;
+...
+Route::post('/', function (Request $request) {
+    if($request-&gt;input('password') == '111') {
+        $request-&gt;session()-&gt;put('is_auth', 'true');
+    }
+    return redirect('/');
+});
+</code></pre>
+
+<p><img src="https://webmonstr.com/media/course/php-marafon/ru/4-pages-admin/images/2.png" alt="admin" /></p>
+
+<p>Проверяем авторизацию в шаблоне.</p>
+
+<pre><code>    @if(Session::has('is_auth'))
+        &lt;a class="btn btn-cta-primary pull-right" href="/pages"&gt;
+            Редактирование страниц
+        &lt;/a&gt;
+    @endif
+</code></pre>
+
+<p><img src="https://webmonstr.com/media/course/php-marafon/ru/4-pages-admin/images/3.png" alt="admin" /></p>
+
+<p>Создадим контроллер для crud страниц.</p>
+
+<pre><code>php artisan make:controller PageController --resource --model=Page
+</code></pre>
+
+<p>Добавив ресурсный маршрут.</p>
+
+<pre><code>Route::resource('page','PageController');
+</code></pre>
+
+<p><img src="https://webmonstr.com/media/course/php-marafon/ru/4-pages-admin/images/4.png" alt="admin" /></p>
+
+<p>Контроллер для списка страниц.</p>
+
+<pre><code>public function index()
+{
+    $pages = Page::all();
+    return view('page.index')-&gt;with('pages', $pages);
+}
+</code></pre>
+
+<p>Шаблон для таблицы resources/views/page/index.blade.php</p>
+
+<pre><code>@extends('layout')
+
+@section('content')
+
+        &lt;section class="about section"&gt;
+            &lt;div class="section-inner"&gt;   
+
+                &lt;table class="table table-bordered"&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;No&lt;/th&gt;
+                        &lt;th&gt;Image&lt;/th&gt;
+                        &lt;th&gt;Alias&lt;/th&gt;
+                        &lt;th&gt;Title&lt;/th&gt;
+                        &lt;th width="280px"&gt;Action&lt;/th&gt;
+                    &lt;/tr&gt;
+                    @foreach ($pages as $page)
+                    &lt;tr&gt;
+                        &lt;td&gt;{{ $page-&gt;id }}&lt;/td&gt;
+                        &lt;td&gt;&lt;img width="100" src="/storage/pages/{{ $page-&gt;image }}" /&gt;&lt;/td&gt;
+                        &lt;td&gt;{{ $page-&gt;alias }}&lt;/td&gt;
+                        &lt;td&gt;{{ $page-&gt;title }}&lt;/td&gt;
+                        &lt;td&gt;
+                            &lt;a class="btn btn-primary" href="{{ route('page.edit',$page-&gt;id) }}"&gt;Edit&lt;/a&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                    @endforeach
+                &lt;/table&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+@endsection
+</code></pre>
+
+<p><img src="https://webmonstr.com/media/course/php-marafon/ru/4-pages-admin/images/5.png" alt="admin" /></p>
+
+<p>Контролер для редактирования записи.</p>
+
+<pre><code>public function edit(Page $page)
+{
+    return view('page.edit',compact('page'));
+}
+</code></pre>
+
+<p>Шаблон для редактирования.</p>
+
+<pre><code>@extends('layout')
+
+@section('content')
+    &lt;div class="row"&gt;
+        &lt;div class="col-lg-12 margin-tb"&gt;
+            &lt;div class="pull-left"&gt;
+                &lt;h2&gt;Редактирование&lt;/h2&gt;
+            &lt;/div&gt;
+            &lt;div class="pull-right"&gt;
+                &lt;a class="btn btn-primary" href="{{ route('page.index') }}"&gt; Назад&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+
+    &lt;form action="{{ route('page.update',$page-&gt;id) }}" method="POST" enctype="multipart/form-data"&gt;
+        @csrf
+        @method('PUT')
+
+         &lt;div class="row"&gt;
+            &lt;div class="col-xs-12 col-sm-12 col-md-12"&gt;
+                &lt;div class="form-group"&gt;
+                    &lt;strong&gt;Заголовок:&lt;/strong&gt;
+                    &lt;input type="text" name="title" value="{{ $page-&gt;title }}" class="form-control" placeholder="Заголовок"&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="col-xs-12 col-sm-12 col-md-12"&gt;
+                &lt;div class="form-group"&gt;
+                    &lt;strong&gt;Изображение:&lt;/strong&gt;
+                    &lt;input type="file" name="image" /&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="col-xs-12 col-sm-12 col-md-12"&gt;
+                &lt;div class="form-group"&gt;
+                    &lt;strong&gt;Описание:&lt;/strong&gt;
+                    &lt;textarea class="form-control" style="height:150px" name="content" placeholder="Описание"&gt;{{ $page-&gt;content }}&lt;/textarea&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="col-xs-12 col-sm-12 col-md-12 text-center"&gt;
+              &lt;button type="submit" class="btn btn-primary"&gt;Сохранить&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+    &lt;/form&gt;
+@endsection
+</code></pre>
+
+<p>Прописываем поля для редактирования в модели.</p>
+
+<pre><code>&lt;?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Page extends Model
+{
+    protected $table = 'page';
+    protected $fillable = ['title','content', 'image'];
+}
+</code></pre>
+
+<p><img src="https://webmonstr.com/media/course/php-marafon/ru/4-pages-admin/images/6.png" alt="admin" /></p>
+
+<p>Контроллер для редактирования.</p>
+
+<pre><code>public function update(Request $request, Page $page)
+{
+    $page-&gt;update($request-&gt;all());
+    $file = $request-&gt;file('image');
+    $fileName = time().'.'.$file-&gt;extension();  
+    $file-&gt;move(public_path('storage/pages'), $fileName);
+    $page-&gt;image = $fileName;
+    $page-&gt;save();
+    return redirect()-&gt;route('page.index');
+}
+</code></pre>

@@ -1,0 +1,198 @@
+<h1>Последние посты. Фильтр.</h1>
+
+<p>Выбираем последние 3 поста из базы и категории в app/Providers/AppServiceProvider.php</p>
+
+<pre><code>&lt;?php
+...
+use \App\Post;
+use \App\Category;
+
+class AppServiceProvider extends ServiceProvider
+{
+    ...
+    public function boot()
+    {
+        ...
+        $last_posts = Post::orderBy('created_at', 'desc')-&gt;paginate(3);
+        $categories = Category::all();
+
+        ...
+
+        View::share('last_posts', $last_posts);
+        View::share('categories', $categories);
+
+    }
+}
+</code></pre>
+
+<p>Выводим в шаблоне.</p>
+
+<pre><code>            &lt;aside class="list music aside section"&gt;
+                &lt;div class="section-inner"&gt;
+                    &lt;h2 class="heading"&gt;Категории&lt;/h2&gt;
+                    &lt;div class="content"&gt;
+                        &lt;ul class="list-unstyled"&gt;
+                            @foreach ($categories as $category)
+                                &lt;li&gt;&lt;i class="fa fa-headphones"&gt;&lt;/i&gt; &lt;a href="#"&gt;
+                                    {{ $category-&gt;name }}
+                                &lt;/a&gt;&lt;/li&gt;
+                            @endforeach
+                        &lt;/ul&gt;
+                    &lt;/div&gt;&lt;!--//content--&gt;
+                &lt;/div&gt;&lt;!--//section-inner--&gt;
+            &lt;/aside&gt;&lt;!--//section--&gt;
+
+            &lt;aside class="blog aside section"&gt;
+                &lt;div class="section-inner"&gt;
+                    &lt;h2 class="heading"&gt;Последние посты&lt;/h2&gt;
+                    @foreach ($last_posts as $post)
+                        &lt;div id="rss-feeds" class="content"&gt;
+                            &lt;div class="item"&gt;
+                                &lt;h3 class="title" style=""&gt;
+                                    &lt;a target="_blank"&gt;
+                                        {{ $post-&gt;title }}
+                                    &lt;/a&gt;
+                                &lt;/h3&gt;
+
+                            &lt;/div&gt;           
+                        &lt;/div&gt;&lt;!--//content--&gt;
+                    @endforeach
+                &lt;/div&gt;&lt;!--//section-inner--&gt;
+            &lt;/aside&gt;&lt;!--//section--&gt;
+</code></pre>
+
+<p>Убираем из шаблона ajax подгрузку.</p>
+
+<pre><code>&lt;script type="text/javascript" src="/assets/js/main.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p><img src="https://webmonstr.com/media/course/php-marafon/ru/5-post-filter/images/1.png" alt="start page" /></p>
+
+<p>Добавим больше постов в фикстуры.</p>
+
+<pre><code>"posts": [
+    {
+        "title": "Title about PHP 1",
+        "image": "1.png",
+        "content": "Content about PHP",
+        "category": "PHP"
+    }, 
+    {
+        "title": "Title about Python 1",
+        "image": "2.png",
+        "content": "Content about Python",
+        "category": "Python"
+    }, 
+    {
+        "title": "Title about Javascript 1",
+        "image": "3.png",
+        "content": "Content about Javascript",
+        "category": "Javascript"
+    },
+    {
+        "title": "Title about PHP 2",
+        "image": "1.png",
+        "content": "Content about PHP",
+        "category": "PHP"
+    }, 
+    {
+        "title": "Title about Python 2",
+        "image": "2.png",
+        "content": "Content about Python",
+        "category": "Python"
+    }, 
+    {
+        "title": "Title about Javascript 2",
+        "image": "3.png",
+        "content": "Content about Javascript",
+        "category": "Javascript"
+    }    
+]
+</code></pre>
+
+<p>Загрузим их еще раз.</p>
+
+<pre><code>php artisan db:seed --class=PostSeeder
+</code></pre>
+
+<p>Создадим контроллер для фильтра.</p>
+
+<pre><code>php artisan make:controller FilterController
+</code></pre>
+
+<p>Содержимое контроллера.</p>
+
+<pre><code>&lt;?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Post;
+
+
+class FilterController extends Controller
+{
+    public function index($id)
+    {
+        $posts = Post::where('category_id', $id)-&gt;get();
+        return view('index')-&gt;with('posts', $posts);
+
+    }    
+}
+</code></pre>
+
+<p>Добавляем маршрут.</p>
+
+<pre><code>Route::get('/filter/{id}', 'FilterController@index');
+</code></pre>
+
+<p><img src="https://webmonstr.com/media/course/php-marafon/ru/5-post-filter/images/2.png" alt="start page" /></p>
+
+<p>Выводим в шаблоне ссылку на маршрут.</p>
+
+<pre><code>@foreach ($categories as $category)
+    &lt;li&gt;&lt;i class="fa fa-headphones"&gt;&lt;/i&gt; 
+    &lt;a href="/filter/{{ $category-&gt;id }}"&gt;
+        {{ $category-&gt;name }}
+    &lt;/a&gt;&lt;/li&gt;
+@endforeach
+</code></pre>
+
+<p>Шаблон для вывода статей.</p>
+
+<pre><code>@extends('layout')
+
+@section('content')
+    &lt;section class="latest section"&gt;
+            &lt;div class="section-inner"&gt;
+                &lt;h2 class="heading"&gt;Статьи&lt;/h2&gt;
+                &lt;div class="content"&gt;    
+
+                @foreach ($posts as $post)
+
+                    &lt;hr class="divider" /&gt;
+                    &lt;div class="item row"&gt;
+                        &lt;a class="col-md-4 col-sm-4 col-xs-12" href="#" target="_blank"&gt;
+                        &lt;img class="img-responsive project-image" src="/storage/posts/{{ $post-&gt;image }}" alt="project name" /&gt;
+                        &lt;/a&gt;
+                        &lt;div class="desc col-md-8 col-sm-8 col-xs-12"&gt;
+                            &lt;h3 class="title"&gt;
+                                &lt;a href="#" target="_blank"&gt;
+                                {{ $post-&gt;title }}
+                                &lt;/a&gt;&lt;/h3&gt;
+                            &lt;p&gt;{{ $post-&gt;content }}&lt;/p&gt;
+
+                        &lt;/div&gt;&lt;!--//desc--&gt;                          
+                    &lt;/div&gt;&lt;!--//item--&gt;
+
+                @endforeach                            
+
+
+                &lt;/div&gt;&lt;!--//content--&gt;  
+            &lt;/div&gt;&lt;!--//section-inner--&gt;                 
+        &lt;/section&gt;&lt;!--//section--&gt;
+
+@endsection
+</code></pre>
+
+<p><img src="https://webmonstr.com/media/course/php-marafon/ru/5-post-filter/images/3.png" alt="start page" /></p>

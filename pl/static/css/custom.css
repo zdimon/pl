@@ -1,1 +1,13 @@
 /** ADD YOUR AWESOME CODES HERE **/
+
+.header-title {
+    font-size: 30px;
+}
+
+.container {
+    padding-bottom: 10px;
+}
+
+.lessons-list li a{
+    font-size: 20px;
+}

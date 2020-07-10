@@ -1,0 +1,18 @@
+slug: php-win-install
+name: Установка PHP на Win 10
+meta_title: Установка PHP на Win 10
+meta_keywords: Установка PHP на Win 10
+meta_description: Установка PHP на Win 10
+is_active: true
+desc:
+        
+files:
+    -
+        file:  php-win-install.md
+        title: Установка PHP на Win 10
+        meta_title: Установка PHP на Win 10
+        meta_description:  Установка PHP на Win 10
+        meta_keywords: Установка PHP на Win 10
+        desc: 
+            
+           

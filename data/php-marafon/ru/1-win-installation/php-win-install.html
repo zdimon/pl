@@ -1,0 +1,90 @@
+<h1>Установка PHP на Win 10</h1>
+
+<p>Скачиваем дистрибутив.</p>
+
+<p><img src="https://webmonstr.com/media/course/php-marafon/ru/1-win-installation/images/1.png" alt="admin" /></p>
+
+<p><img src="https://webmonstr.com/media/course/php-marafon/ru/1-win-installation/images/2.png" alt="admin" /></p>
+
+<p>Распаковываем в папку с:/php</p>
+
+<p>Переименовываем файл php.ini-production в php.ini</p>
+
+<p>В нем раскоментируем строки </p>
+
+<pre><code>extension=curl
+extension=gd2
+extension=gettext
+extension=mbstring
+extension=mysqli
+extension=openssl
+extension=pdo_mysql
+extension=pdo_pgsql
+extension=pdo_sqlite
+extension=pgsql
+</code></pre>
+
+<p>Теперь нудно добавить путь c:/php в переменную окружения path.</p>
+
+<p>Через поиск вводим env и ищем переменные окружения.</p>
+
+<p><img src="https://webmonstr.com/media/course/php-marafon/ru/1-win-installation/images/3.png" alt="admin" /></p>
+
+<p>Уснанавливливаем композер.</p>
+
+<p><a href="https://getcomposer.org/download/">ссылка на скачивание</a></p>
+
+<p>Создаем пороект Laraver.</p>
+
+<pre><code>composer create-project --prefer-dist laravel/laravel blog
+</code></pre>
+
+<p>Скачиваем дистрибутив Apache.</p>
+
+<p><a href="https://www.apachehaus.com/cgi-bin/download.plx">ссылка для скачивания</a></p>
+
+<p>Распаковываем архив в папку c:/apache</p>
+
+<p>Открываем файл с:/apache/conf/httpd.conf и меняем следующее</p>
+
+<pre><code>Define SRVROOT "c:/apache"
+</code></pre>
+
+<p>Добавляем php.</p>
+
+<pre><code>PHPIniDir "c:/php"
+LoadModule php7_module "C:/php/php7apache2_4.dll"
+AddHandler application/x-httpd-php .php
+</code></pre>
+
+<p>Определяем виртуальный хост.</p>
+
+<pre><code>&lt;VirtualHost *:80&gt;
+    DocumentRoot "c:/Users/Dell/Desktop/php/blog/public"
+    ServerName localhost
+    &lt;Directory "c:/Users/Dell/Desktop/php/blog/public"&gt;
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride All
+            Require all granted
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p>Запускаем PowerShell от имени администратора и устанавливаем апач как сервис.</p>
+
+<pre><code>cd C:\Apache24\bin
+.\httpd.exe -k install
+</code></pre>
+
+<p>Стартуем сервер.</p>
+
+<pre><code>.\httpd.exe -k start
+</code></pre>
+
+<p><img src="https://webmonstr.com/media/course/php-marafon/ru/1-win-installation/images/4.png" alt="admin" /></p>
+
+<p>Устанавливаем MySQL.</p>
+
+<p><a href="https://dev.mysql.com/downloads/installer/">ссылка для скачивания</a></p>
+
+<p>Прописываем коннект к базе в файле blog/.env</p>

@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block carousel %} {% endblock %}
+{% block content %}
+
+<div class="section margin-top_50">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 layout_padding_2">
+                <div class="full">
+                    <div class="heading_main text_align_left">
+                       <h2>{{ course.name }}</h2>
+
+                    </div>
+                    <div class="full">
+                        <ul class="lessons-list">
+                            {% for lesson in course.lesson_set.all %}
+                                 <li><a href="#">{{ lesson.title }}</a></li>
+                            {% endfor %}
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+{% endblock %}

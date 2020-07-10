@@ -1,0 +1,17 @@
+slug: lesson-topic-import
+name: Импорт уроков и тем.
+meta_title: Импорт уроков и тем.
+meta_keywords: Импорт уроков и тем.
+meta_description: Импорт уроков и тем.
+is_active: true
+desc:
+        
+files:
+    -
+        file:  lesson-topic-import.md
+        title: Импорт уроков и тем.
+        meta_title: Импорт уроков и тем.
+        meta_description:  Импорт уроков и тем.
+        meta_keywords: Импорт уроков и тем.
+        desc: 
+           

@@ -1,0 +1,18 @@
+slug: laravel-pages-admin
+name: Статичные страницы. Админка.
+meta_title: Статичные страницы. Админка.
+meta_keywords: Статичные страницы. Админка.
+meta_description: Статичные страницы. Админка.
+is_active: true
+desc:
+        
+files:
+    -
+        file:  laravel-pages-admin.md
+        title: Статичные страницы. Админка.
+        meta_title: Статичные страницы. Админка.
+        meta_description: Статичные страницы. Админка.
+        meta_keywords: Статичные страницы. Админка.
+        desc: 
+            
+           
