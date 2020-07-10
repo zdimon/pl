@@ -1,0 +1,18 @@
+slug: pl-template-model
+name: Шаблонный синтаксис. Модели.
+meta_title: Шаблонный синтаксис. Модели.
+meta_keywords: Шаблонный синтаксис. Модели.
+meta_description: Шаблонный синтаксис. Модели.
+is_active: true
+desc:
+        
+files:
+    -
+        file:  pl-template-model.md
+        title: Шаблонный синтаксис. Модели.
+        meta_title: Шаблонный синтаксис. Модели.
+        meta_description: Шаблонный синтаксис. Модели.
+        meta_keywords: Шаблонный синтаксис. Модели.
+        desc: 
+            
+  
