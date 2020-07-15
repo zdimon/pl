@@ -9,7 +9,7 @@ from pl.settings import LESSON_PRICE
 from django.contrib.auth.decorators import login_required
 
 from liqpay.liqpay3 import LiqPay
-from pl.settings import LIQPAY_PRIVATE_KEY, LIQPAY_PUBLIC_KEY, LIQPAY_PROCESS_URL, DOMAIN
+from pl.settings import LIQPAY_PRIVATE_KEY, LIQPAY_PUBLIC_KEY, LIQPAY_PROCESS_URL, DOMAIN, LESSON_PRICE
 import time
 from .models import LessonPayments
 from django.urls import reverse
@@ -63,7 +63,7 @@ def course_detail(request,slug):
         if l.is_paid(request.user):
             paid.append(l.id)
     print(paid)
-    return render(request,'course_detail.html',{'course': course, 'lessons': lessons, 'paid': paid})
+    return render(request,'course_detail.html',{'course': course, 'lessons': lessons, 'paid': paid, 'price': LESSON_PRICE})
 
 @login_required
 def lesson_detail(request,slug):

@@ -35,7 +35,7 @@
                             </a>
                             {% else %}
                             <a href="{% url 'pay' lesson_id=lesson.id  %}" class="btn btn-warning btn-lg">
-                                Купить
+                                Купить за {{ price }} грн.
                             </a>
                             {% endif %}
                         </div>
