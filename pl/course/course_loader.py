@@ -64,9 +64,9 @@ class CourseLoader(object):
                 lesson = Lesson.objects.get(name_slug=d)
             except:
                 lesson = Lesson()
-            number = d.split(-)[0]
-            lesson.name_slug = d
-            lesson.number = number
+            number = d.split('-')[0]
+            lesson.name_slug = d 
+            lesson.number = number 
             lesson.title = data['name']
             lesson.course = self.course
             lesson.save()

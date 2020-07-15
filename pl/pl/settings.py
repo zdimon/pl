@@ -142,3 +142,9 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+LESSON_PRICE = 50
+
+LIQPAY_PUBLIC_KEY   = 'sandbox_i44723543778'
+LIQPAY_PRIVATE_KEY  = 'sandbox_HYN5eC9cFYFxGkHsRX5wg8sEgxniYLPeONzfhmMv'
+LIQPAY_PROCESS_URL  = 'https://learning.webmonstr.com/liqpay/process'

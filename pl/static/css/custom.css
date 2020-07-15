@@ -18,3 +18,7 @@ pre {
     padding: 10px;
     border-radius: 6px;
 }
+
+.big-text {
+    font-size: 24px;
+}

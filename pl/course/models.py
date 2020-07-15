@@ -99,3 +99,17 @@ class Topic(models.Model):
         pathtosubject = '/media/course/%s/ru/%s' % (self.lesson.course.name_slug, self.lesson.name_slug)
         txt = txt.replace('{path-to-subject}',pathtosubject)
         return txt
+
+
+# PAYMENT MODEL
+
+from django.contrib.auth.models import User
+
+class LessonPayments(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null = True)
+    lesson = models.ForeignKey(Lesson, on_delete=models.SET_NULL, blank=True, null = True)
+    is_paid = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)   
+  
+################################   

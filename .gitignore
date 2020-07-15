@@ -2,3 +2,4 @@ venv
 *.pyc
 pl/media
 pl/db.sqlite3
+pl/pl/local.py

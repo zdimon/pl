@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block carousel %} {% endblock %}
+
+
+
+{% block content %}
+
+<div class="section margin-top_50">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 layout_padding_2">
+                <div class="full">
+                    <div class="heading_main text_align_left">
+                       <h2><span>Вход на сайт</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="full center">
+                <a class="contact_bt" href='{% url "social:begin" "google-oauth2" %}'>
+                    Вход через гугл <img height="30" src="/static/images/google.png" />
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

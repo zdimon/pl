@@ -13,8 +13,8 @@
                     </div>
                     <div class="full">
                         <ul class="lessons-list">
-                            {% for lesson in course.lesson_set.all %}
-                                 <li><a href="{{ lesson.get_absolute_url }}">{{ lesson.title }}</a></li>
+                            {% for lesson in lessons %}
+                                 <li>{{ lesson.number }}. <a href="{{ lesson.get_absolute_url }}">{{ lesson.title }}</a></li>
                             {% endfor %}
                          </ul>
                     </div>
