@@ -157,6 +157,8 @@
 Создаем новый платеж во вьюхе и передаем кнопку в шаблон.
 
 
+    from django.urls import reverse
+    ...
     @login_required
     def pay(request,lesson_id):
         
@@ -174,7 +176,7 @@
             'order_id': lp.pk,
             'version': '3',
             'sandbox': 1,
-            'result_url': LIQPAY_PROCESS_URL
+            'result_url': DOMAIN+reverse('lesson_detail', args=(lesson.name_slug,))
         })
         return render(request,'pay.html',{'lesson': lesson, 'price': LESSON_PRICE, 'button': form_html})
 
@@ -189,6 +191,16 @@
     @csrf_exempt
     def liqpay_process(request):
         print(request.POST)
+        liqpay = LiqPay(LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY)
+        data = request.POST.get('data')
+        signature = request.POST.get('signature')
+        sign = liqpay.str_to_sign(LIQPAY_PRIVATE_KEY + data + LIQPAY_PRIVATE_KEY)
+        if sign == signature:
+            print('callback is valid')
+            data = liqpay.decode_data_from_str(data)
+            order = LessonPayments.objects.get(pk=data['order_id'])
+            order.is_paid = True
+            order.save()
         return HttpResponse('ok')
     
 Добавляем в роутинг.
@@ -200,8 +212,28 @@
         path('liqpay/process/', liqpay_process),
     ]
 
+Добавим метод в модель для проверки оплаченного урока.
+
+    class Lesson(models.Model):
+        ...
+        
+        def is_paid(self,user):
+            if self.number == 1:
+                return True
+            try:
+                LessonPayments.objects.get(user=user,lesson=self, is_paid=True)
+                return True
+            except:
+                return False
+
+Перепишем вьюху.
 
 
+    @login_required
+    def lesson_detail(request,slug):
+        lesson = Lesson.objects.get(name_slug=slug)
+        is_free = lesson.is_paid(request.user)
+        return render(request,'lesson_detail.html',{'lesson': lesson, 'is_free': is_free})
 
-
+![admin]({path-to-subject}/images/1.png)
 

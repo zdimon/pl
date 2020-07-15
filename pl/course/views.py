@@ -19,10 +19,13 @@ def pay(request,lesson_id):
     
     lesson = Lesson.objects.get(pk=lesson_id)
     liqpay = LiqPay(LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY)
-    lp = LessonPayments.objects.create(
-        user = request.user, \
-        lesson = lesson
-    )
+    try:
+        lp = LessonPayments.objects.get(user=request.user,lesson=lesson)
+    except:
+        lp = LessonPayments.objects.create(
+            user = request.user, \
+            lesson = lesson
+        )
     form_html = liqpay.cnb_form({
         'action': 'pay',
         'amount': LESSON_PRICE,
@@ -55,11 +58,15 @@ def liqpay_process(request):
 def course_detail(request,slug):
     course = Course.objects.get(name_slug=slug)
     lessons = Lesson.objects.filter(course=course).order_by('number')
-    return render(request,'course_detail.html',{'course': course, 'lessons': lessons})
+    paid = []
+    for l in lessons:
+        if l.is_paid(request.user):
+            paid.append(l.id)
+    print(paid)
+    return render(request,'course_detail.html',{'course': course, 'lessons': lessons, 'paid': paid})
 
+@login_required
 def lesson_detail(request,slug):
-    is_free = False
     lesson = Lesson.objects.get(name_slug=slug)
-    if lesson.number == 1:
-        is_free = True
+    is_free = lesson.is_paid(request.user)
     return render(request,'lesson_detail.html',{'lesson': lesson, 'is_free': is_free})

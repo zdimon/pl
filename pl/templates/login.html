@@ -12,15 +12,23 @@
             <div class="col-md-6 layout_padding_2">
                 <div class="full">
                     <div class="heading_main text_align_left">
-                       <h2><span>Вход на сайт</h2>
+                       <h2>Вход</h2>
                     </div>
                 </div>
+
             </div>
             <div class="full center">
                 <a class="contact_bt" href='{% url "social:begin" "google-oauth2" %}'>
                     Вход через гугл <img height="30" src="/static/images/google.png" />
                 </a>
             </div>
+
+            <div class="full center" style="padding-top: 10px;">
+                <div class="alert alert-danger" role="alert">
+                    Для просмотра страницы нужно авторизоваться.
+                </div>
+            </div>
+
             
         </div>
     </div>

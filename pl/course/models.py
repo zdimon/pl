@@ -48,6 +48,16 @@ class Lesson(models.Model):
     image = models.ImageField(blank=True, verbose_name=_(u'Image'), upload_to='lessons_images', null = True)
     course = models.ForeignKey(Course, verbose_name=_(u'Course'), on_delete=models.CASCADE)
     name_slug = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
+    desc = models.TextField(verbose_name=_(u'Description'), blank=True, null = True, default=' ')
+    @property
+    def get_image(self):
+        path = '%s%s/ru/%s/images/1.png' % (DATA_DIR,self.course.name_slug,self.name_slug)
+        url = '/media/course/%s/ru/%s/images/1.png' % (self.course.name_slug,self.name_slug)
+        if isfile(path):
+            # return path
+            return mark_safe('<img width="100" src="%s" />' % url)
+        else:
+            return mark_safe('&nbsp;')
 
     def __str__(self):
         return self.title
@@ -55,12 +65,23 @@ class Lesson(models.Model):
     def get_absolute_url(self):
         return reverse('lesson_detail', kwargs={'slug': self.name_slug })
 
+
+    def is_paid(self,user):
+        if self.number == 1:
+            return True
+        try:
+            LessonPayments.objects.get(user=user,lesson=self, is_paid=True)
+            return True
+        except:
+            return False
+
 class Topic(models.Model):
     title = models.CharField(max_length=250, blank=True, verbose_name=_(u'Name'))
     filename = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
     lesson = models.ForeignKey(Lesson, verbose_name=_(u'Lesson'), on_delete=models.CASCADE)
     video = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
     has_video = models.BooleanField(default=False)
+    is_youtube = models.BooleanField(default=False)
 
     @property
     def content(self):
@@ -78,17 +99,26 @@ class Topic(models.Model):
     def __str__(self):
         return self.title
 
-    def check_video(self):
+    def check_video(self,data):
         onlyfiles = [f for f in listdir(VIDEO_DIR) if isfile(join(VIDEO_DIR, f))]
-        for video in onlyfiles:
-            fname = video.split('.')[0]
-            if fname == self.filename.split('.')[0]:
-                self.has_video = True
-                self.video = video
-                self.save()
+        print(data)
+        if "youtube" in data:
+            self.is_youtube = True
+            self.video = data['youtube']
+            self.save()
+        else:
+            for video in onlyfiles:
+                fname = video.split('.')[0]
+                if fname == self.filename.split('.')[0]:
+                    self.has_video = True
+                    self.video = video
+                    self.save()
 
     @property
     def video_tag(self):
+        if self.is_youtube:
+            out = '<iframe width="560" height="315" src="%s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' % self.video
+            return mark_safe(out)
         if self.has_video:
             return mark_safe('<video  controls><source src="/static/video/%s" type="video/mp4"></video>' % self.video)
         else:

@@ -68,6 +68,7 @@ class CourseLoader(object):
             lesson.name_slug = d 
             lesson.number = number 
             lesson.title = data['name']
+            lesson.desc = data['desc']
             lesson.course = self.course
             lesson.save()
             print('Saving lesson...%s' % data['slug'])
@@ -77,7 +78,7 @@ class CourseLoader(object):
                 except Exception as e:
                     topic = Topic.objects.create(filename=f['file'], title=f['title'], lesson=lesson)
                 print('Saving topic %s' % f['file'])
-                topic.check_video()
+                topic.check_video(f)
 
     @staticmethod
     def get_active_courses_dirs():

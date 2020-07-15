@@ -9,15 +9,39 @@
                 <div class="full">
                     <div class="heading_main text_align_left">
                        <h2>{{ course.name }}</h2>
-
                     </div>
                     <div class="full">
-                        <ul class="lessons-list">
-                            {% for lesson in lessons %}
-                                 <li>{{ lesson.number }}. <a href="{{ lesson.get_absolute_url }}">{{ lesson.title }}</a></li>
-                            {% endfor %}
-                         </ul>
+                        <div class="row">
+                            {{ course.desc | safe }}
+                        </div>
                     </div>
+                    {% for lesson in lessons %}
+                    <div style="clear: both;"></div>
+                    <div class="lesson-item">
+                        
+                        <div class="lesson-image">{{ lesson.get_image }}</div>
+                        <div class="lesson-desc">
+                        <p><strong>Урок {{ lesson.number }}. </strong></p>
+                        
+                        <a  href="{{ lesson.get_absolute_url }}">{{ lesson.title }}</a>
+                        <p> {{ lesson.desc }}</p>
+
+
+                        </div>
+                        <div class="buy-button">
+                            {% if lesson.id in paid %}
+                            <a href="{{ lesson.get_absolute_url }}" class="btn btn-primary">
+                                Смотреть
+                            </a>
+                            {% else %}
+                            <a href="{% url 'pay' lesson_id=lesson.id  %}" class="btn btn-warning btn-lg">
+                                Купить
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div style="clear: both;"></div>
+                    {% endfor %}
                 </div>
             </div>
         </div>        

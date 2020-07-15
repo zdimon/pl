@@ -4,7 +4,7 @@ meta_title: Импорт курсов.
 meta_keywords: Импорт курсов.
 meta_description: Импорт курсов.
 is_active: true
-desc:
+desc: Загрузка данных в БД по команде.
         
 files:
     -
@@ -14,4 +14,5 @@ files:
         meta_description:  Импорт курсов.
         meta_keywords: Импорт курсов.
         desc: 
+        youtube: https://www.youtube.com/embed/vFQgrANCMXQ
            

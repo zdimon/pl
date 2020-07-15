@@ -12,7 +12,7 @@
                        <h2>{{ course.name }}</h2>
                     </div>
                     <div class="full">
-                      <p>{{ course.desc }}</p>
+                      <p>{{ course.desc | safe}}</p>
                     </div>
                     <div class="full">
                        <a class="hvr-radial-out button-theme" href="{{ course.get_absolute_url }}">Подробней</a>
