@@ -5,3 +5,4 @@ pyaml
 django-grappelli
 Pillow
 markdown
+social-auth-app-django

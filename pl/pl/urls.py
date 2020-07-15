@@ -17,13 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 from index.views import index, about, course_detail, lesson_detail
 
+from index.views import LoginView, LogoutView
+
 urlpatterns = [
     path('',index),
     path('course/detail/<slug:slug>',course_detail, name="course_detail"),
     path('lesson/detail/<slug:slug>',lesson_detail, name="lesson_detail"),
     path('about-me.html',about, name='about-link'),
     path('admin/', admin.site.urls),
-    path('grappelli/', include('grappelli.urls'))
+    path('grappelli/', include('grappelli.urls')),
+    path('social-auth/', include('social_django.urls', namespace="social")),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('login/', LoginView.as_view(), name='login'),
 ]
 
 from django.conf import settings

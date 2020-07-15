@@ -72,3 +72,104 @@
 Выведем в шаблоне.
 
     {{topic.video_tag}}
+
+## Ссылка назад.
+
+    <div class="text_align_right">
+        <a href="{{ lesson.course.get_absolute_url }}">Назад</a>
+    </div>
+
+## Регистрация.
+
+    pip install social-auth-app-django
+
+Добавляем в настройки.
+
+    INSTALLED_APPS = [
+    ...
+        'social_django'
+    ]
+
+Применяем миграцию.
+
+![admin]({path-to-subject}/images/3.png)
+
+Добавляем секреты и бекенд.
+
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '...'
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '...'
+    SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+    AUTHENTICATION_BACKENDS = (
+        'social_core.backends.open_id.OpenIdAuth',
+        'social_core.backends.google.GoogleOpenId',
+        'social_core.backends.google.GoogleOAuth2',
+        'social_core.backends.google.GoogleOAuth',
+        'django.contrib.auth.backends.ModelBackend',
+    )
+
+Добавляем роутинг.
+
+        urlpatterns = [
+        ...
+        path('social-auth/', include('social_django.urls', namespace="social")),
+    ]
+
+[Получаем секреты](https://console.developers.google.com/.)
+
+![admin]({path-to-subject}/images/5.png)
+
+Определяем вьюхи для авторизации и выхода.
+
+    from django.views.generic import View
+    from django.contrib.auth import authenticate, login, logout
+    from django.http import HttpResponse, HttpResponseRedirect
+    ...
+    class LoginView(View):
+        def post(self, request):
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect('/')
+                else:
+                    return HttpResponseRedirect('/')
+            else:
+                return HttpResponseRedirect('/')
+
+            return render(request, "index.html")
+
+    class LogoutView(View):
+        def get(self, request):
+            logout(request)
+            return HttpResponseRedirect('/')
+
+Прописываем роутинг.
+
+    from index.views import LoginView, LogoutView
+
+    urlpatterns = [
+        ...
+        path('logout/', LogoutView.as_view(), name='logout'),
+        path('login/', LoginView.as_view(), name='login'),
+    ]
+
+Выводим ссылки в шаблоне.
+
+    {% if user.is_authenticated %}
+    <li><a class="nav-link" href="news.html">Мой кабинет</a></li>
+    <li>
+        <a class="nav-link" id="logout" href="{% url 'logout' %}" class="">Выход</a>
+    </li>
+    {% else %}
+    <li>
+        <a class="nav-link" href='{% url "social:begin" "google-oauth2" %}'>
+            Вход <img height="30" src="/static/images/google.png" />
+        </a>
+    </li>
+    {% endif %}
+
+![admin]({path-to-subject}/images/6.png)

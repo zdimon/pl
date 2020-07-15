@@ -62,10 +62,21 @@
 
                         
                         <li><a class="nav-link" href="{% url 'about-link' %}">О нас</a></li>
-                        <li><a class="nav-link" href="courses.html">Все курсы</a></li>
                         <li><a class="nav-link" href="reaserch.html">Статьи</a></li>
-						<li><a class="nav-link" href="news.html">Мой кабинет</a></li>
-						<li><a class="nav-link" href="contact.html">Обратная связь</a></li>
+                        <li><a class="nav-link" href="contact.html">Обратная связь</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a class="nav-link" href="news.html">Мой кабинет</a></li>
+                        <li>
+                            <a class="nav-link" id="logout" href="{% url 'logout' %}" class="">Выход</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a class="nav-link" href='{% url "social:begin" "google-oauth2" %}'>
+                                Вход <img height="30" src="/static/images/google.png" />
+                            </a>
+                        </li>
+                        {% endif %}
+                        
                     </ul>
 				</div>
 				<!--

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'index',
-    'course'
+    'course',
+    'social_django'
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,14 @@ STATICFILES_DIRS = [
 
 DATA_DIR = str(os.path.join(BASE_DIR, "../data"))
 VIDEO_DIR = '/home/zdimon/Videos/course-data/ruslan'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '769722970237-8lhn2anpmkjjagu1monnvooetln72i2b.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'eMiJChs6r6v7A6AoHY-YooaN'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.google.GoogleOpenId',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
