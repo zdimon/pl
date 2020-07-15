@@ -45,6 +45,10 @@ def liqpay_process(request):
     sign = liqpay.str_to_sign(LIQPAY_PRIVATE_KEY + data + LIQPAY_PRIVATE_KEY)
     if sign == signature:
         print('callback is valid')
+        data = liqpay.decode_data_from_str(data)
+        order = LessonPayments.objects.get(pk=data['order_id'])
+        order.is_paid = True
+        order.save()
     print (liqpay.decode_data_from_str(data))
     return HttpResponse('ok')
 
