@@ -31,7 +31,7 @@ def pay(request,lesson_id):
         'order_id': lp.pk,
         'version': '3',
         'sandbox': 1,
-        'result_url': DOMAIN+'/'+reverse('lesson_detail'args=(lesson.name_slug,))
+        'result_url': DOMAIN+'/'+reverse('lesson_detail', args=(lesson.name_slug,))
     })
     return render(request,'pay.html',{'lesson': lesson, 'price': LESSON_PRICE, 'button': form_html})
 
