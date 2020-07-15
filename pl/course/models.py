@@ -52,7 +52,7 @@ class Lesson(models.Model):
     @property
     def get_image(self):
         path = '%s%s/ru/%s/images/1.png' % (DATA_DIR,self.course.name_slug,self.name_slug)
-        url = '/media/course/%s/ru/%s/images/1.png' % (self.course.name_slug,self.name_slug)
+        url = '/static/course/%s/ru/%s/images/1.png' % (self.course.name_slug,self.name_slug)
         if isfile(path):
             # return path
             return mark_safe('<img width="100" src="%s" />' % url)
