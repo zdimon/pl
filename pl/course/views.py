@@ -39,6 +39,13 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def liqpay_process(request):
     print(request.POST)
+    liqpay = LiqPay(LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY)
+    data = request.POST.get('data')
+    signature = request.POST.get('signature')
+    sign = liqpay.str_to_sign(LIQPAY_PRIVATE_KEY + data + LIQPAY_PRIVATE_KEY)
+    if sign == signature:
+        print('callback is valid')
+    print (liqpay.decode_data_from_str(data))
     return HttpResponse('ok')
 
 def course_detail(request,slug):
