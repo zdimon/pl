@@ -2,6 +2,18 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from django.utils.safestring import mark_safe
 from django.urls import reverse
+from pl.settings import DATA_DIR
+import os
+
+import markdown
+
+def parse_md(txt):
+    try:
+        txt = txt.decode('UTF-8')
+    except:
+        pass
+    return mark_safe(markdown.markdown(txt,extensions=['extra', 'smarty'], output_format='html5'))
+
 
 class Course(models.Model):
     name = models.CharField(max_length=250, verbose_name=_(u'Name'), blank=True, null = True)
@@ -34,12 +46,27 @@ class Lesson(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('lesson_detail', kwargs={'slug': self.name_slug })
+
 class Topic(models.Model):
     title = models.CharField(max_length=250, blank=True, verbose_name=_(u'Name'))
     filename = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
     lesson = models.ForeignKey(Lesson, verbose_name=_(u'Lesson'), on_delete=models.CASCADE)
     video = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
     has_video = models.BooleanField(default=False)
+
+    @property
+    def content(self):
+        path = '%s/%s/ru/%s/%s' % (DATA_DIR,self.lesson.course.name_slug,self.lesson.name_slug,self.filename)
+        #return path
+        if os.path.isfile(path):
+            f = open(path,'r')
+            txt = f.read()
+            return parse_md(txt)
+            f.close()
+        else:
+            return 'File %s does not exist!' % path
 
     def __str__(self):
         return self.title

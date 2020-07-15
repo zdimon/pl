@@ -4,3 +4,4 @@ requests
 pyaml
 django-grappelli
 Pillow
+markdown

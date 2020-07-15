@@ -60,7 +60,6 @@ class CourseLoader(object):
         for d in onlydirs:
             lesson_yml_path = path+'/'+d+'/meta.yml'
             data = self.get_meta(lesson_yml_path)
-            print(data)
             try:
                 lesson = Lesson.objects.get(name_slug=d)
             except:
@@ -72,8 +71,8 @@ class CourseLoader(object):
             print('Saving lesson...%s' % data['slug'])
             for f in data['files']:
                 try:
-                    topic = Topic.object.get(lesson=lesson,filename=f['file'])
-                except:
+                    topic = Topic.objects.get(lesson=lesson,filename=f['file'])
+                except Exception as e:
                     topic = Topic.objects.create(filename=f['file'], title=f['title'], lesson=lesson)
                 print('Saving topic %s' % f['file'])
 
