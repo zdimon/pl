@@ -5,7 +5,13 @@ from django.urls import reverse
 from pl.settings import DATA_DIR
 import os
 
+
 import markdown
+
+from pl.settings import DATA_DIR, VIDEO_DIR
+from os.path import isfile, join, isdir
+from os import listdir
+
 
 def parse_md(txt):
     try:
@@ -63,6 +69,7 @@ class Topic(models.Model):
         if os.path.isfile(path):
             f = open(path,'r')
             txt = f.read()
+            txt = self.parse_subject_txt(txt)
             return parse_md(txt)
             f.close()
         else:
@@ -70,3 +77,25 @@ class Topic(models.Model):
 
     def __str__(self):
         return self.title
+
+    def check_video(self):
+        onlyfiles = [f for f in listdir(VIDEO_DIR) if isfile(join(VIDEO_DIR, f))]
+        for video in onlyfiles:
+            fname = video.split('.')[0]
+            if fname == self.filename.split('.')[0]:
+                self.has_video = True
+                self.video = video
+                self.save()
+
+    @property
+    def video_tag(self):
+        if self.has_video:
+            return mark_safe('<video  controls><source src="/static/video/%s" type="video/mp4"></video>' % self.video)
+        else:
+            return 'Видео отсутствует'
+
+
+    def parse_subject_txt(self,txt):
+        pathtosubject = '/media/course/%s/ru/%s' % (self.lesson.course.name_slug, self.lesson.name_slug)
+        txt = txt.replace('{path-to-subject}',pathtosubject)
+        return txt

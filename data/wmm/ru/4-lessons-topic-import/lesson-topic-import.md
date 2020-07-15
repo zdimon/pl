@@ -171,6 +171,34 @@ class CourseLoader(object):
 
 ![admin]({path-to-subject}/images/2.png)
 
-![admin]({path-to-subject}/images/2.png)
+![admin]({path-to-subject}/images/3.png)
+
+Создадим симлинк в папке media.
+
+    ln -s /home/zdimon/Desktop/pl/data/ course
+
+Создадим метод замены пути к картинкам в модели и применим его.
+
+    class Topic(models.Model):
+        ...
+
+        @property
+        def content(self):
+            ...
+            if os.path.isfile(path):
+                f = open(path,'r')
+                txt = f.read()
+                txt = self.parse_subject_txt(txt)
+                return parse_md(txt)
+                f.close()
+            else:
+                return 'File %s does not exist!' % path
+        ...
+        def parse_subject_txt(self,txt):
+            pathtosubject = '/media/course/%s/ru/%s' % (self.lesson.course.name_slug, self.lesson.name_slug)
+            txt = txt.replace('{path-to-subject}',pathtosubject)
+            return txt
+
+
 
 
