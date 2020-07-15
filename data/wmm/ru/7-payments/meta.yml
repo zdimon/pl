@@ -1,0 +1,16 @@
+slug: pl-payments
+name: Оплата уроков.
+meta_title: Оплата уроков.
+meta_keywords: Оплата уроков.
+meta_description: Оплата уроков.
+is_active: true
+desc:
+        
+files:
+    -
+        file:  pl-payments.md
+        title: Оплата уроков.
+        meta_title: Оплата уроков.
+        meta_description: Оплата уроков.
+        meta_keywords: Оплата уроков.
+        desc: 
