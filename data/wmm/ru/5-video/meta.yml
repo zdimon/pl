@@ -1,0 +1,17 @@
+slug: pl-video
+name: Импорт видео.
+meta_title: Импорт видео.
+meta_keywords: Импорт видео.
+meta_description: Импорт видео.
+is_active: true
+desc:
+        
+files:
+    -
+        file:  pl-video.md
+        title: Импорт видео.
+        meta_title: Импорт видео.
+        meta_description:  Импорт видео.
+        meta_keywords: Импорт видео.
+        desc: 
+           
