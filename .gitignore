@@ -3,3 +3,5 @@ venv
 pl/media
 pl/db.sqlite3
 pl/pl/local.py
+pl/static/course
+pl/static/video
