@@ -4,7 +4,8 @@ meta_title: Установка PHP на Win 10
 meta_keywords: Установка PHP на Win 10
 meta_description: Установка PHP на Win 10
 is_active: true
-desc:
+desc: |
+    Пошаговые инструкции по установке и настройке php laravel и nginx на Windows.
         
 files:
     -
