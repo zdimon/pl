@@ -55,7 +55,7 @@ class Lesson(models.Model):
         url = '/static/course/%s/ru/%s/images/1.png' % (self.course.name_slug,self.name_slug)
         if isfile(path):
             # return path
-            return mark_safe('<img width="100" src="%s" />' % url)
+            return mark_safe('<img width="150" src="%s" />' % url)
         else:
             return mark_safe('&nbsp;')
 

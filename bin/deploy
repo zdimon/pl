@@ -1,0 +1,4 @@
+git add .
+git commit -m 'auto'
+git push
+ssh pl@78.46.160.16 'cd pl; ls; git pull'
