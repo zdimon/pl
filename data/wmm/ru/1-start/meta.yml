@@ -16,6 +16,7 @@ files:
         meta_description:  Начало проекта.
         meta_keywords: Начало проекта.
         desc: 
+        youtube: https://www.youtube.com/embed/RkwsJfsrbq4
             
     -
         file:  command-read-yml.md
