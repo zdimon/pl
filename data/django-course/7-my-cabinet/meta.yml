@@ -14,3 +14,11 @@ files:
         meta_description: Кабинет пользователя.
         meta_keywords: Кабинет пользователя.
         desc: 
+
+    -
+        file:  questions.md
+        title: Вопросы, комментарии.
+        meta_title: Вопросы, комментарии.
+        meta_description: Вопросы, комментарии.
+        meta_keywords: Вопросы, комментарии.
+        desc: 
