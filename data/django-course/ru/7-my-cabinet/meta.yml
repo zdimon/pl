@@ -1,0 +1,16 @@
+slug: my-cabinet
+name: Кабинет пользователя.
+meta_title: Кабинет пользователя.
+meta_keywords: Кабинет пользователя.
+meta_description: Кабинет пользователя.
+is_active: true
+desc: Список купленных уроков.
+        
+files:
+    -
+        file:  my-cabinet.md
+        title: Кабинет пользователя.
+        meta_title: Кабинет пользователя.
+        meta_description: Кабинет пользователя.
+        meta_keywords: Кабинет пользователя.
+        desc: 

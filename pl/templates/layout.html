@@ -67,7 +67,7 @@
                         <li><a class="nav-link" href="contact.html">Обратная связь</a></li>
                         -->
                         {% if user.is_authenticated %}
-                        <li><a class="nav-link" href="news.html">Мой кабинет</a></li>
+                        <li><a class="nav-link" href="{% url 'my_cabinet' %}">Мой кабинет</a></li>
                         <li>
                             <a class="nav-link" id="logout" href="{% url 'logout' %}" class="">Выход</a>
                         </li>

@@ -70,3 +70,9 @@ def lesson_detail(request,slug):
     lesson = Lesson.objects.get(name_slug=slug)
     is_free = lesson.is_paid(request.user)
     return render(request,'lesson_detail.html',{'lesson': lesson, 'is_free': is_free})
+
+
+@login_required
+def my_cabinet(request):
+    payments = LessonPayments.objects.filter(user=request.user, is_paid=True).order_by('-id')
+    return render(request,'my_cabinet.html',{'payments': payments})
