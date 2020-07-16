@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from course.models import Course, Lesson, Topic, LessonPayments
+from course.models import Course, Lesson, Topic, LessonPayments, Comments
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
@@ -20,3 +20,9 @@ class TopicAdmin(admin.ModelAdmin):
 @admin.register(LessonPayments)
 class LessonPaymentsAdmin(admin.ModelAdmin):
     list_display = ['user', 'lesson', 'created', 'is_paid']
+
+from mptt.admin import MPTTModelAdmin
+
+@admin.register(Comments)
+class CommentsAdmin(MPTTModelAdmin):
+    list_display = ['user', 'content']

@@ -12,6 +12,8 @@ from pl.settings import DATA_DIR, VIDEO_DIR
 from os.path import isfile, join, isdir
 from os import listdir
 
+from mptt.models import MPTTModel, TreeForeignKey
+
 
 def parse_md(txt):
     try:
@@ -145,3 +147,12 @@ class LessonPayments(models.Model):
     updated = models.DateTimeField(auto_now=True)   
   
 ################################   
+
+
+class Comments(MPTTModel):
+    content = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null = True)
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    created = models.DateTimeField(auto_now_add=True)
+    class MPTTMeta:
+        order_insertion_by = ['user']

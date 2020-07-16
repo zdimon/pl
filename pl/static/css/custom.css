@@ -78,3 +78,9 @@ p {
     padding-top: 10px;
 
 }
+
+.white-title {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}

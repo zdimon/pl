@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'index',
     'course',
-    'social_django'
+    'social_django',
+    'mptt'
 ]
 
 MIDDLEWARE = [
