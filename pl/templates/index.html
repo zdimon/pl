@@ -9,7 +9,7 @@
             <div class="col-md-6 layout_padding_2">
                 <div class="full">
                     <div class="heading_main text_align_left">
-                       <h2>{{ course.name }}</h2>
+                       <h2><a href="{{ course.get_absolute_url }}">{{ course.name }}</a></h2>
                     </div>
                     <div class="full">
                       <p>{{ course.desc | safe}}</p>
@@ -21,7 +21,9 @@
             </div>
             <div class="col-md-6">
                 <div class="full">
-                    <img src="{{ course.image.url }}" alt="#" />
+                    
+                        <img src="{{ course.image.url }}" alt="#" />
+
                 </div>
             </div>
         </div>

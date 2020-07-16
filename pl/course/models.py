@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from django.utils.safestring import mark_safe
 from django.urls import reverse
-from pl.settings import DATA_DIR
+from pl.settings import DATA_DIR, ALL_FREE
 import os
 
 
@@ -67,6 +67,8 @@ class Lesson(models.Model):
 
 
     def is_paid(self,user):
+        if ALL_FREE:
+            return True
         if self.number == 1:
             return True
         try:
