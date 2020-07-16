@@ -55,7 +55,7 @@ class CourseLoader(object):
             return False
 
     def save_lessons(self):
-        path = DATA_DIR+'/'+self.dir+'/ru'
+        path = DATA_DIR+'/'+self.dir
         onlydirs = [f for f in listdir(path) if isdir(join(path, f))]
         for d in onlydirs:
             lesson_yml_path = path+'/'+d+'/meta.yml'

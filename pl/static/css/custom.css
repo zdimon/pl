@@ -71,3 +71,10 @@ p {
    
     line-height: 0;
 }
+
+.course-item {
+    border-bottom: 1px solid silver;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+}

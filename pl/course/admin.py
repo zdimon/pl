@@ -16,6 +16,7 @@ class TopicAdmin(admin.ModelAdmin):
     list_display = ['title', 'filename', 'lesson', 'video', 'has_video', 'is_youtube']
 
 
+
 @admin.register(LessonPayments)
 class LessonPaymentsAdmin(admin.ModelAdmin):
     list_display = ['user', 'lesson', 'created', 'is_paid']

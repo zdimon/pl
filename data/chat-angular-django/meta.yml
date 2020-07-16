@@ -1,0 +1,17 @@
+is_active_ru: true
+is_active_en: true
+title_ru: Сайт знакомств на Angular и Django.
+title_en: Сайт знакомств на Angular и Django.
+desc_ru: |
+
+    Цель проекта: создать одностраничное приложение для мобильных устройств, используя Django на серверной части и Angular Ionic на клиентской.
+    
+desc_en: |
+   
+    
+meta_title_ru: Сайт знакомств на Angular и Django.
+meta_title_en: Сайт знакомств на Angular и Django.
+meta_keywords_ru: Сайт знакомств на Angular и Django.
+meta_keywords_en: Сайт знакомств на Angular и Django.
+meta_description_ru: Сайт знакомств на Angular и Django.
+meta_description_en: Сайт знакомств на Angular и Django.

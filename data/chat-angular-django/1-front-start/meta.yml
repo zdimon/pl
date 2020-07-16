@@ -1,0 +1,30 @@
+slug: sd-intro
+name: Описание проекта. Начало работы.
+meta_title: Сайт знакомств на Angular и Django. Часть 1.
+meta_keywords: Сайт знакомств на Angular и Django. Часть 1.
+meta_description: Сайт знакомств на Angular и Django. Часть 1.
+is_active: true
+desc: |
+    Как создать проект на Angular Ionic.
+        
+files:
+
+    -
+        file:     'annonce.md'
+        title: Описание проекта.
+        meta_title: Описание проекта.
+        meta_description:  Описание проекта.
+        meta_keywords: 'angular django dating'
+        desc: Что мы будем создавать.
+
+    -
+        file:     'sd-intro.md'
+        title: Старт фронтенд проекта на Angular.
+        meta_title: Старт фронтенд проекта на Angular.
+        meta_description:  Старт фронтенд проекта на Angular.
+        meta_keywords: 'angular django dating'
+        desc: 
+        youtube: https://www.youtube.com/embed/pJcKJL0p1Ao
+
+        
+   

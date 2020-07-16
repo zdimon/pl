@@ -51,8 +51,8 @@ class Lesson(models.Model):
     desc = models.TextField(verbose_name=_(u'Description'), blank=True, null = True, default=' ')
     @property
     def get_image(self):
-        path = '%s%s/ru/%s/images/1.png' % (DATA_DIR,self.course.name_slug,self.name_slug)
-        url = '/static/course/%s/ru/%s/images/1.png' % (self.course.name_slug,self.name_slug)
+        path = '%s%s/%s/images/1.png' % (DATA_DIR,self.course.name_slug,self.name_slug)
+        url = '/static/course/%s/%s/images/1.png' % (self.course.name_slug,self.name_slug)
         if isfile(path):
             # return path
             return mark_safe('<img width="150" src="%s" />' % url)
@@ -87,7 +87,7 @@ class Topic(models.Model):
 
     @property
     def content(self):
-        path = '%s/%s/ru/%s/%s' % (DATA_DIR,self.lesson.course.name_slug,self.lesson.name_slug,self.filename)
+        path = '%s/%s/%s/%s' % (DATA_DIR,self.lesson.course.name_slug,self.lesson.name_slug,self.filename)
         #return path
         if os.path.isfile(path):
             f = open(path,'r')
@@ -128,7 +128,7 @@ class Topic(models.Model):
 
 
     def parse_subject_txt(self,txt):
-        pathtosubject = '/media/course/%s/ru/%s' % (self.lesson.course.name_slug, self.lesson.name_slug)
+        pathtosubject = '/media/course/%s/%s' % (self.lesson.course.name_slug, self.lesson.name_slug)
         txt = txt.replace('{path-to-subject}',pathtosubject)
         return txt
 

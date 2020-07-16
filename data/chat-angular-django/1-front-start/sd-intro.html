@@ -1,0 +1,70 @@
+<h2>Frontend.</h2>
+
+<p><a href="https://github.com/ionic-team/ionic-cli/wiki/Angular-Monorepo">tutorial</a></p>
+
+<h3>Angular and multiproject workspase.</h3>
+
+<h3>Creating an empty workspace.</h3>
+
+<pre><code>ng new sdat --createApplication=false --directory=frontend
+</code></pre>
+
+<p><img src="https://webmonstr.com/media/course/simple-dating/ru/1-intro/images/1.png" alt="start page" /></p>
+
+<p>Change the folder and generate a new web app.</p>
+
+<pre><code>cd frontend
+ng generate application web
+</code></pre>
+
+<p><img src="https://webmonstr.com/media/course/simple-dating/ru/1-intro/images/2.png" alt="start page" /></p>
+
+<p>Run the server.</p>
+
+<pre><code>ng serve web
+</code></pre>
+
+<p>Create a new mobile app.</p>
+
+<pre><code>ng generate application mobi
+</code></pre>
+
+<p>Initiate a config file for the Ionic</p>
+
+<pre><code>ionic init --multi-app
+</code></pre>
+
+<p>Add the Ionic lib to the mobi app.</p>
+
+<pre><code>ng add @ionic/angular --project=mobi
+</code></pre>
+
+<p>Add others dependencies.</p>
+
+<pre><code>  "dependencies": {
+    "@ionic/angular": "^5.1.1",
+    "@ionic-native/core": "^5.0.7",
+    "@ionic-native/splash-screen": "^5.0.0",
+    "@ionic-native/status-bar": "^5.0.0",
+</code></pre>
+
+<p>Create somewere a new Ionic app with the start template.</p>
+
+<pre><code>ionic start myApp sidemenu
+</code></pre>
+
+<p>Replace the folder app in the mobi/src with the same folder in the myApp.</p>
+
+<p><img src="https://webmonstr.com/media/course/simple-dating/ru/1-intro/images/3.png" alt="start page" /></p>
+
+<h2>Create a new library to share functionality between web and mobi apps.</h2>
+
+<pre><code>ng generate library shareLib --prefix=sl
+</code></pre>
+
+<p>Run the builder with watcher</p>
+
+<pre><code>ng build shareLib --watch
+</code></pre>
+
+<p><img src="https://webmonstr.com/media/course/simple-dating/ru/1-intro/images/4.png" alt="start page" /></p>
