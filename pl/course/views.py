@@ -66,6 +66,7 @@ def course_detail(request,slug):
     return render(request,'course_detail.html',{'course': course, 'lessons': lessons, 'paid': paid, 'price': LESSON_PRICE})
 
 @login_required
+@csrf_exempt
 def lesson_detail(request,slug):
     lesson = Lesson.objects.get(name_slug=slug)
     is_free = lesson.is_paid(request.user)
