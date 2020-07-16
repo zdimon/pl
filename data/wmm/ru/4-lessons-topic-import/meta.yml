@@ -4,7 +4,7 @@ meta_title: Импорт уроков и тем.
 meta_keywords: Импорт уроков и тем.
 meta_description: Импорт уроков и тем.
 is_active: true
-desc:
+desc: Импортирование уроков и тем в БД.
         
 files:
     -

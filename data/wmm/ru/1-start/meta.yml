@@ -4,7 +4,9 @@ meta_title: Старт проекта.
 meta_keywords: Старт проекта.
 meta_description: Старт проекта.
 is_active: true
-desc:
+desc: |
+    Установка Django и создание начальной структуры проекта.
+
         
 files:
     -

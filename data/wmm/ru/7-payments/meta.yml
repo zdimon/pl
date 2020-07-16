@@ -4,7 +4,7 @@ meta_title: Оплата уроков.
 meta_keywords: Оплата уроков.
 meta_description: Оплата уроков.
 is_active: true
-desc:
+desc: Работа с платежной системой liqpay.
         
 files:
     -
