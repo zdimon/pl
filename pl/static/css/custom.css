@@ -26,19 +26,27 @@ pre {
 .lesson-item {
     padding-bottom: 10px;
     padding-top: 20px;
-    border-bottom: 1px solid silver;
-    height: 120px;
+   
+   
 }
 
 .lesson-image {
     width: 170px;
-    float: left;
+    display: inline-block;
+    
 }
 
 .lesson-desc {
-   
-    float: left;
+    display: inline-block;
+    
 }
+
+
+.buy-button {
+    display: inline-block;
+    float: right;
+}
+
 
 .lesson-item a {
    
@@ -61,8 +69,4 @@ p {
 .lesson-item p {
    
     line-height: 0;
-}
-
-.buy-button {
-    float: right;
 }
