@@ -105,7 +105,7 @@ class Topic(models.Model):
 
     def check_video(self,data):
         onlyfiles = [f for f in listdir(VIDEO_DIR) if isfile(join(VIDEO_DIR, f))]
-        print(data)
+        # print(data)
         if "youtube" in data:
             self.is_youtube = True
             self.video = data['youtube']
