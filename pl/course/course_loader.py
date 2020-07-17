@@ -22,11 +22,11 @@ class CourseLoader(object):
         path = DATA_DIR+'/'+self.dir+'/meta.yml'
         print('Saving meta for %s' % self.course.name_slug)
         meta = self.get_meta(path)
-        self.course.name = meta['title_ru']
-        self.course.meta_keywords = meta['meta_keywords_ru']
-        self.course.meta_title = meta['meta_title_ru']
-        self.course.meta_description = meta['meta_description_ru']
-        self.course.desc = meta['desc_ru']
+        self.course.name = meta['title']
+        self.course.meta_keywords = meta['meta_keywords']
+        self.course.meta_title = meta['meta_title']
+        self.course.meta_description = meta['meta_description']
+        self.course.desc = meta['desc']
         self.course.save()
         try:
             im_path = DATA_DIR+'/'+self.dir+'/image.png'

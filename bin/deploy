@@ -1,3 +1,8 @@
+cd /home/zdimon/www/course-resourse
+git add .
+git commit -m 'auto'
+git push
+cd /home/zdimon/Desktop/pl
 git add .
 git commit -m 'auto'
 git push
