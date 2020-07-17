@@ -62,8 +62,9 @@
 
                         
                         <li><a class="nav-link" href="{% url 'about-link' %}">О нас</a></li>
+                        
+                        <li><a class="nav-link" href="{% url 'discussion' %}">Обсуждения</a></li>
                         <!-- 
-                        <li><a class="nav-link" href="reaserch.html">Статьи</a></li>
                         <li><a class="nav-link" href="contact.html">Обратная связь</a></li>
                         -->
                         {% if user.is_authenticated %}
@@ -140,7 +141,27 @@
     {% endblock %}
 
 
-    {% block content %} {% endblock %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="section" style="margin-top: 100px;">
+                <div class="container">
+                    <div class="full">
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+
+
+    {% block content %} 
+    
+
+    
+    {% endblock %}
 
 	
     <footer class="footer-box">
@@ -166,7 +187,7 @@
 				 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 				 <div class="footer_blog full white_fonts">
 						     <h3>Рассылка</h3>
-							 <p>Получайте уведомления о новых курсах.</p>
+							 <p>Получайте уведомления о новых курсах или уроках.</p>
 							 <div class="newsletter_form">
 							    <form action="index.html">
 								   <input type="email" placeholder="email" name="#" required />

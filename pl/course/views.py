@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from course.models import Course, Lesson
+from course.models import Course, Lesson, Comments
 
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
@@ -13,6 +13,8 @@ from pl.settings import LIQPAY_PRIVATE_KEY, LIQPAY_PUBLIC_KEY, LIQPAY_PROCESS_UR
 import time
 from .models import LessonPayments
 from django.urls import reverse
+from django.shortcuts import redirect
+from django.contrib import messages
 
 @login_required
 def pay(request,lesson_id):
@@ -77,3 +79,21 @@ def lesson_detail(request,slug):
 def my_cabinet(request):
     payments = LessonPayments.objects.filter(user=request.user).order_by('-id')
     return render(request,'my_cabinet.html',{'payments': payments})
+
+@login_required
+def save_comment(request):
+    if request.method == 'POST':
+        lesson = Lesson.objects.get(pk=request.POST.get('lesson_id'))
+        comment = Comments()
+        comment.lesson = lesson
+        comment.user = request.user
+        comment.content = request.POST.get('message')
+        comment.is_published = True
+        comment.save()
+        messages.info(request, 'Спасибо. Ваш комментарий был сохранен.')
+        return redirect(lesson)
+
+@login_required
+def discussion(request):
+    comments = Comments.objects.filter(is_published=True).order_by('-id')
+    return render(request,'discussion.html',{'comments': comments})

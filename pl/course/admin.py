@@ -25,4 +25,4 @@ from mptt.admin import MPTTModelAdmin
 
 @admin.register(Comments)
 class CommentsAdmin(MPTTModelAdmin):
-    list_display = ['user', 'content']
+    list_display = ['user', 'content', 'parent']
