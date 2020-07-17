@@ -9,3 +9,4 @@ markdown
 social-auth-app-django
 git+https://github.com/liqpay/sdk-python#egg=liqpay
 django-mptt
+psycopg2

@@ -7,3 +7,17 @@ LESSON_PRICE = 50
 LIQPAY_PUBLIC_KEY   = '...'
 LIQPAY_PRIVATE_KEY  = '...'
 LIQPAY_PROCESS_URL  = 'https://learning.webmonstr.com/liqpay/process'
+
+
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'pl',
+        'USER': 'postgres',
+        'PASSWORD': 'plplpl',
+        'HOST': 'localhost',
+    }
+}
+
+'''
