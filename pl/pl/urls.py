@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from index.views import index, about
 
-from index.views import LoginView, LogoutView, delivery, oferta
+from index.views import LoginView, LogoutView, delivery, oferta, confident
 
 from course.views import liqpay_process
 
@@ -27,7 +27,7 @@ urlpatterns = [
     path('about-me.html',about, name='about-link'),
 
     path('oferta.html',oferta, name='oferta'),
-
+    path('confident.html',confident, name='confident'),
     path('delivery.html',delivery, name='delivery'),
 
     path('admin/', admin.site.urls),
