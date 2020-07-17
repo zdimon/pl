@@ -9,11 +9,11 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ['title', 'name_slug', 'course', 'number', 'desc']
+    list_display = ['title', 'name_slug', 'course', 'number', 'desc', 'is_active']
 
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
-    list_display = ['title', 'filename', 'lesson', 'video', 'has_video', 'is_youtube']
+    list_display = ['title', 'filename', 'course', 'lesson', 'video', 'has_video', 'is_youtube']
 
 
 

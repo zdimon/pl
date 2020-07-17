@@ -46,7 +46,7 @@ class Course(models.Model):
 class Lesson(models.Model):
     title = models.CharField(max_length=250, blank=True, verbose_name=_(u'Name'))
     number = models.IntegerField(default=0, verbose_name=_(u'Number'))
-    is_active = models.BooleanField(verbose_name=_('Is main?'), default=False)
+    is_active = models.BooleanField(verbose_name=_('Is active?'), default=False)
     image = models.ImageField(blank=True, verbose_name=_(u'Image'), upload_to='lessons_images', null = True)
     course = models.ForeignKey(Course, verbose_name=_(u'Course'), on_delete=models.CASCADE)
     name_slug = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
@@ -83,6 +83,7 @@ class Topic(models.Model):
     title = models.CharField(max_length=250, blank=True, verbose_name=_(u'Name'))
     filename = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
     lesson = models.ForeignKey(Lesson, verbose_name=_(u'Lesson'), on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, verbose_name=_(u'Course'), on_delete=models.CASCADE)
     video = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
     has_video = models.BooleanField(default=False)
     is_youtube = models.BooleanField(default=False)
@@ -112,6 +113,8 @@ class Topic(models.Model):
             self.video = data['youtube']
             self.has_video = True
             self.save()
+            self.lesson.is_active = True
+            self.lesson.save()
         else:
             for video in onlyfiles:
                 fname = video.split('.')[0]
@@ -120,7 +123,8 @@ class Topic(models.Model):
                     self.video = video
                     self.has_video = True
                     self.save()
-
+                    self.lesson.is_active = True
+                    self.lesson.save()
         
 
     @property

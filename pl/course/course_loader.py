@@ -76,7 +76,7 @@ class CourseLoader(object):
                 try:
                     topic = Topic.objects.get(lesson=lesson,filename=f['file'])
                 except Exception as e:
-                    topic = Topic.objects.create(filename=f['file'], title=f['title'], lesson=lesson)
+                    topic = Topic.objects.create(filename=f['file'], course=self.course, title=f['title'], lesson=lesson)
                 print('Saving topic %s' % f['file'])
                 topic.check_video(f)
 
