@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from index.views import index, about
 
-from index.views import LoginView, LogoutView
+from index.views import LoginView, LogoutView, delivery, oferta
 
 from course.views import liqpay_process
 
@@ -25,6 +25,11 @@ urlpatterns = [
     path('',index),
     path('course/',include('course.urls')),
     path('about-me.html',about, name='about-link'),
+
+    path('oferta.html',oferta, name='oferta'),
+
+    path('delivery.html',delivery, name='delivery'),
+
     path('admin/', admin.site.urls),
     path('grappelli/', include('grappelli.urls')),
     path('social-auth/', include('social_django.urls', namespace="social")),
