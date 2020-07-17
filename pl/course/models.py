@@ -106,9 +106,11 @@ class Topic(models.Model):
     def check_video(self,data):
         onlyfiles = [f for f in listdir(VIDEO_DIR) if isfile(join(VIDEO_DIR, f))]
         # print(data)
+        
         if "youtube" in data:
             self.is_youtube = True
             self.video = data['youtube']
+            self.has_video = True
             self.save()
         else:
             for video in onlyfiles:
@@ -116,7 +118,10 @@ class Topic(models.Model):
                 if fname == self.filename.split('.')[0]:
                     self.has_video = True
                     self.video = video
+                    self.has_video = True
                     self.save()
+
+        
 
     @property
     def video_tag(self):
