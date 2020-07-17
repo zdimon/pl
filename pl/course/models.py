@@ -12,7 +12,7 @@ from pl.settings import DATA_DIR, VIDEO_DIR
 from os.path import isfile, join, isdir
 from os import listdir
 
-
+from bs4 import BeautifulSoup
 
 
 def parse_md(txt):
@@ -87,6 +87,24 @@ class Topic(models.Model):
     video = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
     has_video = models.BooleanField(default=False)
     is_youtube = models.BooleanField(default=False)
+
+    @property
+    def short_content(self):
+        path = '%s/%s/%s/%s' % (DATA_DIR,self.lesson.course.name_slug,self.lesson.name_slug,self.filename)
+        if os.path.isfile(path):
+            f = open(path,'r')
+            txt = f.read()
+            txt = self.parse_subject_txt(txt)
+            f.close()
+            html =  parse_md(txt)
+            soup = BeautifulSoup(html, 'html.parser')
+            ps = soup.find_all('p')
+            out = ''
+            for p in ps[0:6]:
+                out = out + str(p)
+            return out
+        else:
+            return 'File %s does not exist!' % path
 
     @property
     def content(self):
