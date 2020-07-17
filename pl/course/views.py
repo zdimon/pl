@@ -15,10 +15,15 @@ from .models import LessonPayments
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib import messages
-
+from pl.settings import DATA_DIR
+from course.models import parse_md
 @login_required
 def pay(request,lesson_id):
-    
+    path = DATA_DIR+'/oferta.md'
+    f = open(path, 'r')
+    txt = f.read()
+    f.close()
+    oferta = parse_md(txt)
     lesson = Lesson.objects.get(pk=lesson_id)
     liqpay = LiqPay(LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY)
     try:
@@ -37,7 +42,7 @@ def pay(request,lesson_id):
         'version': '3',
         'result_url': DOMAIN+reverse('lesson_detail', args=(lesson.name_slug,))
     })
-    return render(request,'pay.html',{'lesson': lesson, 'price': LESSON_PRICE, 'button': form_html})
+    return render(request,'pay.html',{'oferta': oferta, 'lesson': lesson, 'price': LESSON_PRICE, 'button': form_html})
 
 from django.views.decorators.csrf import csrf_exempt
 
