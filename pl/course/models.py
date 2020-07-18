@@ -61,6 +61,15 @@ class Lesson(models.Model):
         else:
             return mark_safe('&nbsp;')
 
+    @property
+    def get_image_url(self):
+        path = '%s%s/%s/images/1.png' % (DATA_DIR,self.course.name_slug,self.name_slug)
+        url = '/static/course/%s/%s/images/1.png' % (self.course.name_slug,self.name_slug)
+        if isfile(path):
+            return url
+        else:
+            return '/static/images/noimage.png'
+
     def __str__(self):
         return self.title
 
