@@ -231,10 +231,14 @@ a.navbar-brand img {
 	.top-header {
     width: 100%;
     margin: 0;
+    }
+    .header-title {
+        display: none;
+    }
 }
 
 a.navbar-brand img {
-    height: auto;
+    height: 40px;
 }
 
 .tab_menu {
@@ -281,7 +285,7 @@ a.navbar-brand img {
          margin-bottom: 5px;
     }
      .navbar-brand img {
-         width: 210px;
+         width: 40px;
     }
      .top-header {
          background-image: none;
