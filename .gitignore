@@ -5,3 +5,4 @@ pl/db.sqlite3
 pl/pl/local.py
 pl/static/course
 pl/static/video
+pl/email
