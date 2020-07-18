@@ -63,7 +63,7 @@ def liqpay_process(request):
 
 def course_detail(request,slug):
     course = Course.objects.get(name_slug=slug)
-    lessons = Lesson.objects.filter(course=course,is_active=True).order_by('number')
+    lessons = Lesson.objects.filter(course=course).order_by('number')
     paid = []
     for l in lessons:
         if l.is_paid(request.user):
