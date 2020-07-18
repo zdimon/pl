@@ -188,8 +188,13 @@
 						     <h3>Рассылка</h3>
 							 <p>Получайте уведомления о новых курсах или уроках.</p>
 							 <div class="newsletter_form">
-							    <form action="index.html">
-								   <input type="email" placeholder="email" name="#" required />
+							    <form action="{% url 'subscribe' %}" method="POST">
+                                    {% csrf_token %}
+                                    {% if user.is_authenticated %}
+                                    <input type="email" placeholder="email" name="email" value="{{ user.email }}" />
+                                    {% else %}
+                                        <input type="email" placeholder="email" name="email" required />
+                                    {% endif %}
 								   <button>Подписаться</button>
 								</form>
 							 </div>

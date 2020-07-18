@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import course_detail, lesson_detail, pay, my_cabinet, save_comment, discussion
+from .views import course_detail, lesson_detail, pay, my_cabinet, save_comment, discussion, subscribe
 
 urlpatterns = [ 
     path('detail/<slug:slug>',course_detail, name="course_detail"),
@@ -8,4 +8,5 @@ urlpatterns = [
     path('my/cabinet',my_cabinet, name="my_cabinet"),
     path('save/comment',save_comment, name="save_comment"),
     path('discussion',discussion, name="discussion"),
+    path('subscribe',subscribe, name="subscribe"),
 ]

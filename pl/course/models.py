@@ -195,3 +195,8 @@ class Comments(MPTTModel):
     is_published = models.BooleanField(default=False)
     class MPTTMeta:
         order_insertion_by = ['user']
+
+
+class Subscription(models.Model):
+    email = models.CharField(max_length=250, blank=True, verbose_name=_(u'Email'), unique=True)
+

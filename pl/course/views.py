@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from course.models import Course, Lesson, Comments
+from course.models import Course, Lesson, Comments, Subscription
 
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
@@ -101,3 +101,15 @@ def save_comment(request):
 def discussion(request):
     comments = Comments.objects.filter(is_published=True).order_by('-id')
     return render(request,'discussion.html',{'comments': comments})
+
+def subscribe(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        try:
+            s = Subscription()
+            s.email = email
+            s.save()
+            messages.info(request, 'Спасибо, вы успешно подписаны.')
+        except:
+            messages.info(request, 'Вы уже подписаны.')
+    return redirect('/')
