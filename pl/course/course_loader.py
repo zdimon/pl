@@ -69,6 +69,9 @@ class CourseLoader(object):
             lesson.number = number 
             lesson.title = data['name']
             lesson.desc = data['desc']
+            lesson.meta_keywords = data['meta_keywords']
+            lesson.meta_title = data['meta_title']
+            lesson.meta_description = data['meta_description']
             lesson.course = self.course
             lesson.save()
             print('Saving lesson...%s' % data['slug'])
@@ -85,7 +88,7 @@ class CourseLoader(object):
         out = []
         onlydirs = [f for f in listdir(DATA_DIR) if isdir(join(DATA_DIR, f))]
         for d in onlydirs:
-            if d.find('.') == -1:
+            if d.find('.') == -1 and d != 'articles':
                 out.append(d)
         return out
 

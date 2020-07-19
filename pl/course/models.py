@@ -51,6 +51,9 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, verbose_name=_(u'Course'), on_delete=models.CASCADE)
     name_slug = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
     desc = models.TextField(verbose_name=_(u'Description'), blank=True, null = True, default=' ')
+    meta_keywords = models.TextField(blank=True, null = True)
+    meta_title = models.CharField(max_length=255, blank=True, null = True)
+    meta_description = models.TextField(blank=True, null = True)
     @property
     def get_image(self):
         path = '%s%s/%s/images/1.png' % (DATA_DIR,self.course.name_slug,self.name_slug)
@@ -209,3 +212,43 @@ class Comments(MPTTModel):
 class Subscription(models.Model):
     email = models.CharField(max_length=250, blank=True, verbose_name=_(u'Email'), unique=True)
 
+class Catalog(models.Model):
+    name = models.CharField(max_length=250, blank=True, verbose_name=_(u'Name'))
+    
+    def __str__(self):
+        return self.name
+
+class Article(models.Model):
+    title = models.CharField(max_length=250, blank=True, verbose_name=_(u'Title'))
+    filename = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
+    catalog = models.ForeignKey(Catalog, on_delete=models.SET_NULL, blank=True, null = True)
+    meta_keywords = models.TextField(blank=True, null = True)
+    meta_title = models.CharField(max_length=255, blank=True, null = True)
+    meta_description = models.TextField(blank=True, null = True)
+
+    def get_absolute_url(self):
+        alias = '%s-%s' % (self.catalog,self.filename.split('.')[0])
+        return reverse('article_detail', kwargs={'slug': alias })
+
+    @property
+    def content(self):
+        path = join(DATA_DIR,'articles',self.catalog.name,self.filename)
+        if os.path.isfile(path):
+            f = open(path,'r')
+            txt = f.read()
+            txt = self.parse_subject_txt(txt)
+            return parse_md(txt)
+            f.close()
+        else:
+            return 'File %s does not exist!' % path
+
+    def parse_subject_txt(self,txt):
+        pathtosubject = '/media/course/articles/%s/%s' % \
+                        (   self.catalog.name, \
+                            self.filename.split('.')[0] \
+                        )
+        txt = txt.replace('{path-to-subject}',pathtosubject)
+        return txt
+
+    def __str__(self):
+        return self.title

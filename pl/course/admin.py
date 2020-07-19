@@ -65,3 +65,14 @@ class CommentsAdmin(MPTTModelAdmin):
 @admin.register(Subscription)
 class SubscriptionAdmin(admin.ModelAdmin):
     list_display = ['email']
+
+from .models import Catalog, Article
+
+@admin.register(Catalog)
+class CatalogAdmin(admin.ModelAdmin):
+    list_display = ['name']
+
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ['title', 'filename', 'catalog']
+    list_filter = ['catalog']

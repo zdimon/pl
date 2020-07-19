@@ -10,10 +10,15 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <!-- Site Metas -->
-    <title>Обучение. Курсы онлайн веб-программирование. Python. Javascript.</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    
+    <title>
+        {% block meta_title %}
+           Онлайн курсы веб-программирование. Python Javascript PHP Django Angular Typescript.
+        {% endblock %}
+    </title>
+    <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{% endblock %}">
+    <meta name="author" content="Жариков Дмитрий">
 
     <!-- Site Icons -->
     <link rel="shortcut icon" href="#" type="image/x-icon" />
@@ -64,9 +69,9 @@
                         <li><a class="nav-link" href="{% url 'about-link' %}">О нас</a></li>
                         
                         <li><a class="nav-link" href="{% url 'discussion' %}">Обсуждения</a></li>
-                        <!-- 
-                        <li><a class="nav-link" href="contact.html">Обратная связь</a></li>
-                        -->
+                        
+                        <li><a class="nav-link" href="{% url 'articles' %}">Статьи</a></li>
+                        
                         {% if user.is_authenticated %}
                         <li><a class="nav-link" href="{% url 'my_cabinet' %}">Мой кабинет</a></li>
                         <li>
@@ -252,6 +257,8 @@
     <script src="/static/js/isotope.min.js"></script>
     <script src="/static/js/images-loded.min.js"></script>
     <script src="/static/js/custom.js"></script>
+
+    {% block customjs %} {% endblock %}
 
 </body>
 

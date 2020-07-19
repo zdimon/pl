@@ -113,3 +113,19 @@ def subscribe(request):
         except:
             messages.info(request, 'Вы уже подписаны.')
     return redirect('/')
+
+from course.models import Catalog
+
+def articles(request):
+    catalog = Catalog.objects.all()
+    return render(request,'articles.html',{'catalog': catalog})
+
+from course.models import Article, Catalog
+
+def article_detail(request,slug):
+    tmparr =  slug.split('-')
+    filename = ('-').join(tmparr[1:len(tmparr)])+'.md'
+    catalogsename = slug.split('-')[0]
+    catalog = Catalog.objects.get(name=catalogsename)
+    article = Article.objects.get(filename=filename)
+    return render(request,'article_detail.html',{'article': article})
