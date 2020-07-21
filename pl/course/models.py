@@ -185,7 +185,7 @@ class Topic(models.Model):
 
 
     def parse_subject_txt(self,txt):
-        pathtosubject = '/media/course/%s/%s' % (self.lesson.course.name_slug, self.lesson.name_slug)
+        pathtosubject = '/media/course/%s/%s' % (self.lesson.course.name_slug, self.get_clear_lesson_slug())
         txt = txt.replace('{path-to-subject}',pathtosubject)
         return txt
 
