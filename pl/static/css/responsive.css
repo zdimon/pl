@@ -176,7 +176,13 @@ a.navbar-brand img {
      .navbar-brand{
          margin-left: 10px;
          margin-right: 10px;
+         width: 30px;
+         padding: 0;
     }
+    .top-header {
+       height: 35px;
+    }
+
      .top-header .navbar .navbar-collapse ul li a{
          padding: 5px 15px;
     }
@@ -286,6 +292,8 @@ a.navbar-brand img {
     }
      .navbar-brand img {
          width: 40px;
+         max-width: 100%;
+         height: auto !important;
     }
      .top-header {
          background-image: none;

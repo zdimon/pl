@@ -338,7 +338,7 @@ button:focus {
 /*------------------------------------------------------------------ HEADER -------------------------------------------------------------------*/
 
 .top-header .navbar {
-	padding: 5px 0px;
+	padding: 0;
 }
 
 .top-header {
@@ -406,8 +406,8 @@ a.navbar-brand img {
 .navbar-toggler {
 	border: 2px solid #d4a81e !important;
 	border-radius: 0;
-	margin: 15px 15px;
-	padding: 8px 8px;
+	margin: 3px;
+	padding: 3px;
 	-webkit-transition: all 0.2s linear;
 	-moz-transition: all 0.2s linear;
 	-o-transition: all 0.2s linear;
