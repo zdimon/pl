@@ -107,9 +107,12 @@ class Topic(models.Model):
     has_video = models.BooleanField(default=False)
     is_youtube = models.BooleanField(default=False)
 
+    def get_clear_lesson_slug(self):
+        return self.lesson.name_slug.split('--')[1]
+
     @property
     def short_content(self):
-        path = '%s/%s/%s/%s' % (DATA_DIR,self.lesson.course.name_slug,self.lesson.name_slug,self.filename)
+        path = '%s/%s/%s/%s' % (DATA_DIR,self.lesson.course.name_slug,self.get_clear_lesson_slug(),self.filename)
         if os.path.isfile(path):
             f = open(path,'r')
             txt = f.read()
@@ -127,7 +130,7 @@ class Topic(models.Model):
 
     @property
     def content(self):
-        path = '%s/%s/%s/%s' % (DATA_DIR,self.lesson.course.name_slug,self.lesson.name_slug,self.filename)
+        path = '%s/%s/%s/%s' % (DATA_DIR,self.lesson.course.name_slug,self.get_clear_lesson_slug(),self.filename)
         #return path
         if os.path.isfile(path):
             f = open(path,'r')
