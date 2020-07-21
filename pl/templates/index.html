@@ -6,7 +6,7 @@
     <div class="container">
         {% for course in courses %}
         <div class="row course-item">
-            <div class="col-md-6 layout_padding_2">
+            <div class="col-md-10">
                 <div class="full">
                     <div class="heading_main text_align_left">
                        <h2><a href="{{ course.get_absolute_url }}">{{ course.name }}</a></h2>
@@ -15,15 +15,21 @@
                       <p>{{ course.desc | safe}}</p>
                     </div>
                     <div class="full">
-                       <a class="hvr-radial-out button-theme" href="{{ course.get_absolute_url }}">Подробней</a>
-                    </div>
+                        <strong>Последние уроки.</strong>
+                        {% for l in course.get_last_lessons %}
+                            <a href="{{ l.get_absolute_url }}">{{l.number}}. {{ l }}</a>
+                        {% endfor %}
+                      </div>
+
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-2">
                 <div class="full">
                     
                         <img src="{{ course.image.url }}" alt="#" />
-
+                        <div class="full">
+                            <a class="hvr-radial-out button-theme" href="{{ course.get_absolute_url }}">Подробней</a>
+                         </div>
                 </div>
             </div>
         </div>

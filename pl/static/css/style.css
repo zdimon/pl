@@ -1833,7 +1833,7 @@ p {
     font-size: 20px;
     font-weight: 700;
     padding: 0 0 15px 0;
-    margin: 0 0 30px 0;
+    margin: 0;
     font-family: 'Raleway', sans-serif;
     position: relative;
     background-image: url(../images/heading_main_border.png);
