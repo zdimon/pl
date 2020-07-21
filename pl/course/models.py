@@ -60,8 +60,9 @@ class Lesson(models.Model):
     meta_description = models.TextField(blank=True, null = True)
     @property
     def get_image(self):
-        path = '%s%s/%s/images/1.png' % (DATA_DIR,self.course.name_slug,self.name_slug)
-        url = '/static/course/%s/%s/images/1.png' % (self.course.name_slug,self.name_slug)
+        clear_name = self.name_slug.split('--')[1]
+        path = '%s%s/%s/images/1.png' % (DATA_DIR,self.course.name_slug,clear_name)
+        url = '/static/course/%s/%s/images/1.png' % (self.course.name_slug,clear_name)
         if isfile(path):
             # return path
             return mark_safe('<img width="150" src="%s" />' % url)
@@ -70,8 +71,9 @@ class Lesson(models.Model):
 
     @property
     def get_image_url(self):
-        path = '%s%s/%s/images/1.png' % (DATA_DIR,self.course.name_slug,self.name_slug)
-        url = '/static/course/%s/%s/images/1.png' % (self.course.name_slug,self.name_slug)
+        clear_name = self.name_slug.split('--')[1]
+        path = '%s%s/%s/images/1.png' % (DATA_DIR,self.course.name_slug,clear_name)
+        url = '/static/course/%s/%s/images/1.png' % (self.course.name_slug,clear_name)
         if isfile(path):
             return url
         else:
