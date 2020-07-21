@@ -60,12 +60,13 @@ class CourseLoader(object):
         for d in onlydirs:
             lesson_yml_path = path+'/'+d+'/meta.yml'
             data = self.get_meta(lesson_yml_path)
+            slug = '%s--%s' % (self.course.name_slug, d)
             try:
-                lesson = Lesson.objects.get(name_slug=d)
+                lesson = Lesson.objects.get(name_slug=slug)
             except:
                 lesson = Lesson()
             number = d.split('-')[0]
-            slug = '%s--%s' % (self.course.name_slug, d)
+            
             lesson.name_slug = slug
             lesson.number = number 
             lesson.title = data['name']
