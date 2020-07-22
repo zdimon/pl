@@ -11,3 +11,4 @@ git+https://github.com/liqpay/sdk-python#egg=liqpay
 django-mptt
 psycopg2
 bs4
+django-crispy-forms

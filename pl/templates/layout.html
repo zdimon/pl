@@ -73,7 +73,7 @@
                         <li><a class="nav-link" href="{% url 'articles' %}">Статьи</a></li>
                         
                         {% if user.is_authenticated %}
-                        <li><a class="nav-link" href="{% url 'my_cabinet' %}">Мой кабинет</a></li>
+                        <li><a class="nav-link" href="{% url 'cabinet_index' %}">Мой кабинет</a></li>
                         <li>
                             <a class="nav-link" id="logout" href="{% url 'logout' %}" class="">Выход</a>
                         </li>

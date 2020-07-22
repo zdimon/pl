@@ -41,8 +41,13 @@ INSTALLED_APPS = [
     'index',
     'course',
     'social_django',
-    'mptt'
+    'mptt',
+    'cabinet',
+    'crispy_forms'
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+AUTH_PROFILE_MODULE = 'cabinet.UserProfile'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

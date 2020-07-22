@@ -97,3 +97,7 @@ p {
 .navbar-brand {
     background-color: white;
 }
+
+.full-width {
+    width: 100%;
+}

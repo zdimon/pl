@@ -24,6 +24,7 @@ from course.views import liqpay_process
 urlpatterns = [
     path('',index),
     path('course/',include('course.urls')),
+    path('cabinet/',include('cabinet.urls')),
     path('about-me.html',about, name='about-link'),
 
     path('oferta.html',oferta, name='oferta'),
