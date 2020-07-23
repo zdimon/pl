@@ -1,0 +1,51 @@
+{% extends 'cabinet_index.html' %}
+
+{% block cabinet_content %}
+
+        <h1>Промокоды</h1>
+
+        <h2>Генерация промокодов</h2>
+        <form method="POST" action="{% url 'promo_gen' %}">
+            {% csrf_token %}
+            Курс: <select name="course">
+                {% for course in courses %}
+                    <option value="{{ course.id }}">{{ course }}</option>
+                {% endfor %}
+            </select>
+            Количество: <input type="text" name="ammount" />
+            <input type="submit" value="Сгенерировать" />
+        </form>
+
+        {% if object_list %}
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Курс</th>
+                <th scope="col">Промокод</th>
+                <th scope="col">Использован?</th>
+                <th scope="col">Cсылка</th>
+              </tr>
+            </thead>
+            <tbody>
+             
+                {% for promocode in object_list %}
+                <tr>
+                    <th scope="row">{{ promocode.id }}</th>
+                    <td>{{ promocode.course }}</td>
+                    <td>{{ promocode.code }}</td>
+                    <td>{{ promocode.is_activated }}</td>
+                    <td><a href="{{ promocode.get_absolute_url }}">ссылка</a></td>
+
+                </tr>
+                {% endfor %}
+              
+            </tbody>
+          </table>
+          {% else %}
+            <div class="alert alert-danger" role="alert">
+                У вас нет промокодов.
+            </div>
+          {% endif %}       
+
+{% endblock %}

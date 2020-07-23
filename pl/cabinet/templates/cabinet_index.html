@@ -10,6 +10,12 @@
                 <div class="btn-group-vertical full-width">
                     <a href="{% url 'edit_profile' %}"  class="btn btn-light">Профиль</a>
                     <a href="{% url 'payments' %}" class="btn btn-light">Мои покупки</a>
+
+                    {% if user.is_superuser %}
+                        <a href="{% url 'promo' %}" class="btn btn-light">Промокоды</a>
+                    {% endif %}
+
+
                   </div>
             </div>
             <div class="col-md-9 ">
