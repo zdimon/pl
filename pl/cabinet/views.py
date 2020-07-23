@@ -42,7 +42,7 @@ import base64
 
 def secure_rand(len=8):
     token=os.urandom(len)
-    return base64.b64encode(token).decode("utf-8").replace('=','').replace('/','')
+    return base64.b64encode(token).decode("utf-8").replace('=','').replace('/','').replace('+','')
 
 def promo_gen(request):
     if request.method == 'POST':
