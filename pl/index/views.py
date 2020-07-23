@@ -11,7 +11,7 @@ from course.models import parse_md
 
 def index(request):
     courses = Course.objects.all()
-    last_lessons = Lesson.objects.all().order_by('-id')[0:10]
+    last_lessons = Lesson.objects.all().order_by('-id')[0:9]
     return render(request,'index.html',{'courses': courses, 'last_lessons': last_lessons})
 
 

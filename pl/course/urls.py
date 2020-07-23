@@ -12,4 +12,5 @@ urlpatterns = [
     path('subscribe',subscribe, name="subscribe"),
     path('articles',articles, name="articles"),
     path('article/<slug:slug>',article_detail, name="article_detail"),
+    path('pay/success/<int:lesson_id>',pay_success, name="pay_success"),
 ]

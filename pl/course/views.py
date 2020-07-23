@@ -129,3 +129,7 @@ def article_detail(request,slug):
     catalog = Catalog.objects.get(name=catalogsename)
     article = Article.objects.get(filename=filename)
     return render(request,'article_detail.html',{'article': article})
+
+def pay_success(request,lesson_id):
+    lesson = Lesson.objects.get(pk=request.POST.get('lesson_id'))
+    messages.info(request, 'Спасибо. <a href="%s">Просмотр урока</a>' % lesson.get_absolute_url)
