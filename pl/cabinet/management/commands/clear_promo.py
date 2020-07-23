@@ -5,4 +5,5 @@ class Command(BaseCommand):
   
     def handle(self, *args, **options):
         print('Clear promo')
+        Promocode.objects.all().delete()
        
