@@ -1,7 +1,7 @@
 from django.urls import path, include
 from course.views import course_detail, lesson_detail, pay, my_cabinet, save_comment, discussion, subscribe
 from course.views import articles
-from course.views import article_detail
+from course.views import article_detail, pay_success
 urlpatterns = [ 
     path('detail/<slug:slug>',course_detail, name="course_detail"),
     path('lesson/detail/<slug:slug>',lesson_detail, name="lesson_detail"),
