@@ -12,3 +12,4 @@ django-mptt
 psycopg2
 bs4
 django-crispy-forms
+python-telegram-bot==12.0.0b1
