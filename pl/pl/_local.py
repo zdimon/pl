@@ -7,6 +7,13 @@ LESSON_PRICE = 50
 LIQPAY_PUBLIC_KEY   = '...'
 LIQPAY_PRIVATE_KEY  = '...'
 LIQPAY_PROCESS_URL  = 'https://learning.webmonstr.com/liqpay/process'
+ALL_FREE=False
+DOMAIN = 'http://localhost:7878'
+
+
+STATICFILES_DIRS = [
+    ''
+]
 
 
 '''
