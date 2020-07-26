@@ -124,11 +124,14 @@ class Topic(models.Model):
             soup = BeautifulSoup(html, 'html.parser')
             ps = soup.find_all('p')
             cs = soup.find_all('pre')
+            imgs = soup.find_all('img')
             out = ''
             for p in ps[0:6]:
                 out = out + str(p)
             for c in cs[0:2]:
-                out = out + str(p)
+                out = out + str(c)
+            for im in ims[0:1]:
+                out = out + str(im)
             return out
         else:
             return 'File %s does not exist!' % path
