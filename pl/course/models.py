@@ -130,7 +130,7 @@ class Topic(models.Model):
                 out = out + str(p)
             for c in cs[0:2]:
                 out = out + str(c)
-            for im in ims[0:1]:
+            for imgs in ims[0:1]:
                 out = out + str(im)
             return out
         else:
