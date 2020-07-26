@@ -123,8 +123,11 @@ class Topic(models.Model):
             html =  parse_md(txt)
             soup = BeautifulSoup(html, 'html.parser')
             ps = soup.find_all('p')
+            cs = soup.find_all('pre')
             out = ''
             for p in ps[0:6]:
+                out = out + str(p)
+            for c in cs[0:2]:
                 out = out + str(p)
             return out
         else:
