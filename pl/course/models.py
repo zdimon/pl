@@ -65,7 +65,7 @@ class Lesson(models.Model):
         url = '/static/course/%s/%s/images/1.png' % (self.course.name_slug,clear_name)
         if isfile(path):
             # return path
-            return mark_safe('<img width="150" src="%s" />' % url)
+            return mark_safe('<img width="200" src="%s" />' % url)
         else:
             return mark_safe('&nbsp;')
 
@@ -85,6 +85,13 @@ class Lesson(models.Model):
     def get_absolute_url(self):
         return reverse('lesson_detail', kwargs={'slug': self.name_slug })
 
+    @property
+    def has_video(self):
+        cnt = Topic.objects.filter(lesson=self,has_video=True).count()
+        if cnt == 0:
+            return False
+        else:
+          return True    
 
     def is_paid(self,user):
         if ALL_FREE:
@@ -111,6 +118,8 @@ class Topic(models.Model):
 
     def get_clear_lesson_slug(self):
         return self.lesson.name_slug.split('--')[1]
+
+
 
     @property
     def short_content(self):
