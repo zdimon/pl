@@ -33,6 +33,11 @@ class Course(models.Model):
     name_slug = models.CharField(verbose_name='Name slug',max_length=250, blank=True, null = True)
     is_active = models.BooleanField(verbose_name=_('Is published?'), default=False)
 
+
+    @property
+    def count_lessons(self):
+        return Lesson.objects.filter(course=self).count()
+
     @property
     def get_last_lessons(self):
         return Lesson.objects.filter(course=self).order_by('-number')[0:2]

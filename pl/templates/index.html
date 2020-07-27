@@ -19,6 +19,9 @@
                         {% for l in course.get_last_lessons %}
                             <a href="{{ l.get_absolute_url }}">{{l.number}}. {{ l }}</a>
                         {% endfor %}
+
+                        <strong>Количество уроков: {{ course.count_lessons }}</strong>
+
                       </div>
 
                 </div>
