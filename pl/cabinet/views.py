@@ -34,7 +34,7 @@ from course.models import Course
 class PromocodeList(LoginRequiredMixin,ListView):
     model = Promocode
     def get_context_data(self, *args, **kwargs):
-        if request.user.is_superuser:
+        if self.request.user.is_superuser:
             context = super(PromocodeList, self).get_context_data(*args, **kwargs)
             context['courses'] = Course.objects.all()
             return context
