@@ -3,6 +3,7 @@ from course.models import LessonPayments
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
     return render(request,'cabinet_index.html')
@@ -30,12 +31,13 @@ from cabinet.models import Promocode
 from django.views.generic import ListView
 from course.models import Course
 
-class PromocodeList(ListView):
+class PromocodeList(LoginRequiredMixin,ListView):
     model = Promocode
     def get_context_data(self, *args, **kwargs):
-        context = super(PromocodeList, self).get_context_data(*args, **kwargs)
-        context['courses'] = Course.objects.all()
-        return context
+        if request.user.is_superuser:
+            context = super(PromocodeList, self).get_context_data(*args, **kwargs)
+            context['courses'] = Course.objects.all()
+            return context
 
 import os
 import base64
