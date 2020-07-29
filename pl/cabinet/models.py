@@ -16,7 +16,7 @@ class UserProfile(User):
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
-    if created:
+    if created and not instance.is_superuser:
         UserProfile.objects.create(pk=instance.pk)
 
 from course.models import Course, LessonPayments

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from course.models import LessonPayments
+from course.models import LessonPayments, Comments
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -38,6 +38,8 @@ class PromocodeList(LoginRequiredMixin,ListView):
             context = super(PromocodeList, self).get_context_data(*args, **kwargs)
             context['courses'] = Course.objects.all()
             return context
+        else:
+            redirect('access_denite')
 
 import os
 import base64
@@ -69,3 +71,27 @@ def promo_activate(request,slug):
         code.activate(request.user.userprofile)
         messages.info(request, 'Промокод активирован.')
     return redirect('promo')
+
+def access_denite(request):
+    return render(request,'access_denite.html')
+
+def faq(request):
+    comments = Comments.objects.filter(is_published=True, level=0).order_by('-id')
+    return render(request,'faq.html',{'comments': comments})
+
+from cabinet.forms import CommentForm
+
+def add_answer(request,id):
+    comment = Comments.objects.get(pk=id)
+    answer = Comments()
+    answer.user = request.user.userprofile
+    answer.parent = comment
+    answer.lesson = comment.lesson
+    answer.is_published = True
+    form = CommentForm(request.POST or None, instance=answer)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'Спасибо. Ваш комментарий был сохранен.')
+            return redirect('faq')
+    return render(request,'add_answer.html',{'form': form, 'comment': comment})

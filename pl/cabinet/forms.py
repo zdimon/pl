@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from cabinet.models import UserProfile
+from course.models import Comments
 
 class ProfileForm(ModelForm):
     class Meta:
@@ -12,3 +13,8 @@ class ProfileForm(ModelForm):
         self.fields['phone'].required = False
         self.fields['telegram'].required = False
         self.fields['skype'].required = False
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comments
+        fields = ['content']

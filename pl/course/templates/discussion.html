@@ -25,10 +25,10 @@
                         {% for message in comments %}
                         <tr>
                             <th scope="row">{{ message.id }}</th>
-                            <td>{{ message.content }}</td>
+                            <td><a href="{{ message.get_absolute_url }}">{{ message.content }}</a></td>
                             <td><a href="{{ message.lesson.get_absolute_url }}">{{ message.lesson }}</a></td>
                             <td>{{ message.user }}</td>
-                            <td>0</td>
+                            <td>{{ message.get_count }}</td>
                             <td>{{ message.created }} </td>
                         </tr>
                         {% endfor %}

@@ -1,0 +1,42 @@
+{% extends 'cabinet_index.html' %}
+{% load crispy_forms_tags %}
+
+{% block cabinet_content %}
+        <h1>Обсуждения</h1>
+        <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Сообщение</th>
+                    
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                 
+                    {% for message in comments %}
+                    <tr>
+                        <th scope="row">{{ message.id }}</th>
+                        <td>
+                          <p> Урок: <a href="{{ message.lesson.get_absolute_url }}">{{ message.lesson }}</a></p>
+                          <p><strong>{{ message.content }}</strong></p>
+                          <p style="text-align: right;">Автор: {{ message.user }}</p>
+                          <p style="text-align: right;">{{ message.created }} </p>
+                          <p><a href="{% url 'add_answer' id=message.id %}" > Ответить </a></p>
+                          <p><strong>Ответы:</strong></p>
+                          {% for item in message.get_children %}
+                            <p>{{ item.content }}</p>
+                            <p style="text-align: right;">Автор: {{ item.user }}</p>
+                            <p style="text-align: right;">{{ item.created }} </p>
+                          {% endfor %}
+                        </td>
+   
+                       
+                       
+                        
+                    </tr>
+                    {% endfor %}
+                  
+                </tbody>
+              </table>
+{% endblock %}

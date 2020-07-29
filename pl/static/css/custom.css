@@ -113,3 +113,7 @@ p {
 .green {
     color: green;
 }
+
+b, strong {
+    font-weight: bold !important;
+}

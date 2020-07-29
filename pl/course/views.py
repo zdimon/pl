@@ -133,3 +133,8 @@ def article_detail(request,slug):
 def pay_success(request,lesson_id):
     lesson = Lesson.objects.get(pk=request.POST.get('lesson_id'))
     messages.info(request, 'Спасибо. <a href="%s">Просмотр урока</a>' % lesson.get_absolute_url)
+
+
+def comment_detail(request,id):
+    comment = Comments.objects.get(pk=id)
+    return render(request,'comment_detail.html',{'comment': comment})

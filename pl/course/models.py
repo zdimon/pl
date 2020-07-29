@@ -234,8 +234,16 @@ class Comments(MPTTModel):
     created = models.DateTimeField(auto_now_add=True)
     lesson = models.ForeignKey(Lesson, on_delete=models.SET_NULL, blank=True, null = True)
     is_published = models.BooleanField(default=False)
+
     class MPTTMeta:
         order_insertion_by = ['user']
+
+    def get_absolute_url(self):
+        return reverse('comment_detail', kwargs={'id': self.id })
+
+    @property
+    def get_count(self):
+        return self.get_children().count()
 
 
 class Subscription(models.Model):
