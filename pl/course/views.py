@@ -99,7 +99,7 @@ def save_comment(request):
 
 @login_required
 def discussion(request):
-    comments = Comments.objects.filter(is_published=True).order_by('-id')
+    comments = Comments.objects.filter(is_published=True, level=0).order_by('-id')
     return render(request,'discussion.html',{'comments': comments})
 
 def subscribe(request):
