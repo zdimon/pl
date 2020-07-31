@@ -103,9 +103,9 @@ class Lesson(models.Model):
             return True
         if self.number == 1:
             return True
-        # cnt = Topic.objects.filter(lesson=self,has_video=True).count()
-        # if cnt == 0:
-        #     return True
+        cnt = Topic.objects.filter(lesson=self,has_video=True).count()
+        if cnt == 0:
+            return True
         try:
             LessonPayments.objects.get(user=user,lesson=self, is_paid=True)
             return True
