@@ -117,3 +117,8 @@ p {
 b, strong {
     font-weight: bold !important;
 }
+
+.myimg {
+    border-radius: 50%;
+    width: 100px;
+}
