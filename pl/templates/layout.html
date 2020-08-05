@@ -35,6 +35,10 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/static/css/custom.css" />
 
+    <link rel="stylesheet"
+    href="/static/css/dracula.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+  
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -258,8 +262,9 @@
     <script src="/static/js/images-loded.min.js"></script>
     <script src="/static/js/custom.js"></script>
 
-    {% block customjs %} {% endblock %}
 
+    {% block customjs %} {% endblock %}
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 
 </html>
