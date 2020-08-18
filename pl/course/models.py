@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from django.utils.safestring import mark_safe
 from django.urls import reverse
-from pl.settings import DATA_DIR, ALL_FREE
+from pl.settings import DATA_DIR, ALL_FREE, VIDEO_DIR
 import os
 
 
@@ -117,7 +117,7 @@ class Topic(models.Model):
     filename = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
     lesson = models.ForeignKey(Lesson, verbose_name=_(u'Lesson'), on_delete=models.CASCADE)
     course = models.ForeignKey(Course, verbose_name=_(u'Course'), on_delete=models.CASCADE)
-    video = models.CharField(verbose_name='Name slug',max_length=250, blank=True)
+    video = models.CharField(verbose_name='Video',max_length=250, blank=True)
     has_video = models.BooleanField(default=False)
     is_youtube = models.BooleanField(default=False)
 
@@ -167,7 +167,12 @@ class Topic(models.Model):
         return self.title
 
     def check_video(self,data):
-        onlyfiles = [f for f in listdir(VIDEO_DIR) if isfile(join(VIDEO_DIR, f))]
+        vpath = join(VIDEO_DIR,self.course.name_slug)
+        # if self.filename == 'py-bs4.md':
+        #     import pdb; pdb.set_trace()
+        onlyfiles = []
+        if isdir(vpath):
+            onlyfiles = [f for f in listdir(vpath) if isfile(join(vpath, f))]
         # print(data)
         
         if "youtube" in data:
@@ -179,6 +184,7 @@ class Topic(models.Model):
             self.lesson.save()
             return True
         else:
+
             for video in onlyfiles:
                 fname = video.split('.')[0]
                 if fname == self.filename.split('.')[0]:
