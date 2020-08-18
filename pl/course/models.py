@@ -209,7 +209,7 @@ class Topic(models.Model):
             out = '<iframe width="560" height="315" src="%s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' % self.video
             return mark_safe(out)
         if self.has_video:
-            return mark_safe('<video  controls><source src="/static/video/%s" type="video/mp4"></video>' % self.video)
+            return mark_safe('<video  controls><source src="/static/video/%s/%s" type="video/mp4"></video>' % (self.course.name_slug,self.video))
         else:
             return 'Видео отсутствует'
 
