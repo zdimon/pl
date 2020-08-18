@@ -1,8 +1,9 @@
-{% extends 'cabinet_index.html' %}
+{% extends 'base.html' %}
 
-{% block cabinet_content %}
+{% block content %}
 
-        <h1>Мои покупки</h1>
+<div class="card-body">
+  <h6 class="heading-small text-muted mb-4">Мои покупки</h6>
         {% if payments %}
         <table class="table">
             <thead>
@@ -33,5 +34,6 @@
                 У вас нет купленных уроков.
             </div>
           {% endif %}       
+</div>
 
 {% endblock %}

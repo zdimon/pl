@@ -1,8 +1,9 @@
-{% extends 'cabinet_index.html' %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block cabinet_content %}
-        <h1>Обсуждения</h1>
+{% block content %}
+<div class="card-body">
+  <h6 class="heading-small text-muted mb-4">Обсуждения</h6>
         <table class="table">
                 <thead>
                   <tr>
@@ -39,4 +40,5 @@
                   
                 </tbody>
               </table>
+</div>
 {% endblock %}

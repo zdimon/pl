@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
-    return render(request,'cabinet_index.html')
+    return render(request,'base.html')
 
 from .forms import ProfileForm
 

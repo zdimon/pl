@@ -1,11 +1,13 @@
-{% extends 'cabinet_index.html' %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-{% block cabinet_content %}
-        <h1>Редактирование профиля</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-success">Сохранить</button>
-          </form>
+{% block content %}
+<div class="card-body">
+    <h6 class="heading-small text-muted mb-4">Редактирование профиля</h6>
+      <form method="post">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button type="submit" class="btn btn-success">Сохранить</button>
+      </form>
+</div>
 {% endblock %}
