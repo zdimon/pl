@@ -1,9 +1,9 @@
-{% extends 'cabinet_index.html' %}
+{% extends 'base.html' %}
 
-{% block cabinet_content %}
+{% block content %}
 
-        <h1>Промокоды</h1>
-
+        <div class="card-body">
+          <h6 class="heading-small text-muted mb-4">Промокоды</h6>
         <h2>Генерация промокодов</h2>
         <form method="POST" action="{% url 'promo_gen' %}">
             {% csrf_token %}
@@ -47,5 +47,5 @@
                 У вас нет промокодов.
             </div>
           {% endif %}       
-
+</div>
 {% endblock %}
