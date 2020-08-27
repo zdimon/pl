@@ -1,0 +1,12 @@
+#!/bin/bash
+cd backend
+. ./venv/bin/activate
+case "$#" in
+0 )
+        port=8000
+;;
+1 )
+        port=$1
+esac
+cd iZiJob
+./manage.py runserver $port
