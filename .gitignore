@@ -2,3 +2,4 @@ venv
 db.sqlite3
 *.pyc
 __pycache__
+backend/static/front_dist
