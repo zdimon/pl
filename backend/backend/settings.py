@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'ij',
-    'ssr'
+    'ssr',
+    'graber'
 ]
 
 MIDDLEWARE = [

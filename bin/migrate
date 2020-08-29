@@ -1,4 +1,5 @@
 #!/bin/bash
 cd backend
 . ../venv/bin/activate
-./manage.py runserver 8081
+./manage.py makemigrations
+./manage.py migrate

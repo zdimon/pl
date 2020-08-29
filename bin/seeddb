@@ -1,0 +1,6 @@
+#!/bin/bash
+cd backend
+. ../venv/bin/activate
+./manage.py load_city
+./manage.py load_youdo
+./manage.py load_user
