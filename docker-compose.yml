@@ -3,23 +3,42 @@ version: '3'
 services:
 
 
+  # ng-web:
+  #   image: node
+  #   container_name: ng-web-server
+  #   volumes:
+  #     - "./frontend/angular:/app"
+  #   command: bash -c "cd app && ./node_modules/@angular/cli/bin/ng serve --port 4201 --host 0.0.0.0 --disable-host-check"
+  #   ports:
+  #     - "4201:4201"
+
+  # ng-mobi:
+  #   image: node
+  #   container_name: ng-mobi-server
+  #   volumes:
+  #     - "./frontend/angular:/app"
+  #   command: bash -c "cd app && ./node_modules/@angular/cli/bin/ng serve mobi --port 4202 --host 0.0.0.0 --disable-host-check"
+  #   ports:
+  #     - "4202:4202"
+
+
+
   ng-web:
     image: node
-    container_name: ng-web-server
+    container_name: ng-web-build
     volumes:
-      - "./frontend/angular:/app"
-    command: bash -c "cd app && ./node_modules/@angular/cli/bin/ng serve --port 4201 --host 0.0.0.0 --disable-host-check"
-    ports:
-      - "4201:4201"
+      - "./:/app"
+    command: bash -c "cd app/frontend/angular && ./node_modules/@angular/cli/bin/ng build web --watch"
+
 
   ng-mobi:
     image: node
-    container_name: ng-mobi-server
+    container_name: ng-mobi-build
     volumes:
-      - "./frontend/angular:/app"
-    command: bash -c "cd app && ./node_modules/@angular/cli/bin/ng serve mobi --port 4202 --host 0.0.0.0 --disable-host-check"
-    ports:
-      - "4202:4202"
+      - "./:/app"
+    command: bash -c "cd app/frontend/angular && ./node_modules/@angular/cli/bin/ng build mobi --watch"
+
+
 
   django:
     container_name: django-server
