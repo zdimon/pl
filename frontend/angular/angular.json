@@ -156,10 +156,10 @@
             ],
             "styles": [
               {
-                "input": "src/theme/variables.scss"
+                "input": "projects/mobi/src/theme/variables.scss"
               },
               {
-                "input": "src/global.scss"
+                "input": "projects/mobi/src/global.scss"
               }
             ],
             "scripts": []
