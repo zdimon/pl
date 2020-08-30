@@ -69,7 +69,10 @@ class CourseLoader(object):
             
             lesson.name_slug = slug
             lesson.number = number 
-            lesson.title = data['name']
+            try:
+                lesson.title = data['name']
+            except:
+                lesson.title = 'Не определено!'
             lesson.desc = data['desc']
             lesson.meta_keywords = data['meta_keywords']
             lesson.meta_title = data['meta_title']
