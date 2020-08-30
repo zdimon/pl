@@ -13,8 +13,18 @@ class Command(BaseCommand):
             tmpstr = f.read()
             data = json.loads(tmpstr)
 
+        # admin
+        user = UserProfile()
+        user.publicname = 'admin'
+        user.username = 'admin'
+        user.set_password('admin')
+        user.is_superuser = True
+        user.is_active = True
+        user.is_staff = True
+        user.save()
+
         for item in data:
-            print(item)
+            print('Creating user .... %s' % item['publicname'])
             user = UserProfile()
             user.publicname = item['publicname']
             user.username = item['username']

@@ -3,3 +3,4 @@ djangorestframework
 drf-yasg
 bs4
 requests
+django-filter
