@@ -48,3 +48,9 @@ class SuggestionAdmin(admin.ModelAdmin):
 
 admin.site.register(Suggestion, SuggestionAdmin)
 
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['title', 'desc']
+
+admin.site.register(Order, OrderAdmin)
+

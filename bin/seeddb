@@ -4,3 +4,4 @@ cd backend
 ./manage.py load_city
 ./manage.py load_youdo
 ./manage.py load_user
+./manage.py load_suggestion

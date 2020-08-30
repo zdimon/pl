@@ -51,7 +51,7 @@ class Command(BaseCommand):
                 fpath = join(suggestion_dir,filename)
                 if not isfile(fpath):
                     print(key)
-                    get_suggestion(key
+                    get_suggestion(key)
         save_suggestions()
 
 
