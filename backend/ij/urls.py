@@ -1,5 +1,9 @@
 from django.urls import path, include
-from ij.views import CityListView, CategoryListView, ControlListView, RegistrationView
+from ij.views import CityListView, \
+                    CategoryListView, \
+                    ControlListView, \
+                    RegistrationView, \
+                    LoginView
 
 urlpatterns = [ 
    
@@ -7,4 +11,5 @@ urlpatterns = [
     path('category/list',CategoryListView.as_view()),
     path('control/list',ControlListView.as_view()),
     path('registration',RegistrationView.as_view()),
+    path('login',LoginView.as_view()),
 ]

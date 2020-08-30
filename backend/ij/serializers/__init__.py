@@ -5,3 +5,4 @@ from .control import *
 from .option import *
 from .registration import *
 from .profile import *
+from .auth import *
