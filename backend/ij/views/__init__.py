@@ -3,3 +3,4 @@ from .category import *
 from .control import *
 from .registration import *
 from .login import *
+from .suggestion import *

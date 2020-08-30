@@ -42,3 +42,9 @@ class ControlAdmin(admin.ModelAdmin):
         
 
 admin.site.register(Control, ControlAdmin)
+
+class SuggestionAdmin(admin.ModelAdmin):
+    list_display = ['text', 'subcategory']
+
+admin.site.register(Suggestion, SuggestionAdmin)
+
