@@ -2,6 +2,7 @@ from course.models import  Course, Lesson, Topic
 from pl.settings import DATA_DIR, VIDEO_DIR
 from os import listdir
 from os.path import isfile, join, isdir
+import sys
 
 import yaml
 from django.core.files import File
@@ -74,6 +75,7 @@ class CourseLoader(object):
             except:
                 lesson.title = 'Не определено!'
                 print('Ошибка в %s' % path)
+                sys.exit()
             lesson.desc = data['desc']
             lesson.meta_keywords = data['meta_keywords']
             lesson.meta_title = data['meta_title']
