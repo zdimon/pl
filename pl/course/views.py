@@ -138,3 +138,8 @@ def pay_success(request,lesson_id):
 def comment_detail(request,id):
     comment = Comments.objects.get(pk=id)
     return render(request,'comment_detail.html',{'comment': comment})
+
+
+def sitemap(request):
+    courses = Course.objects.all().order_by('-id')
+    return render(request,'map.html',{'courses': courses})

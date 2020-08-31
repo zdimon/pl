@@ -33,7 +33,9 @@ class Course(models.Model):
     name_slug = models.CharField(verbose_name='Name slug',max_length=250, blank=True, null = True)
     is_active = models.BooleanField(verbose_name=_('Is published?'), default=False)
 
-
+    @property
+    def lessons(self):
+        return Lesson.objects.filter(course=self);
     @property
     def count_lessons(self):
         return Lesson.objects.filter(course=self).count()
@@ -89,6 +91,8 @@ class Lesson(models.Model):
 
     def get_absolute_url(self):
         return reverse('lesson_detail', kwargs={'slug': self.name_slug })
+
+
 
     @property
     def has_video(self):

@@ -72,8 +72,12 @@
                         
                         <li><a class="nav-link" href="{% url 'about-link' %}">О нас</a></li>
                         
-                        <li><a class="nav-link" href="{% url 'discussion' %}">Обсуждения</a></li>
+                        <!--
+                            <li><a class="nav-link" href="{% url 'discussion' %}">Обсуждения</a></li>
+                        -->
                         
+                        <li><a class="nav-link" href="{% url 'map' %}">Все курсы</a></li>
+
                         <li><a class="nav-link" href="{% url 'articles' %}">Статьи</a></li>
                         
                         {% if user.is_authenticated %}
