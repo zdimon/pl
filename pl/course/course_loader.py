@@ -76,7 +76,10 @@ class CourseLoader(object):
                 lesson.title = 'Не определено!'
                 print('Ошибка в %s' % lesson_yml_path)
                 sys.exit()
-            lesson.desc = data['desc']
+            try:
+                lesson.desc = data['desc']
+            except:
+                print('Error with desc in %s' % lesson_yml_path)
             lesson.meta_keywords = data['meta_keywords']
             lesson.meta_title = data['meta_title']
             lesson.meta_description = data['meta_description']
