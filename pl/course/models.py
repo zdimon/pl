@@ -35,7 +35,7 @@ class Course(models.Model):
 
     @property
     def lessons(self):
-        return Lesson.objects.filter(course=self);
+        return Lesson.objects.filter(course=self).order_by('number');
     @property
     def count_lessons(self):
         return Lesson.objects.filter(course=self).count()
