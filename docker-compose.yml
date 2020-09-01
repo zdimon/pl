@@ -23,7 +23,7 @@ services:
 
 
 
-  ng-web:
+  ij-ng-web:
     image: node
     container_name: ng-web-build
     tty: true
@@ -32,7 +32,7 @@ services:
     command: bash -c "cd app/frontend/angular && ./node_modules/@angular/cli/bin/ng build web --watch"
 
 
-  ng-mobi:
+  ij-ng-mobi:
     image: node
     tty: true
     container_name: ng-mobi-build
@@ -42,7 +42,7 @@ services:
 
 
 
-  django:
+  ij-django:
     container_name: django-server
     build: .
     tty: true
@@ -53,7 +53,7 @@ services:
     ports:
       - "8081:8008"
 
-  nginxserver:
+  ij-nginx:
     image: nginx:alpine
     container_name: nginx-server
     restart: unless-stopped
@@ -63,9 +63,9 @@ services:
     volumes: 
       - "./config/vhost.nginx.conf:/etc/nginx/conf.d/default.conf"
     depends_on:
-      - ng-web
-      - ng-mobi
-      - django
+      - ij-ng-web
+      - ij-ng-mobi
+      - ij-django
        
 
       

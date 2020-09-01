@@ -4,12 +4,12 @@ from rest_framework.permissions import AllowAny
 from django.contrib.auth.models import User
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.authtoken.models import Token
-
 from ij.serializers import  RegistrationRequestSerializer, \
                             RegistrationResponseSerializer, \
                             UserProfileSerializer \
 
 from ij.models import UserProfile
+
 
 class RegistrationView(APIView):
     '''
@@ -23,7 +23,10 @@ class RegistrationView(APIView):
         responses={'200': RegistrationResponseSerializer}
         )
     def post(self, request, format=None):
-        print(request.data.get('email'))
+        obj = RegistrationRequestSerializer(data=request.data)
+
+        obj.is_valid(raise_exception=True)
+       
         user = UserProfile()
         user.username = request.data.get('email')
         user.set_password('112233')
