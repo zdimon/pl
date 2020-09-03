@@ -1,6 +1,8 @@
 from django.forms import ModelForm
 from cabinet.models import UserProfile
-from course.models import Comments
+from course.models import Comments, Course
+
+
 
 class ProfileForm(ModelForm):
     class Meta:

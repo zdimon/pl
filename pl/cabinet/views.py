@@ -4,11 +4,31 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+from cabinet.forms.comment_form import MyCommentForm, MyCourseForm
 
 def index(request):
-    return render(request,'main.html')
+    if request.method == 'POST':
+    
+        # Создаем экземпляр формы и заполняем данными из запроса (связывание, binding):
+        form = MyCourseForm(request.POST)
 
-from .forms import ProfileForm
+        # Проверка валидности данных формы:
+        if form.is_valid():
+            # сохраняем форму
+            form.save()
+
+            # Переход по адресу 'map':
+            return HttpResponseRedirect(reverse('map'))
+
+    # Если это GET (или какой-либо еще), создать форму по умолчанию.
+    else:
+        form = MyCourseForm(initial={'name': 'Имя'})
+    return render(request,'main.html', {'form': form})
+
+from .mforms import ProfileForm
 
 def edit_profile(request):
     user = request.user.userprofile
@@ -79,7 +99,7 @@ def faq(request):
     comments = Comments.objects.filter(is_published=True, level=0).order_by('-id')
     return render(request,'faq.html',{'comments': comments})
 
-from cabinet.forms import CommentForm
+from cabinet.mforms import CommentForm
 
 def add_answer(request,id):
     comment = Comments.objects.get(pk=id)
