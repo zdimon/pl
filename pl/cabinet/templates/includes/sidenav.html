@@ -7,7 +7,7 @@
       </button>
       <!-- Brand -->
       <a class="navbar-brand pt-0" href="/">
-        <img src="/static/images/logo.png" alt="image">
+        <img src="/static/images/logo.png" alt="image"> {{ user }}
       </a>
       <!-- 
       <ul class="nav align-items-center d-md-none">
@@ -65,8 +65,8 @@
         <div class="navbar-collapse-header d-md-none">
           <div class="row">
             <div class="col-6 collapse-brand">
-              <a href="./index.html">
-                <img src="/static/assets/img/brand/blue.png">
+              <a href="/">
+                <img src="/static/images/logo.png" alt="image"> {{ user }}
               </a>
             </div>
             <div class="col-6 collapse-close">
@@ -91,6 +91,11 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item  class=" active" ">
+
+            <a class="nav-link" href="{% url 'cabinet_index' %}"  class="btn btn-light">
+              <i class="ni ni-laptop text-yellow"></i>
+              Главная
+            </a>
 
             <a class="nav-link" href="{% url 'edit_profile' %}"  class="btn btn-light">
               <i class="ni ni-single-02 text-yellow"></i>
