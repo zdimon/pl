@@ -4,9 +4,39 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseRedirect
+from cabinet.forms.forms import MyCommentForm
+from django.urls import reverse
 
+@csrf_exempt
 def index(request):
-    return render(request,'main.html')
+    if request.method == 'POST':
+    
+        # Создаем экземпляр формы и заполняем данными из запроса (связывание, binding):
+        form = MyCommentForm(request.POST)
+
+        # Проверка валидности данных формы:
+        if form.is_valid():
+            # сохраняем форму
+            form.save()
+
+            # Переход по адресу 'map':
+            return HttpResponseRedirect(reverse('map'))
+
+    # Если это GET (или какой-либо еще), создать форму по умолчанию.
+    else:
+        form = MyCommentForm(initial={'title': 'Заполните заголовок'})
+    return render(request,'main.html', {'form': form})
+
+
+
+
+
+
+
+
+
 
 from .forms import ProfileForm
 

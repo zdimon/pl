@@ -4,15 +4,20 @@
 
 <div class="card-body">
   <h6 class="heading-small text-muted mb-4">Редактирование профиля</h6>
-      <form>
+      <form method="POST" action="">
+        {% csrf_token %}
         <div class="row">
-          
+          <!--
           <div class="col-md-12 px-1">
             <div class="form-group">
               <label>Username</label>
               <input type="text" class="form-control" placeholder="Username" value="michael23">
             </div>
           </div>
+           -->
+
+           {{ form.as_div }}
+
           <button type="submit" class="btn btn-primary" >Submit</button>
         </div>
       </form>
