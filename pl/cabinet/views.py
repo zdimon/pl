@@ -9,26 +9,15 @@ from django.http import HttpResponseRedirect
 from cabinet.forms.forms import MyCommentForm
 from django.urls import reverse
 
-@csrf_exempt
+
 def index(request):
-    if request.method == 'POST':
-    
-        # Создаем экземпляр формы и заполняем данными из запроса (связывание, binding):
-        form = MyCommentForm(request.POST)
+    courses = Course.objects.all().order_by('-id')
+    return render(request,'main.html', {'courses': courses})
 
-        # Проверка валидности данных формы:
-        if form.is_valid():
-            # сохраняем форму
-            form.save()
 
-            # Переход по адресу 'map':
-            return HttpResponseRedirect(reverse('map'))
-
-    # Если это GET (или какой-либо еще), создать форму по умолчанию.
-    else:
-        form = MyCommentForm(initial={'title': 'Заполните заголовок'})
-    return render(request,'main.html', {'form': form})
-
+def show_lesson(request,id):
+    courses = Course.objects.all().order_by('-id')
+    return render(request,'main.html', {'courses': courses})
 
 
 

@@ -3,24 +3,73 @@
 {% block content %}
 
 <div class="card-body">
-  <h6 class="heading-small text-muted mb-4">Редактирование профиля</h6>
-      <form method="POST" action="">
-        {% csrf_token %}
+  <h6 class="heading-small text-muted mb-4">Курсы</h6>
+      
         <div class="row">
-          <!--
-          <div class="col-md-12 px-1">
-            <div class="form-group">
-              <label>Username</label>
-              <input type="text" class="form-control" placeholder="Username" value="michael23">
-            </div>
-          </div>
-           -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Название</th>
+                <th scope="col">Количество уроков</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              {% for course in courses %}
+              <tr>
+                <td scope="col">{{ forloop.counter }} </td>
+                <td scope="col"><a class="course-title" href="#">{{ course.name }}</a>
+                
+                  <table class="table">
+                   
+                    <tbody>
+                      {% for lesson in course.lessons %}
+                      <tr>
+                        <td class="small" scope="col">{{ lesson.number }}</td>
+                        <td class="small" scope="col small">{{ lesson.video_icon }}</td>
+                        <td scope="col">
+                          {{ lesson.title }} 
+                        </td>
+                        <td scope="col">
+                          <a class="txt-white btn btn-primary mt-0">Посмотреть</a>
 
-           {{ form.as_div }}
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    </table>
+                
+                
+                </td>
+                <td scope="col">12</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
 
-          <button type="submit" class="btn btn-primary" >Submit</button>
         </div>
-      </form>
+
+      
 </div>
 
+{% endblock %}
+
+{% block stylesheets %}
+  <style>
+    .course-title {
+      font-size: 20px;
+    }
+
+    td.small {
+      width: 40px;
+      padding-top: 15px;
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+    .txt-white {
+      color: white !important;
+    }
+
+  </style>
 {% endblock %}
