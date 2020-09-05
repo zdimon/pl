@@ -16,6 +16,7 @@ class CourseAdmin(admin.ModelAdmin):
 class LessonAdmin(admin.ModelAdmin):
     list_display = ['title', 'name_slug', 'course', 'number', 'desc', 'is_active', 'subscribe_link']
     list_filter = ['course']
+    search_fields = ['name_slug', 'title']
     def subscribe_link(self, obj):
         url = reverse('admin:send_news',args=[obj.id])
         return mark_safe('<a href="%s">Разослать</a>' % url)
