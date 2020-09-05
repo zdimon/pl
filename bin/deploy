@@ -2,7 +2,7 @@ cd /home/zdimon/www/course-resourse
 git add .
 git commit -m 'auto'
 git push
-cd /home/zdimon/Desktop/pl
+cd /home/zdimon/Desktop/projects/pl
 git add .
 git commit -m 'auto'
 git push
