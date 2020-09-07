@@ -1,5 +1,5 @@
 from django.urls import path, include
-from cabinet.views import index, edit_profile, payments
+from cabinet.views import index, edit_profile, payments, show_lesson
 
 from cabinet.views import PromocodeList, promo_gen, promo_activate, faq, access_denite, add_answer
 
@@ -15,5 +15,9 @@ urlpatterns = [
 
     path('faq',faq, name="faq"),
     path('add_answer/<int:id>',add_answer, name="add_answer"),
+
+    path('lesson_swow/<int:id>',show_lesson, name="show_lesson"),
+
+
 
 ]

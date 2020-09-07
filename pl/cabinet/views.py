@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from course.models import LessonPayments, Comments
+from course.models import LessonPayments, Comments, Lesson
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -16,8 +16,8 @@ def index(request):
 
 
 def show_lesson(request,id):
-    courses = Course.objects.all().order_by('-id')
-    return render(request,'main.html', {'courses': courses})
+    lesson = Lesson.objects.get(pk=id)
+    return render(request,'show_lesson.html', {'lesson': lesson})
 
 
 

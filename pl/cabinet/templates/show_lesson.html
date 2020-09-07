@@ -3,14 +3,47 @@
 {% block content %}
 
 <div class="card-body">
-  <h6 class="heading-small text-muted mb-4">Просмотр урока:</h6>
+  <h6 class="heading-small text-muted mb-4">Просмотр урока: {{ lesson.title }}
+    <div style="text-align: right;">
+      <a href="{% url 'cabinet_index' %}">Вернуться на главную</a>
+     </div>
+
+  </h6>
       
-      
+  {% for topic in lesson.topic_set.all %}
+  <div class="full" id="lesson-content"> 
+      <div style="text-align: center;" class="full">
+      {{topic.video_tag}}
+      </div>
+
+      {{ topic.content }}
+
+  </div>   
+{% endfor %} 
 
 </div>
 
 {% endblock %}
 
 {% block stylesheets %}
- 
+ <style>
+   #lesson-content img {
+     width: 100%;
+   }
+
+   #lesson-content video {
+      width: 100%;
+   }
+   pre {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+#lesson-content {
+  color: black;
+}
+
+ </style>
 {% endblock %}

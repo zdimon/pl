@@ -29,12 +29,9 @@
                         <td class="small" scope="col">{{ lesson.number }}</td>
                         <td class="small" scope="col small">{{ lesson.video_icon }}</td>
                         <td scope="col">
-                          {{ lesson.title }} 
+                          <a href="{% url 'show_lesson' id=lesson.id %}">{{ lesson.title }} </a>
                         </td>
-                        <td scope="col">
-                          <a class="txt-white btn btn-primary mt-0">Посмотреть</a>
-
-                        </td>
+                       
                       </tr>
                       {% endfor %}
                     </tbody>
