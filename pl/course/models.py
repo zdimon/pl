@@ -309,3 +309,8 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+class NewsLetter(models.Model):
+    title = models.CharField(max_length=250, blank=True, verbose_name=_(u'Title'))
+    lesson = models.ManyToManyField(Lesson, verbose_name=_(u'Content'))
+

@@ -79,3 +79,15 @@ class CatalogAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ['title', 'filename', 'catalog']
     list_filter = ['catalog']
+
+from .models import NewsLetter
+
+class LessonInline(admin.TabularInline):
+    model = NewsLetter.lesson.through
+    extra = 3
+
+@admin.register(NewsLetter)
+class NewsLetterAdmin(admin.ModelAdmin):
+    list_display = ['title']
+    inlines = [LessonInline]
+
