@@ -105,10 +105,10 @@ class Lesson(models.Model):
     @property
     def video_icon(self):
         cnt = Topic.objects.filter(lesson=self,has_video=True).count()
-        if cnt == 0:
+        if cnt > 0:
             return mark_safe('<i class="ni ni-button-play text-blue"></i>')
         else:
-          return '' 
+            return '' 
 
     def is_paid(self,user):
         if ALL_FREE:
