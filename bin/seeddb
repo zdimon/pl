@@ -1,7 +1,10 @@
 #!/bin/bash
 cd backend
 . ../venv/bin/activate
+rm db.sqlite3
+./manage.py migrate
 ./manage.py load_city
 ./manage.py load_youdo
 ./manage.py load_user
 ./manage.py load_suggestion
+./manage.py load_order

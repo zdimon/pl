@@ -134,8 +134,10 @@ REST_FRAMEWORK = {
 
 STATIC_URL = '/static/'
 
-FIXTURE_DIR = '/home/zdimon/Desktop/ij/fixtures'
+FIXTURE_DIR = '/home/zdimon/Desktop/projects/ij/fixtures'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+DOMAIN = 'http://localhost:8081'
