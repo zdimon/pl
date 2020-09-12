@@ -55,7 +55,7 @@ class LessonAdmin(admin.ModelAdmin):
             send_mail(
                 title,
                 title,
-                'zdimon77@gmail.com',
+                'zdimon@pressa.ru',
                 ['zdimon77@gmail.com'],
                 fail_silently=False,
             )
