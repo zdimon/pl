@@ -11,6 +11,9 @@ class Order(models.Model):
     controls = models.ManyToManyField('Control', through='Order2Control')
     email = models.CharField(max_length=250, default='')
 
+    def __str__(self):
+        return self.title
+
 
 class Order2Control(models.Model):
     order = models.ForeignKey(Order,on_delete=models.CASCADE)

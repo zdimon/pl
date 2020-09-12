@@ -26,6 +26,7 @@ schema_view = get_schema_view(
         default_version='v1',
         description=''' Documentation
         The `ReDoc` view can be found [here](/doc).
+        The `Schema` graph can be found [here](/static/schema.png) or [here](/schema) .
         ''',
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="zdimon77@gmail.com"),
@@ -35,6 +36,7 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
+from schema_graph.views import Schema
 
 urlpatterns = [
 
@@ -46,7 +48,8 @@ urlpatterns = [
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('doc', schema_view.with_ui('redoc', cache_timeout=0), name='schema-doc'),
     path('admin/', admin.site.urls),
-    path('',include('ssr.urls'))
+    path('',include('ssr.urls')),
+    path("schema/", Schema.as_view())
 ]
 
 

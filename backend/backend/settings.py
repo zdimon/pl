@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'graber',
     'django_filters',
     'rest_framework.authtoken',
+    'schema_graph',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
@@ -140,7 +142,7 @@ REST_FRAMEWORK = {
 
 STATIC_URL = '/static/'
 
-FIXTURE_DIR = '/home/zdimon/Desktop/projects/ij/fixtures'
+FIXTURE_DIR = os.path.join(BASE_DIR, '../fixtures') 
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')

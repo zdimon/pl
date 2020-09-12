@@ -60,3 +60,10 @@ class OrderAdmin(admin.ModelAdmin):
 
 admin.site.register(Order, OrderAdmin)
 
+class OfferAdmin(admin.ModelAdmin):
+    list_display = ['desc', 'user', 'order']
+
+
+admin.site.register(Offer, OfferAdmin)
+
+

@@ -6,7 +6,10 @@ from ij.views import CityListView, \
                     LoginView, \
                     SuggestionListView, \
                     CreateOrderView, \
-                    OrderListView
+                    OrderListView, \
+                    CreateOfferView, \
+                    UserOfferListView, \
+                    OrderOfferListView
 
 urlpatterns = [ 
    
@@ -18,4 +21,7 @@ urlpatterns = [
     path('suggestion/list',SuggestionListView.as_view()),
     path('order/create',CreateOrderView.as_view(),name="create_order"),
     path('order/list',OrderListView.as_view(),name="order_list"),
+    path('offer/create',CreateOfferView.as_view(),name="create_offer"),
+    path('offer/my',UserOfferListView.as_view(),name="my_offers"),
+    path('offer/order',OrderOfferListView.as_view(),name="order_offers"),
 ]
