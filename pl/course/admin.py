@@ -55,8 +55,8 @@ class LessonAdmin(admin.ModelAdmin):
             send_mail(
                 title,
                 title,
-                'from@example.com',
-                [s.email],
+                'zdimon77@gmail.com',
+                ['zdimon77@gmail.com'],
                 fail_silently=False,
             )
         messages.success(request, 'Письма разослал')
