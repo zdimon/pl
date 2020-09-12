@@ -55,7 +55,7 @@ class LessonAdmin(admin.ModelAdmin):
             content= '<a href="#">test</a>'
             send_mail(
                 title,
-                title,
+                content,
                 'zdimon@pressa.ru',
                 ['zdimon77@gmail.com'],
                 fail_silently=False,
