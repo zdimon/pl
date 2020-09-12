@@ -58,6 +58,7 @@ class LessonAdmin(admin.ModelAdmin):
                 content,
                 'zdimon@pressa.ru',
                 ['zdimon77@gmail.com'],
+                html_message=content
                 fail_silently=False,
             )
         messages.success(request, 'Письма разослал')
