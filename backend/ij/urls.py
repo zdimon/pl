@@ -4,7 +4,8 @@ from ij.views import CityListView, \
                     ControlListView, \
                     RegistrationView, \
                     LoginView, \
-                    SuggestionListView
+                    SuggestionListView, \
+                    CreateOrderView
 
 urlpatterns = [ 
    
@@ -14,4 +15,5 @@ urlpatterns = [
     path('registration',RegistrationView.as_view()),
     path('login',LoginView.as_view()),
     path('suggestion/list',SuggestionListView.as_view()),
+    path('create/order',CreateOrderView.as_view(),name="create_order"),
 ]

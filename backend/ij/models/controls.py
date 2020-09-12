@@ -36,3 +36,6 @@ class Option(models.Model):
     value = models.CharField( max_length = 250 )
     text = models.TextField( )
     input_text = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return '%s:%s:%s' % (self.value, self.input_text, self.text)

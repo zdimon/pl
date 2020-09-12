@@ -49,8 +49,14 @@ class SuggestionAdmin(admin.ModelAdmin):
 admin.site.register(Suggestion, SuggestionAdmin)
 
 
+class Order2ControlInline(admin.TabularInline):
+    list_display = ['control', 'value']
+    model = Order2Control
+
+
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['title', 'desc']
+    list_display = ['title', 'desc', 'category', 'subcategory']
+    inlines = [Order2ControlInline]
 
 admin.site.register(Order, OrderAdmin)
 
