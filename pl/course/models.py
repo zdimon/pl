@@ -310,7 +310,15 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+from pl.settings import DOMAIN
+
 class NewsLetter(models.Model):
     title = models.CharField(max_length=250, blank=True, verbose_name=_(u'Title'))
     lesson = models.ManyToManyField(Lesson, verbose_name=_(u'Content'))
 
+    @property
+    def content(self):
+        out = ''
+        for l in self.lesson.all():
+            out = out + '<a href="%s%s">%s</a>' % (DOMAIN,l.get_absolute_url(),l.title)
+        return out
