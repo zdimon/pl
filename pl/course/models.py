@@ -201,6 +201,7 @@ class Topic(models.Model):
 
             for video in onlyfiles:
                 fname = video.split('.')[0]
+                print('%s===%s' % (fname,self.filename.split('.')[0]))
                 if fname == self.filename.split('.')[0]:
                     self.has_video = True
                     self.video = video
