@@ -55,7 +55,7 @@ class Order2ControlInline(admin.TabularInline):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['title', 'desc', 'category', 'subcategory']
+    list_display = ['title', 'desc', 'category', 'subcategory', 'user']
     inlines = [Order2ControlInline]
 
 admin.site.register(Order, OrderAdmin)

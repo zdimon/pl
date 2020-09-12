@@ -8,6 +8,8 @@ class SuggestionListView(generics.ListAPIView):
     
     Suggestion list.
 
+    ________________
+
 
     '''
     serializer_class = SuggestionSerializer

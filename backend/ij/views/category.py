@@ -7,6 +7,13 @@ from ij.models import Category, SubCategory
 from ij.serializers import CategorySerializer
 
 class CategoryListView(ListAPIView):
+    '''
+
+    List of categories.
+
+    ___________________
+
+    '''
     serializer_class = CategorySerializer
     pagination_class = None
 

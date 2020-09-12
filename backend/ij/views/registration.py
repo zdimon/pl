@@ -13,8 +13,11 @@ from ij.models import UserProfile
 
 class RegistrationView(APIView):
     '''
+
     User registration.
+
     __________________
+    
     '''
     permission_classes = (AllowAny,)
     

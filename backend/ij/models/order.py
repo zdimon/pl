@@ -9,6 +9,7 @@ class Order(models.Model):
     user =  models.ForeignKey(UserProfile,on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     controls = models.ManyToManyField('Control', through='Order2Control')
+    email = models.CharField(max_length=250, default='')
 
 
 class Order2Control(models.Model):

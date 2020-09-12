@@ -7,7 +7,8 @@ class ControlListView(generics.ListAPIView):
     '''
     
     Control list.
-    __________
+    
+    ____________
 
     '''
     serializer_class = ControlSerializer

@@ -7,6 +7,7 @@ class CityListView(generics.ListAPIView):
     
     City list.
 
+    ___________
 
     '''
     serializer_class = CitySerializer
