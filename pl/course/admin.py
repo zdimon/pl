@@ -52,6 +52,7 @@ class LessonAdmin(admin.ModelAdmin):
         for s in Subscription.objects.all():
             print('Sent to %s' % s.email)
             title = 'Новый урок - %s' % lesson
+            content= '<a href="#">test</a>'
             send_mail(
                 title,
                 title,
