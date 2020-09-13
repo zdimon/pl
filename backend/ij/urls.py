@@ -10,7 +10,8 @@ from ij.views import CityListView, \
                     CreateOfferView, \
                     UserOfferListView, \
                     OrderOfferListView, \
-                    GoogleAuthView
+                    GoogleAuthView, \
+                    ProfileEditView
 
 urlpatterns = [ 
    
@@ -27,5 +28,6 @@ urlpatterns = [
     path('offer/order',OrderOfferListView.as_view(),name="order_offers"),
 
     path('google/auth',GoogleAuthView.as_view(),name="google_auth"),
+    path('profile/edit/<int:pk>',ProfileEditView.as_view(),name="profile_edit"),
 
 ]

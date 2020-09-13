@@ -7,3 +7,4 @@ from .suggestion import *
 from .order import *
 from .offer import *
 from .google_auth import *
+from .profile import *

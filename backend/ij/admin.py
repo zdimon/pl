@@ -10,7 +10,7 @@ class CityAdmin(admin.ModelAdmin):
 admin.site.register(City, CityAdmin)
 
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ['publicname']
+    list_display = ['image_tag','publicname', 'username', 'about', 'email', 'telegram', 'skype', 'is_master']
 
 admin.site.register(UserProfile, UserProfileAdmin)
 
