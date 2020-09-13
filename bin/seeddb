@@ -6,5 +6,6 @@ rm db.sqlite3
 ./manage.py load_city
 ./manage.py load_youdo
 ./manage.py load_user
+./manage.py load_google
 ./manage.py load_suggestion
 ./manage.py load_order
