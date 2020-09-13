@@ -4,3 +4,7 @@ drf-yasg
 bs4
 requests
 django-filter
+wheel
+pygraphviz
+django-extensions
+django-schema-graph
