@@ -11,7 +11,9 @@ from ij.views import CityListView, \
                     UserOfferListView, \
                     OrderOfferListView, \
                     GoogleAuthView, \
-                    ProfileEditView
+                    ProfileEditView, \
+                    ContactListView, \
+                    ContactDeleteView
 
 urlpatterns = [ 
    
@@ -30,4 +32,6 @@ urlpatterns = [
     path('google/auth',GoogleAuthView.as_view(),name="google_auth"),
     path('profile/edit/<int:pk>',ProfileEditView.as_view(),name="profile_edit"),
 
+    path('contact/list',ContactListView.as_view(),name="contact_list"),
+    path('contact/delete/<int:pk>',ContactDeleteView.as_view(),name="contact_delete"),
 ]

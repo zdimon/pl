@@ -67,3 +67,10 @@ class OfferAdmin(admin.ModelAdmin):
 admin.site.register(Offer, OfferAdmin)
 
 
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ['owner', 'contact', 'created_at']
+
+
+admin.site.register(Contact, ContactAdmin)
+
+

@@ -21,7 +21,10 @@ class Command(BaseCommand):
                 order = Order.objects.exclude(user=user).order_by('?')[0]
                 data = generate_test_proposition_json(order)
                 rez = requests.post(url,json=data,headers=headers)
-                print(rez.status_code)   
-                print(rez.text)             
+                if rez.status_code == 201:
+                    print(rez.status_code)   
+                    print(rez.text) 
+                else:
+                    raise Exception('Error in creating offer! Code %s' % rez.status_code)            
 
 

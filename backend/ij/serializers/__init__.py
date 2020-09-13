@@ -9,4 +9,5 @@ from .auth import *
 from .suggestion import *
 from .order import *
 from .offer import *
-from .google_auth import GoogleAuthRequestSerializer
+from .google_auth import *
+from .contact import *

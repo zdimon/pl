@@ -8,6 +8,7 @@ def custom_exception_handler(exc, context):
         response.data['status_code'] = response.status_code
         response.data['status'] = 1
         response.data['info'] = str(context['view'])
-        if 'email' in exc.detail:
-            response.data['message'] = exc.detail['email'][0]
+        if hasattr(exc, 'detail'):
+            if 'email' in exc.detail:
+                response.data['message'] = exc.detail['email'][0]
     return response
