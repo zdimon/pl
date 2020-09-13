@@ -13,7 +13,10 @@ from ij.views import CityListView, \
                     GoogleAuthView, \
                     ProfileEditView, \
                     ContactListView, \
-                    ContactDeleteView
+                    ContactDeleteView, \
+                    GetRoomView, \
+                    GetRoomMessageView, \
+                    CreateRoomMessageView
 
 urlpatterns = [ 
    
@@ -32,6 +35,12 @@ urlpatterns = [
     path('google/auth',GoogleAuthView.as_view(),name="google_auth"),
     path('profile/edit/<int:pk>',ProfileEditView.as_view(),name="profile_edit"),
 
+    # contact
     path('contact/list',ContactListView.as_view(),name="contact_list"),
     path('contact/delete/<int:pk>',ContactDeleteView.as_view(),name="contact_delete"),
+    
+    # chat
+    path('chat/get_room/<int:user_id>',GetRoomView.as_view(),name="chat_room_get"),
+    path('chat/get_room_messages',GetRoomMessageView.as_view(),name="chat_room_messages"),
+    path('chat/create_message/',CreateRoomMessageView.as_view(),name="chat_message_create"),
 ]

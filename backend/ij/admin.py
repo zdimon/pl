@@ -73,4 +73,15 @@ class ContactAdmin(admin.ModelAdmin):
 
 admin.site.register(Contact, ContactAdmin)
 
+class ChatMessageInlineAdmin(admin.TabularInline):
+    model = ChatMessage
+
+class ChatRoom2UserInlineAdmin(admin.TabularInline):
+    model = ChatRoom2User
+
+@admin.register(ChatRoom)
+class ChatRoomAdmin(admin.ModelAdmin):
+    list_display = ['created_at', 'token', 'search_key']
+    inlines = [ChatRoom2UserInlineAdmin, ChatMessageInlineAdmin]
+    
 

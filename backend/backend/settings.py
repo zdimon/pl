@@ -153,3 +153,4 @@ MEDIA_URL = '/media/'
 
 
 DOMAIN = 'http://localhost:8081'
+

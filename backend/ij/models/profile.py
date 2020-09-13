@@ -16,4 +16,7 @@ class UserProfile(User):
 
     @property
     def image_tag(self):
-        return mark_safe('<img width="60" src="%s" />' % self.photo.url)
+        try:
+            return mark_safe('<img width="60" src="%s" />' % self.photo.url)
+        except:
+            return mark_safe('<img width="60" src="/static/images/nophoto.png" />')

@@ -11,3 +11,4 @@ from .order import *
 from .offer import *
 from .google_auth import *
 from .contact import *
+from .chat import *

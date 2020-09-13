@@ -6,5 +6,6 @@ from .suggestion import *
 from .order import *
 from .offer import *
 from .contact import *
+from .chat import *
 
 

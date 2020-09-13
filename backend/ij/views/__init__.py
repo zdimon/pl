@@ -9,3 +9,4 @@ from .offer import *
 from .google_auth import *
 from .profile import *
 from .contact import *
+from .chat import *
