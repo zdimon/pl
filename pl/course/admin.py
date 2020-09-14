@@ -93,6 +93,7 @@ class CommentsAdmin(MPTTModelAdmin):
 @admin.register(Subscription)
 class SubscriptionAdmin(admin.ModelAdmin):
     list_display = ['email', 'is_subscribed']
+    list_editable = ['is_subscribed']
 
 from .models import Catalog, Article
 
