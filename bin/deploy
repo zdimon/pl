@@ -7,4 +7,4 @@ git add .
 git commit -m 'auto'
 git push
 # ssh pl@78.46.160.16 'cd course-resourse; git pull; cd ../pl;git pull; . ./venv/bin/activate; cd pl;./manage.py clear_course; ./manage.py load_course'
-ssh pl@78.46.160.16 'cd course-resourse; git pull; cd ../pl;git pull; . ./venv/bin/activate; cd pl; ./manage.py load_course; ./manage.py load_articles; ./manage.py migrate'
+ssh pl@78.46.160.16 'cd course-resourse; git pull; cd ../pl;git pull; . ./venv/bin/activate; cd pl; ./manage.py load_articles; ./manage.py migrate; ./manage.py load_course'

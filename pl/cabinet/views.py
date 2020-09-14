@@ -43,7 +43,7 @@ def get_liqpay_form(request, credit):
         'amount': credit,
         'currency': 'UAH',
         'description': 'Payment for the lesson',
-        'order_id': request.user.id+'-'+r.id,
+        'order_id': '%s-%s' % (request.user.id,r.id),
         'version': '3',
         'result_url': DOMAIN+reverse('pay_success')
     })
