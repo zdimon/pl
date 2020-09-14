@@ -329,8 +329,9 @@ class NewsLetter(models.Model):
         out = 'У нас появились новые уроки /n'
         for l in self.lesson.all():
             html = '''
-                    Курс:  %s  Урок: %s 
-            ''' % (l.course.name,l.title)
+                    Курс:  %s  Урок: %s /n
+                    %s%s
+            ''' % (l.course.name,l.title, DOMAIN,l.course.get_absolute_url())
             
             out = out +'/n' + html
         unlink = ' /n Чтобы отписаться от рассылки %s%s' % (DOMAIN,self.get_absolute_url())
