@@ -14,9 +14,10 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ['title', 'name_slug', 'course', 'number', 'desc', 'is_active', 'subscribe_link']
+    list_display = ['title', 'name_slug', 'course', 'number', 'desc', 'is_new', 'subscribe_link']
     list_filter = ['course']
     search_fields = ['name_slug', 'title']
+    list_editable = ['is_new']
     def subscribe_link(self, obj):
         url = reverse('admin:send_news',args=[obj.id])
         return mark_safe('<a href="%s">Разослать</a>' % url)

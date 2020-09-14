@@ -65,6 +65,8 @@ class Lesson(models.Model):
     meta_keywords = models.TextField(blank=True, null = True)
     meta_title = models.CharField(max_length=255, blank=True, null = True)
     meta_description = models.TextField(blank=True, null = True)
+    is_new = models.BooleanField(verbose_name=_('Is new?'), default=False)
+
     @property
     def get_image(self):
         clear_name = self.name_slug.split('--')[1]

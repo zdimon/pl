@@ -4,7 +4,8 @@ from .models import UserProfile, Promocode
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ['publicname']
+    list_display = ['username', 'account']
+    list_editable = ['account']
 
 
 @admin.register(Promocode)
