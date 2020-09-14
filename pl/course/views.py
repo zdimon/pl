@@ -108,6 +108,7 @@ def subscribe(request):
         try:
             s = Subscription()
             s.email = email
+            s.is_subscribed = True
             s.save()
             messages.info(request, 'Спасибо, вы успешно подписаны.')
         except:
