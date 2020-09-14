@@ -124,7 +124,7 @@ class Lesson(models.Model):
             return True
         # if user.is_superuser:
         #     return True
-        print('ddddddddddddddd')
+  
         try:
             LogShow.objects.get(user=user,lesson=self, is_paid=True)
             return True
