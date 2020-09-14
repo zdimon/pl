@@ -271,6 +271,7 @@ class Comments(MPTTModel):
 
 class Subscription(models.Model):
     email = models.CharField(max_length=250, blank=True, verbose_name=_(u'Email'), unique=True)
+    is_subscribed = models.BooleanField(default=False)
 
 class Catalog(models.Model):
     name = models.CharField(max_length=250, blank=True, verbose_name=_(u'Name'))
@@ -318,10 +319,21 @@ from pl.settings import DOMAIN
 class NewsLetter(models.Model):
     title = models.CharField(max_length=250, blank=True, verbose_name=_(u'Title'))
     lesson = models.ManyToManyField(Lesson, verbose_name=_(u'Content'))
+    desc = models.TextField()
+
+    def get_absolute_url(self):
+        return reverse('unsubscribe')
+
 
     @property
     def content(self):
-        out = ''
+        out = '<h1>У нас появились новые уроки</h1>'
         for l in self.lesson.all():
-            out = out + '<a href="%s%s">%s</a>' % (DOMAIN,l.get_absolute_url(),l.title)
-        return out
+            html = '''
+                <p>
+                    Курс: <a target=_blank href="%s%s"> %s </a> Урок: <a target=_blank  href="%s%s"> %s </a>
+                </p>
+            ''' % (DOMAIN,l.course.get_absolute_url(),l.course.name, DOMAIN,l.get_absolute_url(),l.title)
+            unlink = '<p><a target=_blank  href="%s%s">Отписаться от рассылки</a></p>' % (DOMAIN,self.get_absolute_url())
+            out = out +'<br />' + html
+        return mark_safe(out + '<br />' + self.desc + '<br /><br /><br />' + unlink )

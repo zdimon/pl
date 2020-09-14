@@ -143,3 +143,16 @@ def comment_detail(request,id):
 def sitemap(request):
     courses = Course.objects.all().order_by('-id')
     return render(request,'map.html',{'courses': courses})
+
+
+def unsubscribe(request):
+   
+    try:
+        s = Subscription.objects.get(email=request.user.username)
+        s.is_subscribed = False
+        s.save()
+        messages.info(request, 'Вы отписались от рассылки.')
+    except:
+        messages.info(request, 'Емейл %s не подписаны на рассылку.' % request.user.username)
+
+    return redirect('/')

@@ -1,0 +1,19 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: =?utf-8?b?0J3QvtCy0L7QtSDQvdCwINGB0LDQudGC0LUgd2VibW9uc3RyLmNvbQ==?=
+From: from@example.com
+To: zdimon77@gmail.com
+Date: Mon, 14 Sep 2020 07:56:57 -0000
+Message-ID: <160007021742.19011.7028162370102464919@book>
+
+<h1>У нас появились новые уроки</h1>
+                <p>
+                    Курс: <a href="http://localhost:7878/course/detail/php-course"> Основы PHP. </a> Урок: <a href="http://localhost:7878/course/lesson/detail/php-course--22-docker"> PHP. Собираем докер контейнеры. </a>
+                </p>
+            
+                <p>
+                    Курс: <a href="http://localhost:7878/course/detail/python-course"> Основы Python и Django. </a> Урок: <a href="http://localhost:7878/course/lesson/detail/python-course--26-django-formset"> Django. Наборы форм. </a>
+                </p>
+            Также новй функционал!!!!
+-------------------------------------------------------------------------------
