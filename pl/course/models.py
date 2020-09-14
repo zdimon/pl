@@ -66,6 +66,7 @@ class Lesson(models.Model):
     meta_title = models.CharField(max_length=255, blank=True, null = True)
     meta_description = models.TextField(blank=True, null = True)
     is_new = models.BooleanField(verbose_name=_('Is new?'), default=False)
+    created = models.DateTimeField(auto_now_add=True)
 
     @property
     def get_image(self):

@@ -8,6 +8,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
 from cabinet.forms.forms import MyCommentForm
 from django.urls import reverse
+from liqpay.liqpay3 import LiqPay
+from cabinet.models import ReplCredit
+
+from pl.settings import LIQPAY_PRIVATE_KEY, LIQPAY_PUBLIC_KEY, LIQPAY_PROCESS_URL, DOMAIN
 
 
 def index(request):
@@ -20,8 +24,30 @@ def show_lesson(request,id):
     return render(request,'show_lesson.html', {'lesson': lesson})
 
 
+def add_credits(request):
 
+    return render(request,'add_credits.html')
 
+def pay_success(request):
+
+    return render(request,'pay_success.html')
+
+def get_liqpay_form(request, credit):
+    r = ReplCredit()
+    r.user = request.user.userprofile
+    r.ammount = credit
+    r.save()
+    liqpay = LiqPay(LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY)
+    form_html = liqpay.cnb_form({
+        'action': 'pay',
+        'amount': credit,
+        'currency': 'UAH',
+        'description': 'Payment for the lesson',
+        'order_id': request.user.id+'-'+r.id,
+        'version': '3',
+        'result_url': DOMAIN+reverse('pay_success')
+    })
+    return render(request,'liqpay_form.html', {'form_html': form_html})
 
 
 

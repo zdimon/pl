@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from course.models import Course, Lesson, Comments, Subscription
-
+from cabinet.models import ReplCredit, UserProfile
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
@@ -56,9 +56,14 @@ def liqpay_process(request):
     if sign == signature:
         print('callback is valid')
         data = liqpay.decode_data_from_str(data)
-        order = LessonPayments.objects.get(pk=data['order_id'])
+        idr = data['order_id'].split('-')[1]
+        idu = data['order_id'].split('-')[0]
+        order = ReplCredit.objects.get(pk=idr)
         order.is_paid = True
         order.save()
+        user = UserProfile.objects.get(pk=idu)
+        user.ammount = user.ammount + order.ammount
+        user.save()
     return HttpResponse('ok')
 
 def course_detail(request,slug):

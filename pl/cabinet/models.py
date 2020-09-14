@@ -39,3 +39,9 @@ class Promocode(models.Model):
             lp.save()
         self.is_activated = True
         self.save()
+
+class ReplCredit(models.Model):
+    user = models.ForeignKey(UserProfile, verbose_name=_(u'User'), on_delete=models.CASCADE, null=True, blank=True)
+    ammount = models.IntegerField(default=0)
+    is_paid = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
