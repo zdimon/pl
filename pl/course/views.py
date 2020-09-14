@@ -62,7 +62,7 @@ def liqpay_process(request):
         order.is_paid = True
         order.save()
         user = UserProfile.objects.get(pk=idu)
-        user.account = user.ammount + order.ammount
+        user.account = user.account + order.ammount
         user.save()
     return HttpResponse('ok')
 
