@@ -46,6 +46,8 @@ def pay(request,lesson_id):
 
 from django.views.decorators.csrf import csrf_exempt
 
+from course.utils import get_credits
+
 @csrf_exempt
 def liqpay_process(request):
     print(request.POST)
@@ -62,7 +64,7 @@ def liqpay_process(request):
         order.is_paid = True
         order.save()
         user = UserProfile.objects.get(pk=idu)
-        user.account = user.account + order.ammount
+        user.account = user.account + get_credits(order.ammount)
         user.save()
     return HttpResponse('ok')
 
