@@ -132,7 +132,7 @@ class NewsLetterAdmin(admin.ModelAdmin):
             html_message=letter.content,
             fail_silently=False,
         )
-        messages.success(request, 'Письма разослал')
+        messages.success(request, 'Письма разослал %s челикам' % len(users))
         return redirect(reverse('admin:course_newsletter_changelist'))
 
     def create_news_letter(self, request):
