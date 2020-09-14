@@ -28,6 +28,7 @@ def add_credits(request):
 
     return render(request,'add_credits.html')
 
+@csrf_exempt
 def pay_success(request):
 
     return render(request,'pay_success.html')
