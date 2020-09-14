@@ -126,9 +126,10 @@ class NewsLetterAdmin(admin.ModelAdmin):
             
         send_mail(
             letter.title,
-            letter.content,
+            letter.txt_content,
             'zdimon@pressa.ru',
             users,
+            html_message=letter.content,
             fail_silently=False,
         )
         messages.success(request, 'Письма разослал')

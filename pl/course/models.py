@@ -324,6 +324,17 @@ class NewsLetter(models.Model):
     def get_absolute_url(self):
         return reverse('unsubscribe')
 
+    @property
+    def txt_content(self):
+        out = 'У нас появились новые уроки /n'
+        for l in self.lesson.all():
+            html = '''
+                    Курс:  %s  Урок: %s 
+            ''' % (l.course.name,l.title)
+            
+            out = out +'/n' + html
+        unlink = ' /n Чтобы отписаться от рассылки %s%s' % (DOMAIN,self.get_absolute_url())
+        return out + ' /n ' + self.desc + unlink + ' /n http://webmonstr.com'
 
     @property
     def content(self):
