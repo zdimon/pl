@@ -1,0 +1,11 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: News
+From: from@example.com
+To: zdimon77@gmail.com
+Date: Fri, 11 Sep 2020 09:20:50 -0000
+Message-ID: <159981605080.3266.3673145350913822325@book>
+
+<a href="http://localhost:7878/course/lesson/detail/linux--8-fs">Работа с файловой системой.</a><a href="http://localhost:7878/course/lesson/detail/linux--5-process">Процессы.</a><a href="http://localhost:7878/course/lesson/detail/adv--6-catalog">Каталог.</a><a href="http://localhost:7878/course/lesson/detail/adv--8-suggestion">Подсказки для автозаполнения заголовка заказа.</a><a href="http://localhost:7878/course/lesson/detail/php-course--22-docker">PHP. Собираем докер контейнеры.</a>
+-------------------------------------------------------------------------------

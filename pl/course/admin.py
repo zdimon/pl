@@ -11,6 +11,20 @@ from django.contrib import messages
 class CourseAdmin(admin.ModelAdmin):
     list_display = ['image_tag', 'name_slug', 'desc', 'name', 'meta_title']
 
+from django.contrib import messages
+from .models import NewsLetter
+def create_letter(modeladmin, request, queryset):
+    try:
+        l = NewsLetter.objects.get(title='News')
+    except:
+        l = NewsLetter()
+    l.title = 'News'
+    l.save()
+    for lesson in queryset:
+        l.lesson.add(lesson)
+    messages.add_message(request, messages.INFO, 'A letter has been created!')
+
+create_letter.short_description = 'Create a news letter'
 
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
@@ -18,6 +32,8 @@ class LessonAdmin(admin.ModelAdmin):
     list_filter = ['course']
     search_fields = ['name_slug', 'title']
     list_editable = ['is_new']
+    actions = [create_letter, ]
+
     def subscribe_link(self, obj):
         url = reverse('admin:send_news',args=[obj.id])
         return mark_safe('<a href="%s">Разослать</a>' % url)
@@ -35,11 +51,13 @@ class LessonAdmin(admin.ModelAdmin):
         for s in Subscription.objects.all():
             print('Sent to %s' % s.email)
             title = 'Новый урок - %s' % lesson
+            content= '<a href="#">test</a>'
             send_mail(
                 title,
-                title,
-                'from@example.com',
-                [s.email],
+                content,
+                'zdimon@pressa.ru',
+                ['zdimon77@gmail.com'],
+                html_message=content,
                 fail_silently=False,
             )
         messages.success(request, 'Письма разослал')
@@ -53,9 +71,12 @@ class TopicAdmin(admin.ModelAdmin):
 
 
 
+
+
 @admin.register(LessonPayments)
 class LessonPaymentsAdmin(admin.ModelAdmin):
     list_display = ['user', 'lesson', 'created', 'is_paid']
+    
 
 
 
@@ -80,3 +101,44 @@ class CatalogAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ['title', 'filename', 'catalog']
     list_filter = ['catalog']
+
+from .models import NewsLetter
+
+class LessonInline(admin.TabularInline):
+    model = NewsLetter.lesson.through
+    extra = 3
+
+@admin.register(NewsLetter)
+class NewsLetterAdmin(admin.ModelAdmin):
+    list_display = ['title','send_letter_link']
+    inlines = [LessonInline]
+
+    def send_news_letter(self, request, letter_id):
+        letter = NewsLetter.objects.get(pk=letter_id)
+        for s in Subscription.objects.all():
+            print('Sent to %s' % s.email)
+            send_mail(
+                letter.title,
+                letter.content,
+                'from@example.com',
+                [s.email],
+                fail_silently=False,
+            )
+        messages.success(request, 'Письма разослал')
+        return redirect(reverse('admin:course_newsletter_changelist'))
+
+    def get_urls(self):
+        from django.urls import path
+        urls = super(NewsLetterAdmin, self).get_urls()
+        myurl = [
+            path('send/letter/<int:letter_id>', self.admin_site.admin_view(self.send_news_letter), name="send_news_letter")
+        ]
+        return myurl+urls
+
+    def send_letter_link(self, obj):
+        url = reverse('admin:send_news_letter',args=[obj.id])
+        return mark_safe('<a href="%s">%s</a>' % (url, 'Send the letter'))
+
+
+
+

@@ -4,9 +4,16 @@ from course.course_loader import CourseLoader
 from pl.settings import DATA_DIR
 
 class Command(BaseCommand):
+
+    def add_arguments(self, parser):
+       parser.add_argument('-c', '--course', type=str, help='Course name', )
     
     def handle(self, *args, **options):
         print('Start loading courses from %s' % DATA_DIR)
-        for d in CourseLoader.get_active_courses_dirs():
-            loader = CourseLoader(d)
+        if(options['course']):
+            loader = CourseLoader(options['course'])
             loader.process()
+        else:
+            for d in CourseLoader.get_active_courses_dirs():
+                loader = CourseLoader(d)
+                loader.process()
