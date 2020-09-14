@@ -72,18 +72,21 @@ def course_detail(request,slug):
     print(paid)
     return render(request,'course_detail.html',{'course': course, 'lessons': lessons, 'paid': paid, 'price': LESSON_PRICE})
 
-@login_required
+
 @csrf_exempt
 def lesson_detail(request,slug):
     lesson = Lesson.objects.get(name_slug=slug)
     is_free = lesson.is_paid(request.user)
     try:
-        LogShow.objects.get(lesson=lesson,user=request.user.userprofile)
-    except:
-        ls = LogShow()
-        ls.lesson = lesson
-        ls.user = request.user.userprofile
-        ls.save()
+        try:
+            LogShow.objects.get(lesson=lesson,user=request.user.userprofile)
+        except:
+            ls = LogShow()
+            ls.lesson = lesson
+            ls.user = request.user.userprofile
+            ls.save()
+    except Exception as e:
+        print(str(e))
     return render(request,'lesson_detail.html',{'lesson': lesson, 'is_free': is_free})
 
 
