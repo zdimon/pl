@@ -16,7 +16,7 @@ urlpatterns = [
     path('faq',faq, name="faq"),
     path('add_answer/<int:id>',add_answer, name="add_answer"),
 
-    path('lesson_swow/<int:id>',show_lesson, name="show_lesson"),
+    path('lesson_show/<int:id>',show_lesson, name="show_lesson"),
 
     path('add/credits',add_credits, name="add_credits"),
 

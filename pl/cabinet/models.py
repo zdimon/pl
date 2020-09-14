@@ -5,6 +5,7 @@ from django.utils.translation import ugettext as _
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.urls import reverse
+from course.models import Lesson
 
 class UserProfile(User):
     publicname = models.CharField(default='',  max_length=250, verbose_name=_(u'ФИО'))
@@ -43,5 +44,11 @@ class Promocode(models.Model):
 class ReplCredit(models.Model):
     user = models.ForeignKey(UserProfile, verbose_name=_(u'User'), on_delete=models.CASCADE, null=True, blank=True)
     ammount = models.IntegerField(default=0)
+    is_paid = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
+
+class LogShow(models.Model):
+    user = models.ForeignKey(UserProfile, verbose_name=_(u'User'), on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, verbose_name=_(u'Lesson'), on_delete=models.CASCADE, null=True, blank=True)
     is_paid = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)

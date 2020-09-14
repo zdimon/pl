@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 from cabinet.forms.forms import MyCommentForm
 from django.urls import reverse
 from liqpay.liqpay3 import LiqPay
-from cabinet.models import ReplCredit
+from cabinet.models import ReplCredit, LogShow
 
 from pl.settings import LIQPAY_PRIVATE_KEY, LIQPAY_PUBLIC_KEY, LIQPAY_PROCESS_URL, DOMAIN
 
@@ -21,7 +21,15 @@ def index(request):
 
 def show_lesson(request,id):
     lesson = Lesson.objects.get(pk=id)
-    return render(request,'show_lesson.html', {'lesson': lesson})
+    is_free = lesson.is_paid(request.user)
+    try:
+        LogShow.objects.get(lesson=lesson,user=request.user.userprofile)
+    except:
+        ls = LogShow()
+        ls.lesson = lesson
+        ls.user = request.user.userprofile
+        ls.save()
+    return render(request,'show_lesson.html', {'lesson': lesson, 'is_free': is_free})
 
 
 def add_credits(request):
@@ -30,7 +38,7 @@ def add_credits(request):
 
 @csrf_exempt
 def pay_success(request):
-
+    print(request.POST)
     return render(request,'pay_success.html')
 
 def get_liqpay_form(request, credit):
@@ -70,7 +78,7 @@ def edit_profile(request):
     return render(request,'edit_profile.html', {'form': form})
 
 def payments(request):
-    payments = LessonPayments.objects.filter(user=request.user).order_by('-id')
+    payments = LogShow.objects.filter(user=request.user).order_by('-id')
     return render(request,'payments.html',{'payments': payments})
 
 from cabinet.models import Promocode

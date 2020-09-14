@@ -114,17 +114,19 @@ class Lesson(models.Model):
             return '' 
 
     def is_paid(self,user):
+        from cabinet.models import LogShow
         if ALL_FREE:
             return True
-        if self.number == 1:
-            return True
+        # if self.number == 1:
+        #     return True
         cnt = Topic.objects.filter(lesson=self,has_video=True).count()
         if cnt == 0:
             return True
-        if user.is_superuser:
-            return True
+        # if user.is_superuser:
+        #     return True
+        print('ddddddddddddddd')
         try:
-            LessonPayments.objects.get(user=user,lesson=self, is_paid=True)
+            LogShow.objects.get(user=user,lesson=self, is_paid=True)
             return True
         except:
             return False

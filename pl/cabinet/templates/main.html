@@ -4,8 +4,8 @@
 
 <div class="card-body">
   <h6 class="heading-small text-muted mb-4">Курсы</h6>
-      
-        <div class="row">
+
+        <div class="row white-block">
           <table class="table">
             <thead>
               <tr>
@@ -19,9 +19,9 @@
               {% for course in courses %}
               <tr>
                 <td scope="col">{{ forloop.counter }} </td>
-                <td scope="col"><a class="course-title" href="#">{{ course.name }}</a>
+                <td scope="col"><a class="course-title"  data-id="{{course.id}}" >{{ course.name }}</a>
                 
-                  <table class="table">
+                  <table class="table"  id="tbl{{course.id}}" style="display: none;">
                    
                     <tbody>
                       {% for lesson in course.lessons %}
@@ -29,7 +29,7 @@
                         <td class="small" scope="col">{{ lesson.number }}</td>
                         <td class="small" scope="col small">{{ lesson.video_icon }}</td>
                         <td scope="col">
-                          <a href="{% url 'show_lesson' id=lesson.id %}">{{ lesson.title }} </a>
+                          <a  href="{% url 'show_lesson' id=lesson.id %}">{{ lesson.title }} </a>
                         </td>
                        
                       </tr>
@@ -49,6 +49,18 @@
 
       
 </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script>
+    $('.course-title').on('click', function(e) {
+        var b = $(e.target);
+        $( '#tbl'+b.attr("data-id") ).toggle();
+        
+    })  
+</script>
 
 {% endblock %}
 

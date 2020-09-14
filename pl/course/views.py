@@ -17,32 +17,26 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from pl.settings import DATA_DIR
 from course.models import parse_md
+from cabinet.models import LogShow
+
 @login_required
 def pay(request,lesson_id):
-    path = DATA_DIR+'/oferta.md'
-    f = open(path, 'r')
-    txt = f.read()
-    f.close()
-    oferta = parse_md(txt)
-    lesson = Lesson.objects.get(pk=lesson_id)
-    liqpay = LiqPay(LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY)
-    try:
-        lp = LessonPayments.objects.get(user=request.user,lesson=lesson)
-    except:
-        lp = LessonPayments.objects.create(
-            user = request.user, \
-            lesson = lesson
-        )
-    form_html = liqpay.cnb_form({
-        'action': 'pay',
-        'amount': LESSON_PRICE,
-        'currency': 'UAH',
-        'description': 'Payment for the lesson',
-        'order_id': lp.pk,
-        'version': '3',
-        'result_url': DOMAIN+reverse('lesson_detail', args=(lesson.name_slug,))
-    })
-    return render(request,'pay.html',{'oferta': oferta, 'lesson': lesson, 'price': LESSON_PRICE, 'button': form_html})
+    if request.user.userprofile.account<2:
+        messages.info(request, 'У вас кредитов то нету :-(')
+        return redirect(reverse('add_credits'))
+    else:
+        lesson = Lesson.objects.get(pk=lesson_id)
+        user = request.user.userprofile
+        user.account = user.account - 2
+        user.save()
+        ls = LogShow.objects.get(user=request.user.userprofile,lesson=lesson)
+        ls.is_paid = True
+        ls.save()
+        
+        return redirect(reverse('show_lesson', kwargs={'id': lesson.id}))
+
+    
+   
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -83,6 +77,13 @@ def course_detail(request,slug):
 def lesson_detail(request,slug):
     lesson = Lesson.objects.get(name_slug=slug)
     is_free = lesson.is_paid(request.user)
+    try:
+        LogShow.objects.get(lesson=lesson,user=request.user.userprofile)
+    except:
+        ls = LogShow()
+        ls.lesson = lesson
+        ls.user = request.user.userprofile
+        ls.save()
     return render(request,'lesson_detail.html',{'lesson': lesson, 'is_free': is_free})
 
 

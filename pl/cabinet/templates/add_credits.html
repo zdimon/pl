@@ -51,6 +51,7 @@
 
 <script>
     $('.pay-but').on('click', function(e) {
+        e.preventDefault();
         var b = $(e.target);
         console.log(b.attr('data-ammount'));
         $.get( "/cabinet/liqpay/form/"+b.attr('data-ammount'), function( data ) {

@@ -5,3 +5,8 @@
     background-color: white;
     padding: 10px;
 }
+
+.course-title {
+    cursor: pointer;
+    color: #002147 !important;
+}

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import UserProfile, Promocode, ReplCredit
+from .models import UserProfile, Promocode, ReplCredit, LogShow
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
@@ -16,4 +16,9 @@ class PromocodeAdmin(admin.ModelAdmin):
 @admin.register(ReplCredit)
 class ReplCreditAdmin(admin.ModelAdmin):
     list_display = ['user','ammount','is_paid']
+    list_filter = ['is_paid']
+
+@admin.register(LogShow)
+class LogShowAdmin(admin.ModelAdmin):
+    list_display = ['user','lesson','is_paid']
     list_filter = ['is_paid']
