@@ -10,3 +10,7 @@
     cursor: pointer;
     color: #002147 !important;
 }
+
+.lesson-title {
+    font-size: 18px;
+}
