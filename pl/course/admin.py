@@ -29,7 +29,7 @@ create_letter.short_description = 'Create a news letter'
 
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ['title', 'name_slug', 'course', 'number', 'desc', 'is_new', 'subscribe_link']
+    list_display = ['title', 'name_slug', 'course', 'number', 'desc', 'is_new', 'subscribe_link', 'has_video']
     list_filter = ['course']
     search_fields = ['name_slug', 'title']
     list_editable = ['is_new']
