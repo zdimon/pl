@@ -8,7 +8,7 @@ from django.urls import reverse
 
 class UserProfile(User):
     publicname = models.CharField(default='',  max_length=250, verbose_name=_(u'ФИО'))
-    account = models.DecimalField(max_digits=20, decimal_places=2, default=Decimal(0.00), verbose_name=_(u'Счет'))
+    account = models.IntegerField(default=6)
     phone = models.CharField(default='', max_length=250, verbose_name=_(u'Телефон'))
     telegram = models.CharField(default='', max_length=250, verbose_name=_(u'Телеграм'))
     skype = models.CharField(default='', max_length=250, verbose_name=_(u'Скайп'))
