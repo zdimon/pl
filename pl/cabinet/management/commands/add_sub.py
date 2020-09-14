@@ -8,8 +8,11 @@ class Command(BaseCommand):
         
         for u in UserProfile.objects.all():
             print('add %s' % u.email)
-            s = Subscription()
-            s.email = u.email
-            s.is_subscribed = True
-            s.save()
+            try:
+                s = Subscription()
+                s.email = u.email
+                s.is_subscribed = True
+                s.save()
+            except:
+                pass
        
