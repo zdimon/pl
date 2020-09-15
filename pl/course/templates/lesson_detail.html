@@ -35,6 +35,7 @@
                
                 </div>
                 {% else %}
+                
                     <div class="full">
                         <h2>{{ lesson.title }}</h2>
                             {% for topic in lesson.topic_set.all %}
@@ -44,15 +45,8 @@
                             {% endfor %}
                     </div>
 
-                  <div class="full">
-                    <div class="alert alert-danger" role="alert">
-                        Для просмотра полного урока его необходимо 
-                        <a href="{% url 'pay' lesson_id=lesson.id  %}">оплатить</a>.
-                     </div>
-                    <a href="{% url 'pay' lesson_id=lesson.id  %}" class="btn btn-primary btn-lg">
-                        Перейти к оплате
-                    </a>
-                </div>
+                  
+                    {% include 'includes/pay_block.html' %}
                 {% endif %}
 
                 <div class="text_align_right">

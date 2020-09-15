@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="card-body">
+    
+        <h6 class="heading-small text-muted mb-4">
+            <i class="ni ni-money-coins"></i>
+            Кредитная линия </h6>
+    <div class="white-block">
+
+        <p>
+            В этом месте вы можете помочь проекту финансами и пополнить свой счет фантиками (кредитами).
+        </p>
+
+        <p>
+            Просмотр каждого занятия будет вам стоить 2 кредита.
+        </p>
+
+        <p>
+            За успешное прохождение самостоятельного задания вам будет начислен 1 кредит.
+        </p>
+
+        <p>
+            Спасибо за участие и успехов в учебе и труде! 
+        </p>
+
+    </div>
+    <p id="pay-form"></p>
+    <p id="b50">
+        <button type="submit"  data-ammount="50" class="btn btn-success pay-but">Пополнить на 2 кредита (50 грн)</button>
+    </p>
+    <p id="b100">
+    <button  data-ammount="100" type="submit" class="btn btn-success pay-but">Пополнить на 4 кредита (100 грн)</button>
+    </p>
+    <p id="b200">
+    <button data-ammount="200"  type="submit" class="btn btn-success pay-but">Пополнить на 10 кредитов (200 грн)</button>
+    </p>
+    <p id="b400">
+    <button   data-ammount="400"  type="submit" class="btn btn-success pay-but">Пополнить на 20 кредитов (400 грн)</button>
+    </p>
+    <p id="b700">
+    <button  data-ammount="700"  type="submit" class="btn btn-success pay-but">Пополнить на 40 кредитов (700 грн)</button>
+    </p>
+      
+</div>
+{% endblock %}
+
+
+{% block javascripts %}
+
+<script>
+    $('.pay-but').on('click', function(e) {
+        e.preventDefault();
+        var b = $(e.target);
+        console.log(b.attr('data-ammount'));
+        $.get( "/cabinet/liqpay/form/"+b.attr('data-ammount'), function( data ) {
+        $( "#b"+b.attr('data-ammount') ).html( data );
+        
+        });
+
+    })
+</script>
+
+{% endblock %}

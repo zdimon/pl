@@ -66,6 +66,7 @@ class Lesson(models.Model):
     meta_title = models.CharField(max_length=255, blank=True, null = True)
     meta_description = models.TextField(blank=True, null = True)
     is_new = models.BooleanField(verbose_name=_('Is new?'), default=False)
+    created = models.DateTimeField(auto_now_add=True)
 
     @property
     def get_image(self):
@@ -113,17 +114,19 @@ class Lesson(models.Model):
             return '' 
 
     def is_paid(self,user):
+        from cabinet.models import LogShow
         if ALL_FREE:
             return True
-        if self.number == 1:
-            return True
+        # if self.number == 1:
+        #     return True
         cnt = Topic.objects.filter(lesson=self,has_video=True).count()
         if cnt == 0:
             return True
-        if user.is_superuser:
-            return True
+        # if user.is_superuser:
+        #     return True
+  
         try:
-            LessonPayments.objects.get(user=user,lesson=self, is_paid=True)
+            LogShow.objects.get(user=user,lesson=self, is_paid=True)
             return True
         except:
             return False
@@ -271,6 +274,7 @@ class Comments(MPTTModel):
 
 class Subscription(models.Model):
     email = models.CharField(max_length=250, blank=True, verbose_name=_(u'Email'), unique=True)
+    is_subscribed = models.BooleanField(default=False)
 
 class Catalog(models.Model):
     name = models.CharField(max_length=250, blank=True, verbose_name=_(u'Name'))
@@ -318,10 +322,33 @@ from pl.settings import DOMAIN
 class NewsLetter(models.Model):
     title = models.CharField(max_length=250, blank=True, verbose_name=_(u'Title'))
     lesson = models.ManyToManyField(Lesson, verbose_name=_(u'Content'))
+    desc = models.TextField()
+
+    def get_absolute_url(self):
+        return reverse('unsubscribe')
+
+    @property
+    def txt_content(self):
+        out = 'У нас появились новые уроки /n'
+        for l in self.lesson.all():
+            html = '''
+                    Курс:  %s  Урок: %s /n
+                    %s%s
+            ''' % (l.course.name,l.title, DOMAIN,l.course.get_absolute_url())
+            
+            out = out +'/n' + html
+        unlink = ' /n Чтобы отписаться от рассылки %s%s' % (DOMAIN,self.get_absolute_url())
+        return out + ' /n ' + self.desc + unlink + ' /n http://webmonstr.com'
 
     @property
     def content(self):
-        out = ''
+        out = '<h1>У нас появились новые уроки</h1>'
         for l in self.lesson.all():
-            out = out + '<a href="%s%s">%s</a>' % (DOMAIN,l.get_absolute_url(),l.title)
-        return out
+            html = '''
+                <p>
+                    Курс: <a target=_blank href="%s%s"> %s </a> Урок: <a target=_blank  href="%s%s"> %s </a>
+                </p>
+            ''' % (DOMAIN,l.course.get_absolute_url(),l.course.name, DOMAIN,l.get_absolute_url(),l.title)
+            unlink = '<p><a target=_blank  href="%s%s">Отписаться от рассылки</a></p>' % (DOMAIN,self.get_absolute_url())
+            out = out +'<br />' + html
+        return mark_safe(out + '<br />' + self.desc + '<br /><br /><br />' + unlink )

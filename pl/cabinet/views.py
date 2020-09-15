@@ -8,6 +8,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
 from cabinet.forms.forms import MyCommentForm
 from django.urls import reverse
+from liqpay.liqpay3 import LiqPay
+from cabinet.models import ReplCredit, LogShow
+
+from pl.settings import LIQPAY_PRIVATE_KEY, LIQPAY_PUBLIC_KEY, LIQPAY_PROCESS_URL, DOMAIN
 
 
 def index(request):
@@ -17,11 +21,42 @@ def index(request):
 
 def show_lesson(request,id):
     lesson = Lesson.objects.get(pk=id)
-    return render(request,'show_lesson.html', {'lesson': lesson})
+    is_free = lesson.is_paid(request.user)
+    try:
+        LogShow.objects.get(lesson=lesson,user=request.user.userprofile)
+    except:
+        ls = LogShow()
+        ls.lesson = lesson
+        ls.user = request.user.userprofile
+        ls.save()
+    return render(request,'show_lesson.html', {'lesson': lesson, 'is_free': is_free})
 
 
+def add_credits(request):
 
+    return render(request,'add_credits.html')
 
+@csrf_exempt
+def pay_success(request):
+    print(request.POST)
+    return render(request,'pay_success.html')
+
+def get_liqpay_form(request, credit):
+    r = ReplCredit()
+    r.user = request.user.userprofile
+    r.ammount = credit
+    r.save()
+    liqpay = LiqPay(LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY)
+    form_html = liqpay.cnb_form({
+        'action': 'pay',
+        'amount': credit,
+        'currency': 'UAH',
+        'description': 'Payment for the lesson',
+        'order_id': '%s-%s' % (request.user.id,r.id),
+        'version': '3',
+        'result_url': DOMAIN+reverse('pay_success')
+    })
+    return render(request,'liqpay_form.html', {'form_html': form_html})
 
 
 
@@ -43,7 +78,7 @@ def edit_profile(request):
     return render(request,'edit_profile.html', {'form': form})
 
 def payments(request):
-    payments = LessonPayments.objects.filter(user=request.user).order_by('-id')
+    payments = LogShow.objects.filter(user=request.user).order_by('-id')
     return render(request,'payments.html',{'payments': payments})
 
 from cabinet.models import Promocode

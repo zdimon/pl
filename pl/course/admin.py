@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.contrib import messages
 
+
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ['image_tag', 'name_slug', 'desc', 'name', 'meta_title']
@@ -28,11 +29,13 @@ create_letter.short_description = 'Create a news letter'
 
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ['title', 'name_slug', 'course', 'number', 'desc', 'is_new', 'subscribe_link']
+    list_display = ['title', 'name_slug', 'course', 'number', 'desc', 'is_new', 'subscribe_link', 'has_video']
     list_filter = ['course']
     search_fields = ['name_slug', 'title']
     list_editable = ['is_new']
     actions = [create_letter, ]
+
+    
 
     def subscribe_link(self, obj):
         url = reverse('admin:send_news',args=[obj.id])
@@ -89,7 +92,8 @@ class CommentsAdmin(MPTTModelAdmin):
 
 @admin.register(Subscription)
 class SubscriptionAdmin(admin.ModelAdmin):
-    list_display = ['email']
+    list_display = ['email', 'is_subscribed']
+    list_editable = ['is_subscribed']
 
 from .models import Catalog, Article
 
@@ -110,28 +114,42 @@ class LessonInline(admin.TabularInline):
 
 @admin.register(NewsLetter)
 class NewsLetterAdmin(admin.ModelAdmin):
-    list_display = ['title','send_letter_link']
+    list_display = ['title','send_letter_link', 'content']
     inlines = [LessonInline]
+    change_list_template = 'admin/newsletter_list.html'
 
     def send_news_letter(self, request, letter_id):
         letter = NewsLetter.objects.get(pk=letter_id)
-        for s in Subscription.objects.all():
-            print('Sent to %s' % s.email)
-            send_mail(
-                letter.title,
-                letter.content,
-                'from@example.com',
-                [s.email],
-                fail_silently=False,
-            )
-        messages.success(request, 'Письма разослал')
+        users = []
+        for s in Subscription.objects.filter(is_subscribed=True):
+            users.append(s.email)
+            
+        send_mail(
+            letter.title,
+            letter.txt_content,
+            'zdimon@pressa.ru',
+            users,
+            html_message=letter.content,
+            fail_silently=False,
+        )
+        messages.success(request, 'Письма разослал %s челикам' % len(users))
+        return redirect(reverse('admin:course_newsletter_changelist'))
+
+    def create_news_letter(self, request):
+        n = NewsLetter()
+        n.title = 'Новое на сайте webmonstr.com'
+        n.save()
+        for lesson in Lesson.objects.filter(is_new=True):
+            n.lesson.add(lesson)
+        messages.success(request, 'Письмо создал')
         return redirect(reverse('admin:course_newsletter_changelist'))
 
     def get_urls(self):
         from django.urls import path
         urls = super(NewsLetterAdmin, self).get_urls()
         myurl = [
-            path('send/letter/<int:letter_id>', self.admin_site.admin_view(self.send_news_letter), name="send_news_letter")
+            path('send/letter/<int:letter_id>', self.admin_site.admin_view(self.send_news_letter), name="send_news_letter"),
+            path('create/letter', self.admin_site.admin_view(self.create_news_letter), name="create_news_letter")
         ]
         return myurl+urls
 

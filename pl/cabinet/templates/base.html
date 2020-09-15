@@ -23,7 +23,7 @@
   <!-- CSS Files -->
   <link href="/static/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
   <link href="/static/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
-
+  <link href="/static/css/dashboard.css" rel="stylesheet" />
   <!-- Specific CSS goes HERE -->
   {% block stylesheets %}{% endblock stylesheets %}
 
@@ -35,7 +35,19 @@
 
   <div class="main-content">
 
-    
+    {% if messages %}
+    {% for message in messages %}
+        <div class="section" style="margin-top: 100px;">
+            <div class="container">
+                <div class="full">
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
 
     {% block content %}{% endblock content %}
 

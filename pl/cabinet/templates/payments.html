@@ -10,9 +10,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Название урока</th>
-                <th scope="col">Курс</th>
-                <th scope="col">Цена</th>
-                <th scope="col">Дата покупки</th>
+                
               </tr>
             </thead>
             <tbody>
@@ -20,10 +18,30 @@
                 {% for payment in payments %}
                 <tr>
                     <th scope="row">{{ payment.id }}</th>
-                    <td>{{ payment.lesson }}</td>
-                    <td>{{ payment.lesson.course }}</td>
-                    <td>50 грн</td>
-                    <td>{{ payment.created }} </td>
+                    <td>
+                      <p>{{ payment.lesson.course }}</p>
+                      <a class="lesson-title" href="{% url 'show_lesson' id=payment.lesson.id %}">{{ payment.lesson }}</a>
+                      {% if payment.is_paid %}
+                      <p>
+                        Cтатус:<span style="color: green"> доступен </span>
+                      </p>
+                      {% else %}
+                      <p>
+                       Cтатус:<span style="color: red"> недоступен </span>
+                      </p>
+                      <p>
+                      <a href="{% url 'pay' lesson_id=payment.lesson.id  %}" >
+                        купить за 2 кредита
+                    </a></p>
+
+                      {% endif %}
+
+                    </td>
+                    
+                    <td>
+
+                    </td>
+        
                 </tr>
                 {% endfor %}
               

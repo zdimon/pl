@@ -1,0 +1,16 @@
+
+
+.white-block {
+    border-radius: 10px;
+    background-color: white;
+    padding: 10px;
+}
+
+.course-title {
+    cursor: pointer;
+    color: #002147 !important;
+}
+
+.lesson-title {
+    font-size: 18px;
+}

@@ -1,0 +1,36 @@
+Content-Type: multipart/alternative;
+ boundary="===============6896576086010629600=="
+MIME-Version: 1.0
+Subject: =?utf-8?b?0J3QvtCy0L7QtSDQvdCwINGB0LDQudGC0LUgd2VibW9uc3RyLmNvbQ==?=
+From: zdimon@pressa.ru
+To: admin
+Date: Mon, 14 Sep 2020 08:44:15 -0000
+Message-ID: <160007305540.23248.742011673935095440@book>
+
+--===============6896576086010629600==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+
+У нас появились новые уроки /n/n
+                    Курс:  Основы PHP.  Урок: PHP. Собираем докер контейнеры. 
+            /n
+                    Курс:  Основы Python и Django.  Урок: Django. Наборы форм. 
+             /n Также новй функционал!!!! /n Чтобы отписаться от рассылки http://localhost:7878/course/unsubscribe /n http://webmonstr.com
+--===============6896576086010629600==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+
+<h1>У нас появились новые уроки</h1><br />
+                <p>
+                    Курс: <a target=_blank href="http://localhost:7878/course/detail/php-course"> Основы PHP. </a> Урок: <a target=_blank  href="http://localhost:7878/course/lesson/detail/php-course--22-docker"> PHP. Собираем докер контейнеры. </a>
+                </p>
+            <br />
+                <p>
+                    Курс: <a target=_blank href="http://localhost:7878/course/detail/python-course"> Основы Python и Django. </a> Урок: <a target=_blank  href="http://localhost:7878/course/lesson/detail/python-course--26-django-formset"> Django. Наборы форм. </a>
+                </p>
+            <br />Также новй функционал!!!!<br /><br /><br /><p><a target=_blank  href="http://localhost:7878/course/unsubscribe">Отписаться от рассылки</a></p>
+--===============6896576086010629600==--
+
+-------------------------------------------------------------------------------

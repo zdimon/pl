@@ -122,3 +122,8 @@ b, strong {
     border-radius: 50%;
     width: 100px;
 }
+
+.white-block {
+    border-radius: 10px;
+    background-color: white;
+}

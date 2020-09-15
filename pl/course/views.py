@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from course.models import Course, Lesson, Comments, Subscription
-
+from cabinet.models import ReplCredit, UserProfile
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
@@ -17,34 +17,30 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from pl.settings import DATA_DIR
 from course.models import parse_md
+from cabinet.models import LogShow
+
 @login_required
 def pay(request,lesson_id):
-    path = DATA_DIR+'/oferta.md'
-    f = open(path, 'r')
-    txt = f.read()
-    f.close()
-    oferta = parse_md(txt)
-    lesson = Lesson.objects.get(pk=lesson_id)
-    liqpay = LiqPay(LIQPAY_PUBLIC_KEY, LIQPAY_PRIVATE_KEY)
-    try:
-        lp = LessonPayments.objects.get(user=request.user,lesson=lesson)
-    except:
-        lp = LessonPayments.objects.create(
-            user = request.user, \
-            lesson = lesson
-        )
-    form_html = liqpay.cnb_form({
-        'action': 'pay',
-        'amount': LESSON_PRICE,
-        'currency': 'UAH',
-        'description': 'Payment for the lesson',
-        'order_id': lp.pk,
-        'version': '3',
-        'result_url': DOMAIN+reverse('lesson_detail', args=(lesson.name_slug,))
-    })
-    return render(request,'pay.html',{'oferta': oferta, 'lesson': lesson, 'price': LESSON_PRICE, 'button': form_html})
+    if request.user.userprofile.account<2:
+        messages.info(request, 'У вас кредитов то нету :-(')
+        return redirect(reverse('add_credits'))
+    else:
+        lesson = Lesson.objects.get(pk=lesson_id)
+        user = request.user.userprofile
+        user.account = user.account - 2
+        user.save()
+        ls = LogShow.objects.get(user=request.user.userprofile,lesson=lesson)
+        ls.is_paid = True
+        ls.save()
+        
+        return redirect(reverse('show_lesson', kwargs={'id': lesson.id}))
+
+    
+   
 
 from django.views.decorators.csrf import csrf_exempt
+
+from course.utils import get_credits
 
 @csrf_exempt
 def liqpay_process(request):
@@ -56,9 +52,14 @@ def liqpay_process(request):
     if sign == signature:
         print('callback is valid')
         data = liqpay.decode_data_from_str(data)
-        order = LessonPayments.objects.get(pk=data['order_id'])
+        idr = data['order_id'].split('-')[1]
+        idu = data['order_id'].split('-')[0]
+        order = ReplCredit.objects.get(pk=idr)
         order.is_paid = True
         order.save()
+        user = UserProfile.objects.get(pk=idu)
+        user.account = user.account + get_credits(order.ammount)
+        user.save()
     return HttpResponse('ok')
 
 def course_detail(request,slug):
@@ -71,11 +72,21 @@ def course_detail(request,slug):
     print(paid)
     return render(request,'course_detail.html',{'course': course, 'lessons': lessons, 'paid': paid, 'price': LESSON_PRICE})
 
-@login_required
+
 @csrf_exempt
 def lesson_detail(request,slug):
     lesson = Lesson.objects.get(name_slug=slug)
     is_free = lesson.is_paid(request.user)
+    try:
+        try:
+            LogShow.objects.get(lesson=lesson,user=request.user.userprofile)
+        except:
+            ls = LogShow()
+            ls.lesson = lesson
+            ls.user = request.user.userprofile
+            ls.save()
+    except Exception as e:
+        print(str(e))
     return render(request,'lesson_detail.html',{'lesson': lesson, 'is_free': is_free})
 
 
@@ -108,6 +119,7 @@ def subscribe(request):
         try:
             s = Subscription()
             s.email = email
+            s.is_subscribed = True
             s.save()
             messages.info(request, 'Спасибо, вы успешно подписаны.')
         except:
@@ -143,3 +155,16 @@ def comment_detail(request,id):
 def sitemap(request):
     courses = Course.objects.all().order_by('-id')
     return render(request,'map.html',{'courses': courses})
+
+
+def unsubscribe(request):
+   
+    try:
+        s = Subscription.objects.get(email=request.user.username)
+        s.is_subscribed = False
+        s.save()
+        messages.info(request, 'Вы отписались от рассылки.')
+    except:
+        messages.info(request, 'Емейл %s не подписаны на рассылку.' % request.user.username)
+
+    return redirect('/')

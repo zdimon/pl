@@ -1,7 +1,7 @@
 from django.urls import path, include
 from cabinet.views import index, edit_profile, payments, show_lesson
 
-from cabinet.views import PromocodeList, promo_gen, promo_activate, faq, access_denite, add_answer
+from cabinet.views import PromocodeList, promo_gen, promo_activate, faq, access_denite, add_answer, add_credits, get_liqpay_form, pay_success
 
 urlpatterns = [ 
     path('',index, name="cabinet_index"),
@@ -16,7 +16,13 @@ urlpatterns = [
     path('faq',faq, name="faq"),
     path('add_answer/<int:id>',add_answer, name="add_answer"),
 
-    path('lesson_swow/<int:id>',show_lesson, name="show_lesson"),
+    path('lesson_show/<int:id>',show_lesson, name="show_lesson"),
+
+    path('add/credits',add_credits, name="add_credits"),
+
+    path('liqpay/form/<int:credit>',get_liqpay_form, name="get_liqpay_form"),
+
+    path('pay/success',pay_success, name="pay_success"),
 
 
 
