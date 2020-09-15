@@ -21,7 +21,12 @@
                       {% for lesson in course.lessons %}
                       <tr>
                         
-                        <td class="small" scope="col small">{{ lesson.number }}. {{ lesson.video_icon }}</td>
+                        <td class="small" scope="col small">{{ lesson.number }}. {{ lesson.video_icon }}
+                          {% if lesson.id in paid %}
+                          <i class="ni ni-book-bookmark"></i>
+                          {% endif %}
+
+                        </td>
                         <td scope="col">
                           <a  href="{% url 'show_lesson' id=lesson.id %}">{{ lesson.title }} </a>
                         </td>
