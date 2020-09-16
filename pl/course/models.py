@@ -229,7 +229,7 @@ class Topic(models.Model):
         if self.has_video:
             return mark_safe('<video controls><source src="/static/video/%s/%s" type="video/mp4"></video>' % (self.course.name_slug,self.video))
         else:
-            return 'Видео отсутствует'
+            return ''
 
 
     def parse_subject_txt(self,txt):
