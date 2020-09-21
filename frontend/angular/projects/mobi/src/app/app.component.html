@@ -1,6 +1,28 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
 
+
+        <mat-accordion class="example-headers-align" multi>
+          <mat-expansion-panel *ngFor="let item of categories">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ item.name }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+        
+            <p *ngFor="let subcategory of item.subcategory">
+              {{ subcategory.name }}
+            </p>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+
+
+      </ion-content>
+    </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

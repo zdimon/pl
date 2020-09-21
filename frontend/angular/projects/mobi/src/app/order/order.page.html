@@ -13,5 +13,14 @@
     </ion-toolbar>
   </ion-header>
 
+  <div id="container">
+        
+    
+
+    <ion-item *ngFor="let item of orders">
+      <ion-label>{{ item.title }}</ion-label>
+    </ion-item>
+    
+  </div>
  
 </ion-content>

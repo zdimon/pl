@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { CoreComponent } from './core.component';
 
@@ -9,15 +10,25 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { RegistrationFormComponent } from './forms/registration-form/registration-form.component';
 
+import { ApiService } from './services/api.service';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
-  declarations: [CoreComponent, RegistrationFormComponent],
+  declarations: [
+    CoreComponent, 
+    RegistrationFormComponent
+  ],
   imports: [
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    HttpClientModule
+  ],
+  providers: [
+    ApiService
   ],
   exports: [CoreComponent, RegistrationFormComponent]
 })

@@ -11,6 +11,10 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { HttpClientModule } from '@angular/common/http';
+
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +23,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatExpansionModule
   ],
   providers: [
     StatusBar,
