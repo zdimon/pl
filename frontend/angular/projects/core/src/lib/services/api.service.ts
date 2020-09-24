@@ -23,5 +23,17 @@ export class ApiService {
     return this.http.get(`${environment.backendUrl}v1/ij/category/list`);
   }
 
+  checkEmail(data: any){
+    return this.http.post(`${environment.backendUrl}v1/ij/registration/check/email`,data);
+  }
+
+  login(data: any){
+    return this.http.post(`${environment.backendUrl}v1/ij/login`,data);
+  }
+
+  registration(data: any){
+    return this.http.post(`${environment.backendUrl}v1/ij/registration`,data);
+  }
+
 
 }

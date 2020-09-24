@@ -23,7 +23,9 @@ class LoginView(ObtainAuthToken):
     def post(self, request, format=None):
         serializer = self.serializer_class(data=request.data,
                                             context={'request': request})
-        serializer.is_valid(raise_exception=True)
+        if not serializer.is_valid(raise_exception=False):
+            return Response({'status': 2, 'message': 'Wrong email or login!'})
+
         user = serializer.validated_data['user']
         profile = user.userprofile
         token, created = Token.objects.get_or_create(user=user)

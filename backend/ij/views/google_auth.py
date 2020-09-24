@@ -26,7 +26,7 @@ class GoogleAuthView(APIView):
             user = UserProfile()
             user.username = request.data['email']
             user.is_active = True
-            user.set_password = '123'
+            user.set_password('123')
             user.save()
             token = Token.objects.create(user=user)
 
