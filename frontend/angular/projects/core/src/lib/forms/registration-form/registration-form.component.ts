@@ -5,6 +5,10 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { SessionService } from './../../services/session.service';
 
+import { Store } from '@ngrx/store';
+import * as sessionActions from '../../store/actions/session.action';
+import { SessionState } from '../../store/states/session.state';
+
 @Component({
   selector: 'core-registration-form',
   templateUrl: './registration-form.component.html',
@@ -22,7 +26,9 @@ export class RegistrationFormComponent implements OnInit {
 
   constructor(
     private api: ApiService,
-    private session: SessionService) { }
+    private session: SessionService,
+    private sessionStore: Store<SessionState>
+    ) { }
 
   ngOnInit() {
 
@@ -48,8 +54,7 @@ export class RegistrationFormComponent implements OnInit {
           this.message = res.message;
           this.status = 2;
         } else {
-          this.session.setIsAuth(true);
-          this.session.setToken(res.token);
+          this.session.login(res);
         }
     });
   }

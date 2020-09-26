@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+import * as sessionActions from '../store/actions/session.action';
+import { SessionState } from '../store/states/session.state';
+
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
   storage: any;
 
-  constructor() { 
+  constructor(
+    private sessionStore: Store<SessionState>
+  ) { 
     this.storage = sessionStorage;
   }
 
@@ -30,9 +36,14 @@ export class SessionService {
       this.storage.setItem('isAuth', value);
   }
 
+  login(data: any){
+    this.sessionStore.dispatch(new sessionActions.LogIn(data));
+  }
+
   logout(){
     this.removeToken();
     this.setIsAuth(false);
+    this.sessionStore.dispatch(new sessionActions.LogOut());
   }
 
 }

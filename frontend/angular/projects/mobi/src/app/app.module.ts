@@ -1,5 +1,6 @@
 
 
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -19,6 +20,12 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { AuthGuard } from './guards/auth.guard';
 import { SessionService } from './../../../core/src/lib/services/session.service';
 
+
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+
+import { reducers } from './../../../core/src/lib/store/index';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,7 +35,9 @@ import { SessionService } from './../../../core/src/lib/services/session.service
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatExpansionModule
+    MatExpansionModule,
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [
     StatusBar,

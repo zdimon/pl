@@ -16,16 +16,17 @@
       <ion-label>Настройки</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="registration" *ngIf="isAuth=='false'">
+    <ion-tab-button tab="registration" *ngIf="!isAuth" >
       <ion-icon src="static/front_dist/mobi/svg/body-sharp.svg"></ion-icon>
       <ion-label>Регистрация</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button (click)="doLogout()" *ngIf="isAuth=='true'">
+    <ion-tab-button (click)="doLogout()" *ngIf="isAuth">
       <ion-icon src="static/front_dist/mobi/svg/exit-sharp.svg"></ion-icon>
       <ion-label>Выход</ion-label>
     </ion-tab-button>
 
+    
   </ion-tab-bar>
 
 </ion-tabs>
