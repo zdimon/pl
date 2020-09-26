@@ -18,4 +18,4 @@ Copyright (c) 2020, Жариков Дмитрий Викторович, Сидя
 
 ### Разработка
 
-
+    sudo apt-get install python-dev graphviz libgraphviz-dev pkg-config

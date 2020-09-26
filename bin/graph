@@ -1,0 +1,5 @@
+#!/bin/bash
+python3 -m venv venv
+. ./venv/bin/activate
+cd backend
+./manage.py graph_models ij -o static/schema.png
