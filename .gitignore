@@ -4,3 +4,4 @@ db.sqlite3
 __pycache__
 backend/static/front_dist
 backend/media/**
+tmp/**

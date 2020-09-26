@@ -5,8 +5,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OfferPageComponent } from './offer.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
+import {CoreModule} from '../../../../core/src/lib/core.module';
 import { OfferPageRoutingModule } from './offer-routing.module';
+
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { OfferPageRoutingModule } from './offer-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    OfferPageRoutingModule
+    OfferPageRoutingModule,
+    CoreModule
   ],
   declarations: [OfferPageComponent]
 })

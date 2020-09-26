@@ -1,3 +1,5 @@
+
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -14,7 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import { AuthGuard } from './guards/auth.guard';
+import { SessionService } from './../../../core/src/lib/services/session.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +33,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
   providers: [
     StatusBar,
     SplashScreen,
+    AuthGuard,
+    SessionService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

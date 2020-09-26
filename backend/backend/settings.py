@@ -154,3 +154,5 @@ MEDIA_URL = '/media/'
 
 DOMAIN = 'http://localhost:8081'
 
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = '/home/zdimon/Desktop/projects/ij/tmp/' 
