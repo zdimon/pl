@@ -1,14 +1,36 @@
-<mat-form-field appearance="fill">
-    <mat-label>Логин</mat-label>
-    <mat-icon matSuffix>check</mat-icon>
-    <mat-hint>Введите ваш email</mat-hint>
-    <input matInput placeholder="Input">
-</mat-form-field>
 
-<div class="item">
-    <button mat-raised-button color="accent">Submit</button>
+
+<div fxLayout="column" >
+
+    <mat-card *ngIf="message">
+        {{ message }}
+    </mat-card>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Логин</mat-label>
+        <mat-icon matSuffix>check</mat-icon>
+        <mat-hint  *ngIf="status == 3">Введите ваш email</mat-hint>
+        <mat-hint class="red" *ngIf="status == 1">
+            Please enter a valid email address
+        </mat-hint>
+        <input [formControl]="loginControl" matInput placeholder="Input" [(ngModel)]="login">
+    </mat-form-field>
+
+    <mat-form-field *ngIf="status === 2" appearance="fill">
+        <mat-label>Пароль</mat-label>
+        <mat-icon matSuffix>password</mat-icon>
+        <mat-hint>Введите Пароль</mat-hint>
+        <input matInput type="password" [(ngModel)]="password">
+    </mat-form-field>
+
+
+
+    <div class="item">
+        <button *ngIf="status === 0" mat-raised-button color="accent" (click)="doRegistration()">Регистрация</button>
+        <button *ngIf="status === 2" mat-raised-button color="success" (click)="doLogin()">Вход</button>
+    </div>
+
 </div>
-
 
 
 

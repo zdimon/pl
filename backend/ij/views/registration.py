@@ -9,7 +9,8 @@ from ij.serializers import  RegistrationRequestSerializer, \
                             UserProfileSerializer \
 
 from ij.models import UserProfile
-
+from django.core.mail import send_mail
+from random import randrange
 
 class RegistrationView(APIView):
     '''
@@ -29,13 +30,20 @@ class RegistrationView(APIView):
         obj = RegistrationRequestSerializer(data=request.data)
 
         obj.is_valid(raise_exception=True)
-       
+        password = str(randrange(111,999))
         user = UserProfile()
         user.username = request.data.get('email')
-        user.set_password('112233')
+        user.set_password(password)
         user.email = request.data.get('email')
         user.is_active = True
         user.save()
+        send_mail(
+            'Регистрация',
+            'Ваш пароль %s.' % password,
+            'admin@example.com',
+            [request.data.get('email')],
+            fail_silently=False,
+        )
         token, created = Token.objects.get_or_create(user=user)
         return Response( \
             RegistrationResponseSerializer( \

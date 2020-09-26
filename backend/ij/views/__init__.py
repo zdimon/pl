@@ -10,3 +10,4 @@ from .google_auth import *
 from .profile import *
 from .contact import *
 from .chat import *
+from .check_email import *
