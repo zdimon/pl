@@ -1,0 +1,35 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutGap="10px">
+
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <mat-icon matSuffix>alternate_email</mat-icon>
+        <input formControlName="email" matInput placeholder="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Skype</mat-label>
+        <mat-icon matSuffix>question_answer</mat-icon>
+        <input formControlName="skype" matInput placeholder="skype">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Telegram</mat-label>
+        <mat-icon matSuffix>question_answer</mat-icon>
+        <input formControlName="telegram" matInput placeholder="telegram">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Телефон</mat-label>
+        <mat-icon matSuffix>perm_phone_msg</mat-icon>
+        <input formControlName="phone" matInput placeholder="телефон">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Обо мне</mat-label>
+        <mat-icon matSuffix>verified</mat-icon>
+       <textarea formControlName="about" matInput></textarea>
+    </mat-form-field>
+
+    <button [disabled]="!profileForm.valid" mat-raised-button  color="accent">Сохранить</button>
+
+</form>

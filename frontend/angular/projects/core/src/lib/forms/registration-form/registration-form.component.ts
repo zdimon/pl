@@ -80,7 +80,6 @@ export class RegistrationFormComponent implements OnInit {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((data: any) => {
      
       this.authService.authState.subscribe(user => {
-        console.log(user);
         this.api.loginByGoogle(user).subscribe((rez) => {
           console.log(rez);
           this.session.login(rez);

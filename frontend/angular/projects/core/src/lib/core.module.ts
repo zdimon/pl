@@ -19,15 +19,26 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ProfileFormComponent } from './forms/profile-form/profile-form.component';
 
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+
+export const interceptorProviders = [
+  { 
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }
+];
 
 
 @NgModule({
   declarations: [
     CoreComponent, 
-    RegistrationFormComponent
+    RegistrationFormComponent, ProfileFormComponent
   ],
   imports: [
     MatFormFieldModule,
@@ -46,6 +57,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   providers: [
     ApiService
   ],
-  exports: [CoreComponent, RegistrationFormComponent]
+  exports: [
+    CoreComponent,
+    RegistrationFormComponent,
+    ProfileFormComponent
+  ]
 })
 export class CoreModule { }
