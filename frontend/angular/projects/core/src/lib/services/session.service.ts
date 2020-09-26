@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import * as sessionActions from '../store/actions/session.action';
 import { SessionState } from '../store/states/session.state';
 
+import {Router} from "@angular/router";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +13,8 @@ export class SessionService {
   storage: any;
 
   constructor(
-    private sessionStore: Store<SessionState>
+    private sessionStore: Store<SessionState>,
+    private router: Router
   ) { 
     this.storage = sessionStorage;
   }
@@ -40,6 +43,7 @@ export class SessionService {
     this.setToken(data.token);
     this.setIsAuth(true);
     this.sessionStore.dispatch(new sessionActions.LogIn(data));
+    this.router.navigate(['/tabs/order']);
   }
 
   logout(){

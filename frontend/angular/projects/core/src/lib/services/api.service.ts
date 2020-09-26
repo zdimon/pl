@@ -35,5 +35,9 @@ export class ApiService {
     return this.http.post(`${environment.backendUrl}v1/ij/registration`,data);
   }
 
+  loginByGoogle(data){
+    return this.http.post(`${environment.backendUrl}v1/ij/google/auth`,data);
+  }
+
 
 }

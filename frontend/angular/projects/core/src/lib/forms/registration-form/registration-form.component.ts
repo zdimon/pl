@@ -9,6 +9,9 @@ import { Store } from '@ngrx/store';
 import * as sessionActions from '../../store/actions/session.action';
 import { SessionState } from '../../store/states/session.state';
 
+import { AuthService } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
+
 @Component({
   selector: 'core-registration-form',
   templateUrl: './registration-form.component.html',
@@ -17,7 +20,7 @@ import { SessionState } from '../../store/states/session.state';
 export class RegistrationFormComponent implements OnInit {
 
   private loginControl: FormControl;
-  login: string;
+  login = '';
   password: string;
   status = 3;
   done = false;
@@ -27,7 +30,8 @@ export class RegistrationFormComponent implements OnInit {
   constructor(
     private api: ApiService,
     private session: SessionService,
-    private sessionStore: Store<SessionState>
+    private sessionStore: Store<SessionState>,
+    private authService: AuthService
     ) { }
 
   ngOnInit() {
@@ -36,10 +40,12 @@ export class RegistrationFormComponent implements OnInit {
     this.loginControl.valueChanges
     .pipe(debounceTime(1000))
     .subscribe(() => {
-      const data = {email: this.loginControl.value}
-      this.api.checkEmail(data).subscribe((res: any) => {
-        this.status = res.status;
-      });
+      if(this.login.length > 2) {
+        const data = {email: this.loginControl.value}
+        this.api.checkEmail(data).subscribe((res: any) => {
+          this.status = res.status;
+        });
+      }
     });
 
   }
@@ -66,6 +72,21 @@ export class RegistrationFormComponent implements OnInit {
     this.api.registration(data).subscribe((res) => {
       this.status = 2;
       this.message = 'Спасибо, вы были зарегистрированы и пароль был отправлен на emeil.'
+    });
+  }
+
+  doLoginByGoogle(){
+    console.log('reg by google');
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((data: any) => {
+     
+      this.authService.authState.subscribe(user => {
+        console.log(user);
+        this.api.loginByGoogle(user).subscribe((rez) => {
+          console.log(rez);
+          this.session.login(rez);
+        });
+        
+      });
     });
   }
 

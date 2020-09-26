@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
               next: HttpHandler): Observable<HttpEvent<any>> {
 
         const idToken = this.sessionService.getToken();
-        console.log(idToken);
+       
         if (req.headers.get('Authorization') !== null) {
             
             return next.handle(req.clone());

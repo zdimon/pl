@@ -46,7 +46,21 @@ export const interceptorProviders = [
   }
 ];
 
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
+import { AuthService } from "angularx-social-login";
 
+
+const GoogleAuthConfig = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("769722970237-8lhn2anpmkjjagu1monnvooetln72i2b.apps.googleusercontent.com")
+  }
+]);
+
+export function provideConfig() {
+  return GoogleAuthConfig;
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -63,6 +77,11 @@ export const interceptorProviders = [
   ],
   providers: [
     interceptorProviders,
+    AuthService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    },
     {
       provide: APP_INITIALIZER,
       useFactory: init_app,
