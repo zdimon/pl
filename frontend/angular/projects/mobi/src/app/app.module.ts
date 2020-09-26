@@ -26,6 +26,28 @@ import { StoreModule } from '@ngrx/store';
 
 import { reducers } from './../../../core/src/lib/store/index';
 
+import { APP_INITIALIZER } from '@angular/core';
+
+import { InitService } from './../../../core/src/lib/services/init.service';
+
+export function init_app(initService: InitService) {
+  return () => initService.init();
+}
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { AuthInterceptor } from './../../../core/src/lib/interceptors/auth.interceptor';
+
+export const interceptorProviders = [
+  { 
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }
+];
+
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -40,6 +62,13 @@ import { reducers } from './../../../core/src/lib/store/index';
     StoreDevtoolsModule.instrument()
   ],
   providers: [
+    interceptorProviders,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: init_app,
+      deps: [InitService],
+      multi: true,
+    },
     StatusBar,
     SplashScreen,
     AuthGuard,

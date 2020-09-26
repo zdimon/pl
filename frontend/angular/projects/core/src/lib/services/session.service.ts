@@ -36,7 +36,9 @@ export class SessionService {
       this.storage.setItem('isAuth', value);
   }
 
-  login(data: any){
+  login(data: any) {
+    this.setToken(data.token);
+    this.setIsAuth(true);
     this.sessionStore.dispatch(new sessionActions.LogIn(data));
   }
 

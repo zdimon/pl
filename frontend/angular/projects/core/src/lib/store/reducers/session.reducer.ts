@@ -8,7 +8,8 @@ export function SessionReducer(state: SessionState = defaultState, action: Actio
         case Actions.ActionTypes.Init:
 
           return {
-            ...action.payload
+            ...action.payload,
+            isAuth: true
           };
 
           case Actions.ActionTypes.LogIn:
