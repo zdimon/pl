@@ -17,10 +17,14 @@ from ij.views import CityListView, \
                     GetRoomView, \
                     GetRoomMessageView, \
                     CreateRoomMessageView, \
-                    CheckEmailView
+                    CheckEmailView, \
+                    InitView
 
 urlpatterns = [ 
-   
+
+
+    path('init',InitView.as_view()),
+
     path('city/list',CityListView.as_view()),
     path('category/list',CategoryListView.as_view()),
     path('control/list',ControlListView.as_view()),
