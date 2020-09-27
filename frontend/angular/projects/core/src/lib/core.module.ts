@@ -34,6 +34,15 @@ export const interceptorProviders = [
   }
 ];
 
+import { APP_INITIALIZER } from '@angular/core';
+
+import { InitService } from './services/init.service';
+
+export function init_app(initService: InitService) {
+  return () => initService.init();
+}
+
+
 
 @NgModule({
   declarations: [
@@ -55,7 +64,14 @@ export const interceptorProviders = [
     FlexLayoutModule
   ],
   providers: [
-    ApiService
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: init_app,
+    //   deps: [InitService],
+    //   multi: true,
+    // },
+    // ApiService,
+    interceptorProviders
   ],
   exports: [
     CoreComponent,

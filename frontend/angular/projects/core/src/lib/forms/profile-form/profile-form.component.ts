@@ -7,6 +7,7 @@ import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { SessionState } from './../../store/states/session.state';
 import { selectSessionUser } from './../../store/selectors/session.selector';
+import * as sessionActions from './../../store/actions/session.action';
 
 import { ApiService } from './../../services/api.service';
 
@@ -34,7 +35,7 @@ export class ProfileFormComponent implements OnInit {
   ngOnInit() {
 
     this.profileForm = this.fb.group({
-      email: [this.user.username],
+      publicname: [this.user.publicname],
       skype: [this.user.skype],
       telegram: [this.user.telegram],
       phone: [this.user.phone],
@@ -47,9 +48,12 @@ export class ProfileFormComponent implements OnInit {
 
   onSubmit() {
     const data = this.profileForm.value;
-    data.id = this.user.id;
-    this.api.saveProfile(data).subscribe((res: any) => {
-      console.log(res);
+    const formData = new FormData();
+    for(let key in data) {
+      formData.append(key,data[key]);
+    }
+    this.api.saveProfile(formData,this.user.id).subscribe((res: any) => {
+      this.session.dispatch(new sessionActions.UpdateUser(res));
     });
 
   }

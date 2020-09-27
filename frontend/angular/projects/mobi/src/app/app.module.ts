@@ -23,12 +23,16 @@ import { SessionService } from './../../../core/src/lib/services/session.service
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
-
 import { reducers } from './../../../core/src/lib/store/index';
+
+//// Services
+
+import { InitService } from './../../../core/src/lib/services/init.service';
+import { ApiService } from './../../../core/src/lib/services/api.service';
+
 
 import { APP_INITIALIZER } from '@angular/core';
 
-import { InitService } from './../../../core/src/lib/services/init.service';
 
 export function init_app(initService: InitService) {
   return () => initService.init();
@@ -49,6 +53,7 @@ export const interceptorProviders = [
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { AuthService } from "angularx-social-login";
+import { UserPanelComponent } from './widgets/user-panel/user-panel.component';
 
 
 const GoogleAuthConfig = new AuthServiceConfig([
@@ -63,7 +68,7 @@ export function provideConfig() {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UserPanelComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -76,8 +81,9 @@ export function provideConfig() {
     StoreDevtoolsModule.instrument()
   ],
   providers: [
-    interceptorProviders,
     AuthService,
+    ApiService,
+    interceptorProviders,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

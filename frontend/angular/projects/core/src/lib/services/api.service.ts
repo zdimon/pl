@@ -39,8 +39,8 @@ export class ApiService {
     return this.http.post(`${environment.backendUrl}v1/ij/google/auth`,data);
   }
 
-  saveProfile(data){
-    return this.http.patch(`${environment.backendUrl}v1/ij/profile/edit/${data.id}`, data);
+  saveProfile(data,userId){
+    return this.http.patch(`${environment.backendUrl}v1/ij/profile/edit/${userId}`, data);
   }
 
 

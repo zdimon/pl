@@ -1,0 +1,11 @@
+<ion-list id="inbox-list">
+    <ion-list-header>{{ user.publicname }}</ion-list-header>
+    <ion-note>{{ user.username }}</ion-note>
+
+    
+      <ion-item routerDirection="root" lines="none" detail="false">
+        <ion-icon slot="start" src="static/front_dist/mobi/svg/exit-sharp.svg"></ion-icon>
+        <ion-label><a href="#">Выход</a></ion-label>
+      </ion-item>
+    
+  </ion-list>

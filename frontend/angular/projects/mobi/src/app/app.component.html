@@ -2,7 +2,7 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
-
+        <app-user-panel [user]="user | async"></app-user-panel>
 
         <mat-accordion class="example-headers-align" multi>
           <mat-expansion-panel *ngFor="let item of categories">

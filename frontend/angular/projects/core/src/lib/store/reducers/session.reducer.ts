@@ -25,6 +25,13 @@ export function SessionReducer(state: SessionState = defaultState, action: Actio
                 ...defaultState,
                 isAuth: false
             };
+        
+        case Actions.ActionTypes.UpdateUser:
+
+          return {
+              ...state,
+              user: Object.assign({},action.payload)
+          };
 
         default:
         return state;
