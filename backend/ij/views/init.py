@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.response import Response
 
+from ij.models import CatFilter
 from ij.serializers import InitSerializer
 from ij.serializers import NoAuthSerializer
 
@@ -24,9 +25,14 @@ class InitView(APIView):
         responses={200: InitSerializer, 401: NoAuthSerializer} )
     def get(self, request, format=None):
         token, created = Token.objects.get_or_create(user=request.user)
+        filter = []
+        for it in CatFilter.objects.filter(user=request.user.userprofile):
+            filter.append(it.subcategory.id)
         data = {
             'token': token.key,
-            'user': request.user.userprofile
+            'user': request.user.userprofile,
+            'filter': filter
+
         }
         return Response(InitSerializer(data).data)
 

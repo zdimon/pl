@@ -1,6 +1,4 @@
-
-
-
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -71,6 +69,7 @@ export function provideConfig() {
   declarations: [AppComponent, UserPanelComponent],
   entryComponents: [],
   imports: [
+    FormsModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,

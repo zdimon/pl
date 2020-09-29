@@ -83,5 +83,9 @@ class ChatRoom2UserInlineAdmin(admin.TabularInline):
 class ChatRoomAdmin(admin.ModelAdmin):
     list_display = ['created_at', 'token', 'search_key']
     inlines = [ChatRoom2UserInlineAdmin, ChatMessageInlineAdmin]
+
+@admin.register(CatFilter)
+class CatFilterAdmin(admin.ModelAdmin):
+    list_display = ['created_at', 'user', 'subcategory']
     
 

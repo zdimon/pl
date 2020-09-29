@@ -43,5 +43,8 @@ export class ApiService {
     return this.http.patch(`${environment.backendUrl}v1/ij/profile/edit/${userId}`, data);
   }
 
+  setFilter(id){
+    return this.http.get(`${environment.backendUrl}v1/ij/category/set/filter/${id}`);
+  }
 
 }

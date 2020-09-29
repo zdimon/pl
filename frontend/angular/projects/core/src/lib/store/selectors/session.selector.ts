@@ -18,3 +18,8 @@ export const selectUserId = createSelector(
     selectSessionUser,
     (user: UserState) => user.id
 );
+
+export const selectUserFilter = createSelector(
+    getSessionStateSelector,
+    (state: SessionState) => state.filter
+);

@@ -12,3 +12,4 @@ from .contact import *
 from .chat import *
 from .check_email import *
 from .init import *
+from .catfilter import *

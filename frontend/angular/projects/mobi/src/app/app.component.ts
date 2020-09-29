@@ -51,6 +51,8 @@ export class AppComponent {
   }
 
   doSelectFilter(id: number){
-    console.log(id);
+    this.api.setFilter(id).subscribe((data: any) => {
+      console.log(data);
+    })
   }
 }

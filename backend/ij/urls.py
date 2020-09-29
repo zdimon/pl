@@ -18,7 +18,8 @@ from ij.views import CityListView, \
                     GetRoomMessageView, \
                     CreateRoomMessageView, \
                     CheckEmailView, \
-                    InitView
+                    InitView, \
+                    CatFilterView
 
 urlpatterns = [ 
 
@@ -27,6 +28,7 @@ urlpatterns = [
 
     path('city/list',CityListView.as_view()),
     path('category/list',CategoryListView.as_view()),
+    path('category/set/filter/<int:id>',CatFilterView.as_view()),
     path('control/list',ControlListView.as_view()),
 
     path('login',LoginView.as_view()),
