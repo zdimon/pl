@@ -1,6 +1,5 @@
-
 import { Component } from '@angular/core';
-
+import { Observable } from 'rxjs';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -9,9 +8,13 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { Store } from '@ngrx/store';
 import { SessionState } from './../../../core/src/lib/store/states/session.state';
-import { selectSessionUser } from './../../../core/src/lib/store/selectors/session.selector';
+import { selectSessionUser, selectIsAuth } from './../../../core/src/lib/store/selectors/session.selector';
 import * as sessionActions from './../../../core/src/lib/store/actions/session.action';
 
+import { CategoryListState } from './../../../core/src/lib/store/states/category.state';
+import { selectCategory } from './../../../core/src/lib/store/selectors/catalog.selector';
+
+// Services
 import { ApiService } from './../../../core/src/lib/services/api.service';
 
 @Component({
@@ -21,7 +24,8 @@ import { ApiService } from './../../../core/src/lib/services/api.service';
 })
 export class AppComponent {
 
-  categories: any;
+  categories: Observable<any>;
+  isAuth: Observable<boolean>;
   user: any;
 
 
@@ -31,12 +35,12 @@ export class AppComponent {
     private statusBar: StatusBar,
     private api: ApiService,
     private session: Store<SessionState>,
+    private categoryState: Store<CategoryListState>
   ) {
     this.initializeApp();
-    this.api.getCategoryList().subscribe((data: any) => {
-      this.categories = data;
-    });
+    this.categories = this.categoryState.select(selectCategory);
     this.user = this.session.select(selectSessionUser);
+    this.isAuth = this.session.select(selectIsAuth);
   }
 
   initializeApp() {
@@ -44,5 +48,9 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  doSelectFilter(id: number){
+    console.log(id);
   }
 }

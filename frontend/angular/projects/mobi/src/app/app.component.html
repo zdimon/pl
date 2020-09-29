@@ -2,19 +2,20 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
-        <app-user-panel [user]="user | async"></app-user-panel>
-
+        <app-user-panel *ngIf="(isAuth | async)" [user]="user | async"></app-user-panel>
+        
         <mat-accordion class="example-headers-align" multi>
-          <mat-expansion-panel *ngFor="let item of categories">
+          <mat-expansion-panel *ngFor="let item of (categories | async)">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 {{ item.name }}
               </mat-panel-title>
             </mat-expansion-panel-header>
         
-            <p *ngFor="let subcategory of item.subcategory">
-              {{ subcategory.name }}
-            </p>
+            <ion-item *ngFor="let subcategory of item.subcategory">
+              <ion-checkbox (ionChange)="doSelectFilter(subcategory.id)" color="primary"></ion-checkbox> 
+              <ion-label>{{ subcategory.name }}</ion-label>
+            </ion-item>
           </mat-expansion-panel>
         </mat-accordion>
 
