@@ -33,7 +33,6 @@ export const selectCategory = createSelector(
     selectSubCategoryEntities,
     selectUserFilter,
     (ids: any, cats: any, subs: any, userFilter: number[]) => {
-        console.log(userFilter);
         return ids.map((el) => { 
                 const cat = cats[el];
                 cat.subcategory = [];

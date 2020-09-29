@@ -10,14 +10,19 @@ import {CategoryReducer} from './reducers/category.reducer';
 import { SubCategoryListState } from './states/subcategory.state';
 import {SubCategoryReducer} from './reducers/subcategory.reducer';
 
+import { OrderListState } from './states/order.state';
+import { OrderReducer } from './reducers/order.reducer';
+
 export interface State {
     session: SessionState;
     category: CategoryListState;
     subcategory: SubCategoryListState;
+    order: OrderListState;
 }
 
 export const reducers: ActionReducerMap<State> = {
     session: SessionReducer,
     category: CategoryReducer,
-    subcategory: SubCategoryReducer
+    subcategory: SubCategoryReducer,
+    order: OrderReducer
 };

@@ -15,8 +15,11 @@ export class ApiService {
   }
 
 
-  getOrderList(){
-    return this.http.get(`${environment.backendUrl}v1/ij/order/list`);
+  getOrderList(page=1){
+    let offset: number;
+    (page === 1 ) ?  offset = 0 : offset = (page - 1) * 20;
+    
+    return this.http.get(`${environment.backendUrl}v1/ij/order/list?limit=20&offset=${offset}`);
   }
 
   getCategoryList(){
