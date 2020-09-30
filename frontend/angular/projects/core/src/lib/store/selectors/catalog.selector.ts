@@ -20,12 +20,30 @@ export const selectCategoryEntities = createSelector(
     (state: CategoryListState) => state.entities
 );
 
+export const selectCategoryArray = createSelector(
+    selectCategoryIds,
+    selectCategoryEntities,
+    (ids: any, objs: any) => ids.map( id => objs[id] )
+);
+
 export const selectSubCategoryEntities = createSelector(
     getSubCategoryStateSelector,
     (state: SubCategoryListState) => state.entities
 );
 
-
+// TODO попробовать на reduce
+export const selectSubCategoriesByCategoryId = (id: number) => {
+    return createSelector(
+        selectSubCategoryEntities,
+        (objs: any) => {
+            const out = [];
+            for( let ido in objs) {
+                if (objs[ido].category === id) out.push(objs[ido]);
+            }
+            return out;
+        }
+    );
+}
 
 export const selectCategory = createSelector(
     selectCategoryIds,

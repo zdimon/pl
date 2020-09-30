@@ -11,7 +11,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { RegistrationFormComponent } from './forms/registration-form/registration-form.component';
 
-import { ApiService } from './services/api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -34,9 +33,10 @@ export const interceptorProviders = [
   }
 ];
 
-import { APP_INITIALIZER } from '@angular/core';
+
 
 import { InitService } from './services/init.service';
+import { OrderFormComponent } from './forms/order-form/order-form.component';
 
 export function init_app(initService: InitService) {
   return () => initService.init();
@@ -47,7 +47,7 @@ export function init_app(initService: InitService) {
 @NgModule({
   declarations: [
     CoreComponent, 
-    RegistrationFormComponent, ProfileFormComponent
+    RegistrationFormComponent, ProfileFormComponent, OrderFormComponent
   ],
   imports: [
     MatFormFieldModule,
@@ -64,19 +64,13 @@ export function init_app(initService: InitService) {
     FlexLayoutModule
   ],
   providers: [
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: init_app,
-    //   deps: [InitService],
-    //   multi: true,
-    // },
-    // ApiService,
     interceptorProviders
   ],
   exports: [
     CoreComponent,
     RegistrationFormComponent,
-    ProfileFormComponent
+    ProfileFormComponent,
+    OrderFormComponent
   ]
 })
 export class CoreModule { }

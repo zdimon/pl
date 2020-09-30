@@ -1,4 +1,5 @@
 
+
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,6 +18,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NewOrderComponent } from './new/new.component';
+
+
 
 @NgModule({
   imports: [
@@ -29,7 +33,10 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     PerfectScrollbarModule,
     InfiniteScrollModule
   ],
-  declarations: [OrderPageComponent],
+  declarations: [
+    OrderPageComponent,
+    NewOrderComponent
+  ],
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

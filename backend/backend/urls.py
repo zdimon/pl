@@ -27,6 +27,8 @@ schema_view = get_schema_view(
         description=''' Documentation
         The `ReDoc` view can be found [here](/doc).
         The `Schema` graph can be found [here](/static/schema.png) or [here](/schema) .
+        The [mobile app](/mobi) or [admin](/admin) .
+
         ''',
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="zdimon77@gmail.com"),

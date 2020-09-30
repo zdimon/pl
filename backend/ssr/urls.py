@@ -7,4 +7,5 @@ urlpatterns = [
     path('web/',web_index),
     path('mobi/',mobi_index),
     path('mobi/tabs/<slug:slug>',mobi_index),
+    path('mobi/tabs/order/<slug:slug>',mobi_index),
 ]
