@@ -50,6 +50,13 @@
             <mat-label>{{ item.name }} </mat-label>
             <input formControlName="{{item.alias}}" matInput >
           </mat-form-field>
+
+          <mat-form-field appearance="fill" *ngIf="item.type === 'Checkbox'">
+            <mat-label>{{ item.name }} </mat-label>
+            <input formControlName="{{item.alias}}" matInput >
+            <mat-checkbox *ngFor="let opt of item.option"
+            formControlName="{{opt.alias}}">{{ opt.text }}</mat-checkbox>
+          </mat-form-field>
       </ng-container>
       
 

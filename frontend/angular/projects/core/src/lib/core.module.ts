@@ -9,6 +9,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+
 import { RegistrationFormComponent } from './forms/registration-form/registration-form.component';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -56,6 +59,7 @@ export function init_app(initService: InitService) {
     MatButtonModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatCheckboxModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
