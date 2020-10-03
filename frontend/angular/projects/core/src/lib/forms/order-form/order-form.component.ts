@@ -39,6 +39,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   changeCategory(event) {
+    console.log('ssss');
     this.subCategories = this.categoryStore.select(selectSubCategoriesByCategoryId(event.value));
   }
 
