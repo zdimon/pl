@@ -50,4 +50,8 @@ export class ApiService {
     return this.http.get(`${environment.backendUrl}v1/ij/category/set/filter/${id}`);
   }
 
+  getFormFields(catId){
+    return this.http.get(`${environment.backendUrl}v1/ij/control/list?category=${catId}`);
+  }
+
 }

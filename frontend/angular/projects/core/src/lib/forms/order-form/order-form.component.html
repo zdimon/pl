@@ -35,6 +35,24 @@
         </mat-select>
       </mat-form-field>
 
+      <!-- controls -->
+      <ng-container  *ngFor="let item of controls">
+        <mat-form-field appearance="outline" *ngIf="item.type === 'Select'">
+          <mat-label>{{item.name}}</mat-label>
+          <mat-select formControlName="{{item.alias}}">
+            <mat-option *ngFor="let opt of item.option" [value]="opt.value">
+              {{ opt.text }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+          <mat-form-field appearance="fill" *ngIf="item.type === 'NumericTextbox'">
+            <mat-label>{{ item.name }} </mat-label>
+            <input formControlName="{{item.alias}}" matInput >
+          </mat-form-field>
+      </ng-container>
+      
+
     <button [disabled]="!form.valid" mat-raised-button  color="accent">Сохранить</button>
 
 </form>

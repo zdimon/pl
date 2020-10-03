@@ -8,4 +8,4 @@ class ControlSerializer(serializers.ModelSerializer):
     subcategory = SubCategorySerializer(many=True)
     class Meta:
         model = Control
-        fields = ['id', 'name', 'option' ,'subcategory']
+        fields = ['id', 'name', 'alias', 'type', 'option' ,'subcategory']

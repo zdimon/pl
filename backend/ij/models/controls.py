@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from .catalog import Category, SubCategory
+from django.template.defaultfilters import slugify
 
 class Control(models.Model):
     TYPE = (
@@ -31,6 +32,10 @@ class Control(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def slug(self):
+        return slugify(self.name)
+
 class Option(models.Model):
     control = models.ForeignKey(Control,on_delete=models.CASCADE)
     value = models.CharField( max_length = 250 )
@@ -39,3 +44,9 @@ class Option(models.Model):
 
     def __str__(self):
         return '%s:%s:%s' % (self.value, self.input_text, self.text)
+
+    # def save(self, *args, **kwargs):
+    #     self.s = slugify(self.q)
+    #     super(Option, self).save(*args, **kwargs)
+
+

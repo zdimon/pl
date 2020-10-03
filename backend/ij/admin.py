@@ -36,7 +36,7 @@ class Control2SubCategoryInine(admin.TabularInline):
     extra = 3
 
 class ControlAdmin(admin.ModelAdmin):
-    list_display = ['name', 'category', 'type']
+    list_display = ['name', 'category', 'type', 'alias']
     list_filter = ['type', 'category']
     inlines = [Control2SubCategoryInine, OptionInline]
         

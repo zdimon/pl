@@ -77,11 +77,15 @@ def save_controls():
         for contrl in jsdata[i]['Controls']:
             
             print('Save...%s' % contrl['Text'])
-            nc = Control.objects.create( \
-                name = contrl['Text'], \
-                category = cat, \
-                type = contrl['Type']
-            )
+            try:
+                nc = Control.objects.get(alias=contrl['PropertyName'])
+            except:
+                nc = Control.objects.create( \
+                    name = contrl['Text'], \
+                    category = cat, \
+                    type = contrl['Type'], \
+                    alias = contrl['PropertyName']
+                )
             for subcat_id in contrl['Subcategories']:
                 try:
                     sc = SubCategory.objects.get(youdo_id=subcat_id)

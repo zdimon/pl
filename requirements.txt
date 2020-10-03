@@ -10,3 +10,4 @@ pygraphviz
 django-extensions
 django-schema-graph
 email-validator
+python-slugify
