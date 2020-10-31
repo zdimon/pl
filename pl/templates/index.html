@@ -63,11 +63,18 @@
                     <div class="row">
                         <div class="col-md-3">
                             <a href="{{ l.get_absolute_url }}">
-                                {{ l.get_image }}  
+                                 {{ l.get_image }}  
                             </a>
                         </div>
                         <div class="col-md-9">
-                            <a href="{{ l.get_absolute_url }}">{{l.number}}. {{ l }}</a>
+                            <a href="{{ l.get_absolute_url }}">
+                                {{l.number}}. 
+                                {% if l.has_video %}
+                                    <span class="green"> 
+                                        <img class="image-fluid" src="/static/images/video.png"> 
+                                    </span>
+                                {% endif %}
+                                {{ l }}</a>
                             <p>{{ l.desc }}</p>
                         </div>
                         
