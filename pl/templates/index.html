@@ -51,7 +51,9 @@
                     {% for l in course.get_last_lessons %}
                     <div class="row">
                         <div class="col-md-3">
-                            {{ l.get_image }}
+                            <a href="{{ l.get_absolute_url }}">
+                                {{ l.get_image }}
+                            </a>
                         </div>
                         <div class="col-md-9">
                             <a href="{{ l.get_absolute_url }}">{{l.number}}. {{ l }}</a>
