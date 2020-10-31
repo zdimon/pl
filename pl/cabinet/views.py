@@ -16,7 +16,11 @@ from pl.settings import LIQPAY_PRIVATE_KEY, LIQPAY_PUBLIC_KEY, LIQPAY_PROCESS_UR
 
 def index(request):
     courses = Course.objects.all().order_by('-id')
-    return render(request,'main.html', {'courses': courses})
+    paid = []
+    for p in LogShow.objects.filter(user=request.user):
+        paid.append(p.lesson.id)
+
+    return render(request,'main.html', {'courses': courses, 'paid': paid})
 
 
 def show_lesson(request,id):
