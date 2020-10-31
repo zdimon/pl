@@ -10,7 +10,7 @@ from pl.settings import DATA_DIR
 from course.models import parse_md
 
 def index(request):
-    courses = Course.objects.all()
+    courses = Course.objects.all().order_by('-id')
     last_lessons = Lesson.objects.all().order_by('-id')[0:9]
     return render(request,'index.html',{'courses': courses, 'last_lessons': last_lessons})
 

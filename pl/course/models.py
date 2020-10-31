@@ -42,7 +42,7 @@ class Course(models.Model):
 
     @property
     def get_last_lessons(self):
-        return Lesson.objects.filter(course=self).order_by('-number')[0:2]
+        return Lesson.objects.filter(course=self).order_by('-number')[0:3]
 
     def get_absolute_url(self):
         return reverse('course_detail', kwargs={'slug': self.name_slug })
@@ -75,7 +75,7 @@ class Lesson(models.Model):
         url = '/static/course/%s/%s/images/1.png' % (self.course.name_slug,clear_name)
         if isfile(path):
             # return path
-            return mark_safe('<img width="200" src="%s" />' % url)
+            return mark_safe('<img class="img-fluid" width="200" src="%s" />' % url)
         else:
             return mark_safe('&nbsp;')
 
