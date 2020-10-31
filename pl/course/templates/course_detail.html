@@ -36,11 +36,10 @@
                         <p> {{ lesson.desc }}</p>
                         <p>
                             {% if not lesson.has_video %}
-                                <span class="red"> Нет видео. </span>
+                               
                             {% else %}
                                 <span class="green"> 
                                     <img src="/static/images/video.png"> &nbsp; Есть видео. 
-    
                                 </span>
                             {% endif %}
                         </p>      
