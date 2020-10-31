@@ -59,40 +59,41 @@ class CourseLoader(object):
         path = DATA_DIR+'/'+self.dir
         onlydirs = [f for f in listdir(path) if isdir(join(path, f))]
         for d in onlydirs:
-            lesson_yml_path = path+'/'+d+'/meta.yml'
-            data = self.get_meta(lesson_yml_path)
-            slug = '%s--%s' % (self.course.name_slug, d)
-            try:
-                lesson = Lesson.objects.get(name_slug=slug)
-            except:
-                lesson = Lesson()
-            number = d.split('-')[0]
-            
-            lesson.name_slug = slug
-            lesson.number = number 
-            try:
-                lesson.title = data['name']
-            except:
-                lesson.title = 'Не определено!'
-                print('Ошибка в %s' % lesson_yml_path)
-                sys.exit()
-            try:
-                lesson.desc = data['desc']
-            except:
-                print('Error with desc in %s' % lesson_yml_path)
-            lesson.meta_keywords = data['meta_keywords']
-            lesson.meta_title = data['meta_title']
-            lesson.meta_description = data['meta_description']
-            lesson.course = self.course
-            lesson.save()
-            print('Saving lesson...%s' % data['slug'])
-            for f in data['files']:
+            if d != 'code':
+                lesson_yml_path = path+'/'+d+'/meta.yml'
+                data = self.get_meta(lesson_yml_path)
+                slug = '%s--%s' % (self.course.name_slug, d)
                 try:
-                    topic = Topic.objects.get(lesson=lesson,filename=f['file'])
-                except Exception as e:
-                    topic = Topic.objects.create(filename=f['file'], course=self.course, title=f['title'], lesson=lesson)
-                print('Saving topic %s' % f['file'])
-                topic.check_video(f)
+                    lesson = Lesson.objects.get(name_slug=slug)
+                except:
+                    lesson = Lesson()
+                number = d.split('-')[0]
+                
+                lesson.name_slug = slug
+                lesson.number = number 
+                try:
+                    lesson.title = data['name']
+                except:
+                    lesson.title = 'Не определено!'
+                    print('Ошибка в %s' % lesson_yml_path)
+                    sys.exit()
+                try:
+                    lesson.desc = data['desc']
+                except:
+                    print('Error with desc in %s' % lesson_yml_path)
+                lesson.meta_keywords = data['meta_keywords']
+                lesson.meta_title = data['meta_title']
+                lesson.meta_description = data['meta_description']
+                lesson.course = self.course
+                lesson.save()
+                print('Saving lesson...%s' % data['slug'])
+                for f in data['files']:
+                    try:
+                        topic = Topic.objects.get(lesson=lesson,filename=f['file'])
+                    except Exception as e:
+                        topic = Topic.objects.create(filename=f['file'], course=self.course, title=f['title'], lesson=lesson)
+                    print('Saving topic %s' % f['file'])
+                    topic.check_video(f)
 
     @staticmethod
     def get_active_courses_dirs():

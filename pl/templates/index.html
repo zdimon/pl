@@ -5,7 +5,7 @@
 <div class="section margin-top_50">
     <div class="container">
         <div class="row course-item">
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <img align="right" class="myimg" src="/static/images/me.jpg" />
                     <span style="margin-left: 10px;">Привет.</span>
                     Меня зовут Дмитрий Жариков и я являюсь практикующим веб-разработчиком уже более 20 лет. 
@@ -15,37 +15,72 @@
                     Помимо онлайн курсов, я так же провожу индивидуальные уроки по PHP, Python и Javascript 
                     и буду рад помочь как в освоении веб-программирования, 
                     так и в разработке веб-сайтов на этих языках.
+                    <p>
+                       
+                    </p>
+            </div>
+            <div class="col-md-3">
+                <a href="http://t.me/zdimonClub" target="_blank">
+                    <img width="50" src="/static/images/telega.png" />
+                    Мой телегам канал
+                </a>
+                 <p> Задавайте вопросы.</p>
+                 <p> Получайте свежие уроки. </p>
             </div>
         </div>        
         {% for course in courses %}
         <div class="row course-item">
-            <div class="col-md-10">
+            <div class="col-md-7">
                 <div class="full">
-                    <div class="heading_main text_align_left">
-                       <h2><a href="{{ course.get_absolute_url }}">{{ course.name }}</a></h2>
-                    </div>
-                    <div class="full">
-                      <p>{{ course.desc | safe}}</p>
-                    </div>
-                    <div class="full">
-                        <strong>Последние уроки.</strong>
-                        {% for l in course.get_last_lessons %}
-                            <a href="{{ l.get_absolute_url }}">{{l.number}}. {{ l }}</a>
-                        {% endfor %}
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img class="img-fluid" src="{{ course.image.url }}" alt="#" />
+                        </div>
+                        <div class="col-md-9">
+                            <div class="heading_main text_align_left">
+                            <h2 class="course-title"><a href="{{ course.get_absolute_url }}">{{ course.name }}</a></h2>
+                            </div>
+                            <div class="full">
+                            <p>{{ course.desc | safe}}</p>
+                            </div>
+                            <div class="full">
+                                <strong>Уроков: {{ course.count_lessons }}</strong>
 
-                        <strong>Количество уроков: {{ course.count_lessons }}</strong>
 
-                      </div>
+                                
+
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-5">
                 <div class="full">
                     
-                        <img src="{{ course.image.url }}" alt="#" />
-                        <div class="full">
-                            <a class="hvr-radial-out button-theme" href="{{ course.get_absolute_url }}">Подробней</a>
-                         </div>
+                    
+                    {% for l in course.get_last_lessons %}
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a href="{{ l.get_absolute_url }}">
+                                 {{ l.get_image }}  
+                            </a>
+                        </div>
+                        <div class="col-md-9">
+                            <a href="{{ l.get_absolute_url }}">
+                                {{l.number}}. 
+                                {% if l.has_video %}
+                                    <span class="green"> 
+                                        <img class="image-fluid" src="/static/images/video.png"> 
+                                    </span>
+                                {% endif %}
+                                {{ l }}</a>
+                            <p>{{ l.desc }}</p>
+                        </div>
+                        
+                    </div>
+                    
+                {% endfor %}
                 </div>
             </div>
         </div>
@@ -53,6 +88,6 @@
     </div>
 </div>
 
-{% include 'parts/last_lessons.html'  with last_lessons=last_lessons %}
+
 
 {% endblock %}

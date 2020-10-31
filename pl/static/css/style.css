@@ -1756,7 +1756,7 @@ select.form-control:not([size]):not([multiple]) {
 
 p {
     margin-top: 5px;
-    margin-bottom: 1rem;
+    margin-bottom: 5px;
     font-size: 16px;
     font-weight: 300;
     line-height: 30px;
@@ -2247,3 +2247,7 @@ section.inner_banner h3 {
 	color: #12385b;
 }
 
+
+.course-title {
+	font-size: 18px;
+} 
