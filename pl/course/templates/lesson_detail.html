@@ -22,7 +22,7 @@
                     <div class="text_align_right">
                         <a href="{{ lesson.course.get_absolute_url }}">Назад</a>
                      </div>
-                    {% for topic in lesson.topic_set.all %}
+                    {% for topic in topics %}
                         <div class="full"> 
                             <div style="text-align: center;" class="full">
                             {{topic.video_tag}}
