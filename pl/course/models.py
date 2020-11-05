@@ -140,6 +140,7 @@ class Topic(models.Model):
     video = models.CharField(verbose_name='Video',max_length=250, blank=True)
     has_video = models.BooleanField(default=False)
     is_youtube = models.BooleanField(default=False)
+    order = models.IntegerField(default=0)
 
     def get_clear_lesson_slug(self):
         return self.lesson.name_slug.split('--')[1]
