@@ -144,5 +144,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+BROKER_URL = 'redis://localhost:6379'
 
 from .local import *

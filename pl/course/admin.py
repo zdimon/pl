@@ -112,11 +112,19 @@ class LessonInline(admin.TabularInline):
     model = NewsLetter.lesson.through
     extra = 3
 
+from course.tasks import send_letters_task
+def send_letter(modeladmin, request, queryset):
+    for lesson in queryset:
+        messages.success(request, 'Письма разослал')
+        send_letters_task.delay(lesson.id)
+send_letter.short_description = 'Send a news letter'
+
 @admin.register(NewsLetter)
 class NewsLetterAdmin(admin.ModelAdmin):
     list_display = ['title','send_letter_link', 'content']
     inlines = [LessonInline]
     change_list_template = 'admin/newsletter_list.html'
+    actions = [send_letter, ]
 
     def send_news_letter(self, request, letter_id):
         letter = NewsLetter.objects.get(pk=letter_id)
