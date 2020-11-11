@@ -10,8 +10,8 @@ from django.contrib import messages
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ['image_tag', 'name_slug', 'desc', 'name', 'meta_title']
-
+    list_display = ['image_tag', 'name_slug', 'desc', 'name', 'meta_title', 'order']
+    list_editable = ['order']
 from django.contrib import messages
 from .models import NewsLetter
 def create_letter(modeladmin, request, queryset):
@@ -27,6 +27,10 @@ def create_letter(modeladmin, request, queryset):
 
 create_letter.short_description = 'Create a news letter'
 
+class TopicInline(admin.TabularInline):
+    model = Topic
+    extra = 3
+
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
     list_display = ['title', 'name_slug', 'course', 'number', 'desc', 'is_new', 'subscribe_link', 'has_video']
@@ -34,6 +38,7 @@ class LessonAdmin(admin.ModelAdmin):
     search_fields = ['name_slug', 'title']
     list_editable = ['is_new']
     actions = [create_letter, ]
+    inlines = [TopicInline]
 
     
 
@@ -69,8 +74,9 @@ class LessonAdmin(admin.ModelAdmin):
 
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
-    list_display = ['title', 'filename', 'course', 'lesson', 'video', 'has_video', 'is_youtube']
+    list_display = ['title', 'filename', 'course', 'lesson', 'video', 'has_video', 'is_youtube', 'order']
     list_filter = ['has_video']
+    list_editable = ['order']
 
 
 

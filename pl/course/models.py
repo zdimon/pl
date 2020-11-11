@@ -32,6 +32,7 @@ class Course(models.Model):
     meta_description = models.TextField(blank=True, null = True)
     name_slug = models.CharField(verbose_name='Name slug',max_length=250, blank=True, null = True)
     is_active = models.BooleanField(verbose_name=_('Is published?'), default=False)
+    order = models.IntegerField(default=0)
 
     @property
     def lessons(self):
@@ -139,6 +140,7 @@ class Topic(models.Model):
     video = models.CharField(verbose_name='Video',max_length=250, blank=True)
     has_video = models.BooleanField(default=False)
     is_youtube = models.BooleanField(default=False)
+    order = models.IntegerField(default=0)
 
     def get_clear_lesson_slug(self):
         return self.lesson.name_slug.split('--')[1]

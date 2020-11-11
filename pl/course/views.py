@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from liqpay.liqpay3 import LiqPay
 from pl.settings import LIQPAY_PRIVATE_KEY, LIQPAY_PUBLIC_KEY, LIQPAY_PROCESS_URL, DOMAIN, LESSON_PRICE
 import time
-from .models import LessonPayments
+from .models import LessonPayments, Topic
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib import messages
@@ -76,6 +76,7 @@ def course_detail(request,slug):
 @csrf_exempt
 def lesson_detail(request,slug):
     lesson = Lesson.objects.get(name_slug=slug)
+    topics = Topic.objects.filter(lesson=lesson).order_by('order')
     is_free = lesson.is_paid(request.user)
     try:
         try:
@@ -87,7 +88,7 @@ def lesson_detail(request,slug):
             ls.save()
     except Exception as e:
         print(str(e))
-    return render(request,'lesson_detail.html',{'lesson': lesson, 'is_free': is_free})
+    return render(request,'lesson_detail.html',{'lesson': lesson, 'is_free': is_free, 'topics': topics})
 
 
 @login_required
