@@ -4,5 +4,6 @@
     </div>
     <a href="{% url 'pay' lesson_id=lesson.id  %}" class="btn btn-primary btn-lg">
         Потратить 2 кредита и начать обучение!
+        У вас {{ user.userprofile.account }} кредитов(а)
     </a>
   </div>
