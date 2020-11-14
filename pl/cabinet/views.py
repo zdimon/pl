@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from course.models import LessonPayments, Comments, Lesson
+from course.models import LessonPayments, Comments, Lesson, Topic
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -25,6 +25,7 @@ def index(request):
 
 def show_lesson(request,id):
     lesson = Lesson.objects.get(pk=id)
+    topics = Topic.objects.filter(lesson=lesson).order_by('order')
     is_free = lesson.is_paid(request.user)
     try:
         LogShow.objects.get(lesson=lesson,user=request.user.userprofile)
@@ -33,7 +34,7 @@ def show_lesson(request,id):
         ls.lesson = lesson
         ls.user = request.user.userprofile
         ls.save()
-    return render(request,'show_lesson.html', {'lesson': lesson, 'is_free': is_free})
+    return render(request,'show_lesson.html', {'lesson': lesson, 'is_free': is_free, 'topics': topics})
 
 
 def add_credits(request):

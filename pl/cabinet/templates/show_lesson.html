@@ -11,7 +11,7 @@
   </h6>
       
     {% if is_free %}
-      {% for topic in lesson.topic_set.all %}
+      {% for topic in topics %}
         <div class="full" id="lesson-content"> 
             <div style="text-align: center;" class="full">
             {{topic.video_tag}}
@@ -26,7 +26,7 @@
       <div class="full" id="lesson-content">
         <div class="full">
             <h2>{{ lesson.title }}</h2>
-                {% for topic in lesson.topic_set.all %}
+                {% for topic in topics %}
                     <div class="full"> 
                         {{ topic.short_content | safe }}
                     </div>   

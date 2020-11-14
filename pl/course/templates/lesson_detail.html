@@ -38,7 +38,7 @@
                 
                     <div class="full">
                         <h2>{{ lesson.title }}</h2>
-                            {% for topic in lesson.topic_set.all %}
+                            {% for topic in topics %}
                                 <div class="full"> 
                                     {{ topic.short_content | safe }}
                                 </div>   
