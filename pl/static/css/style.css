@@ -2255,11 +2255,15 @@ section.inner_banner h3 {
 .tag-block {
 	margin-top: 10px;
 }
+.tag-block a{
+	font-size: 14px !important;
+	font-weight: bold;
+}
 
 .tag-div {
 	line-height: 15px;
 }
 .active-tag {
 	color: red;
-	font-weight: bold;
+	
 }
