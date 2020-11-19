@@ -2259,3 +2259,7 @@ section.inner_banner h3 {
 .tag-div {
 	line-height: 15px;
 }
+.active-tag {
+	color: red;
+	font-weight: bold;
+}

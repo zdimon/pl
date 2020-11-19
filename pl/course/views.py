@@ -18,6 +18,7 @@ from django.contrib import messages
 from pl.settings import DATA_DIR
 from course.models import parse_md
 from cabinet.models import LogShow
+from tagging.models import Tag, TaggedItem
 
 @login_required
 def pay(request,lesson_id):
@@ -171,5 +172,11 @@ def unsubscribe(request):
     return redirect('/')
 
 def show_tag(request,tag):
-    courses = Course.objects.all().order_by('-id')
-    return render(request,'map.html',{'courses': courses})
+    tag = Tag.objects.get(name=tag)
+    lessons = TaggedItem.objects.get_by_model(Lesson, tag)
+    tags = Tag.objects.all()
+    return render(request,'tag_show.html',{ \
+        'tag': tag, \
+        'lessons': lessons, \
+        'tags': tags
+        })
