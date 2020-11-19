@@ -174,7 +174,7 @@ def unsubscribe(request):
 def show_tag(request,tag):
     tag = Tag.objects.get(name=tag)
     lessons = TaggedItem.objects.get_by_model(Lesson, tag)
-    tags = Tag.objects.all()
+    tags = Tag.objects.all().order_by('name')
     return render(request,'tag_show.html',{ \
         'tag': tag, \
         'lessons': lessons, \
