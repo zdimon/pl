@@ -16,7 +16,10 @@
                 {% if is_free %}
                 <div class="full">
                     <div class="heading_main text_align_left">
-                       <h2>{{ lesson.title }}</h2>
+                       <h2>
+                           <a href="{% url 'course_detail' slug=lesson.course.name_slug %}">{{ lesson.course }}</a>/
+                           {{ lesson.title }}
+                        </h2>
                     </div>
                     {% include 'parts/tags.html' with lesson=lesson %}
                     <div class="text_align_right">
@@ -41,7 +44,10 @@
                 
                     <div class="full">
                         <div class="heading_main text_align_left">
-                            <h2>{{ lesson.title }}</h2>
+                            <h2>
+                                <a href="{% url 'course_detail' slug=lesson.course.name_slug %}">{{ lesson.course }}</a>/
+                                {{ lesson.title }}
+                            </h2>
                         </div>
                         
                             {% for topic in topics %}
