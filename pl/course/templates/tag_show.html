@@ -23,9 +23,12 @@
             <div class="col-md-8">
                    {% for lesson in lessons %}
                     <div style="padding-left: 20px;">
-                        <a href="{% url 'course_detail' slug=lesson.course.name_slug %}">
-                            {{ lesson.course }}. 
-                        </a> / 
+                        <p>
+                            <a href="{% url 'course_detail' slug=lesson.course.name_slug %}">
+                                {{ lesson.course }}. 
+                            </a> 
+                        </p>
+
                         <a href="{{ lesson.get_absolute_url }}">
                             {{ lesson.number }}. 
                             {{ lesson.title }}
