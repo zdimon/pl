@@ -24,6 +24,9 @@
                      </div>
                     {% for topic in topics %}
                         <div class="full"> 
+                            <div class="heading_main2">
+                                <h2></h2>
+                            </div>
                             <div style="text-align: center;" class="full">
                             {{topic.video_tag}}
                             </div>
@@ -37,7 +40,10 @@
                 {% else %}
                 
                     <div class="full">
-                        <h2>{{ lesson.title }}</h2>
+                        <div class="heading_main text_align_left">
+                            <h2>{{ lesson.title }}</h2>
+                        </div>
+                        
                             {% for topic in topics %}
                                 <div class="full"> 
                                     {{ topic.short_content | safe }}
