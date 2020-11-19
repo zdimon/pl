@@ -17,8 +17,8 @@
                 <div class="full">
                     <div class="heading_main text_align_left">
                        <h2>{{ lesson.title }}</h2>
-
                     </div>
+                    {% include 'parts/tags.html' with lesson=lesson %}
                     <div class="text_align_right">
                         <a href="{{ lesson.course.get_absolute_url }}">Назад</a>
                      </div>

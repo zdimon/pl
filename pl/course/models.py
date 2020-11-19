@@ -4,6 +4,8 @@ from django.utils.safestring import mark_safe
 from django.urls import reverse
 from pl.settings import DATA_DIR, ALL_FREE, VIDEO_DIR
 import os
+from tagging.registry import register
+from tagging.models import Tag
 
 
 import markdown
@@ -96,7 +98,9 @@ class Lesson(models.Model):
     def get_absolute_url(self):
         return reverse('lesson_detail', kwargs={'slug': self.name_slug })
 
-
+    # @property
+    # def tags(self):    
+    #     return Tag.objects.get_for_object(self)
 
     @property
     def has_video(self):
@@ -131,6 +135,8 @@ class Lesson(models.Model):
             return True
         except:
             return False
+
+register(Lesson)
 
 class Topic(models.Model):
     title = models.CharField(max_length=250, blank=True, verbose_name=_(u'Name'))

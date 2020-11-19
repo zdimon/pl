@@ -3,6 +3,7 @@ from pl.settings import DATA_DIR, VIDEO_DIR
 from os import listdir
 from os.path import isfile, join, isdir
 import sys
+from tagging.models import Tag
 
 import yaml
 from django.core.files import File
@@ -86,6 +87,11 @@ class CourseLoader(object):
                 lesson.meta_description = data['meta_description']
                 lesson.course = self.course
                 lesson.save()
+                ## add tags
+                if 'tags' in data:
+                    tags = data['tags'].split(' ')
+                    for tag in tags:
+                        Tag.objects.add_tag(lesson, tag)
                 print('Saving lesson...%s' % data['slug'])
                 for f in data['files']:
                     try:

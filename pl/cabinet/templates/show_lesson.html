@@ -6,10 +6,11 @@
   <h6 class="heading-small text-muted mb-4">Просмотр урока: {{ lesson.title }}
     <div style="text-align: right;">
       <a href="{% url 'cabinet_index' %}">Вернуться на главную</a>
+      
      </div>
 
   </h6>
-      
+  {% include 'parts/tags.html' with lesson=lesson %}
     {% if is_free %}
       {% for topic in topics %}
         <div class="full" id="lesson-content"> 
@@ -32,7 +33,7 @@
                     </div>   
                 {% endfor %}
         </div>
-
+        {% include 'parts/tags.html' with lesson=lesson %}
         {% include 'includes/pay_block.html' %}
       </div>
     {% endif %}

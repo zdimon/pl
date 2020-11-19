@@ -2251,3 +2251,11 @@ section.inner_banner h3 {
 .course-title {
 	font-size: 18px;
 } 
+
+.tag-block {
+	margin-top: 10px;
+}
+
+.tag-div {
+	line-height: 15px;
+}

@@ -8,11 +8,17 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from pl.settings import DATA_DIR
 from course.models import parse_md
+from tagging.models import Tag
 
 def index(request):
     courses = Course.objects.all().order_by('-order')
     last_lessons = Lesson.objects.all().order_by('-id')[0:9]
-    return render(request,'index.html',{'courses': courses, 'last_lessons': last_lessons})
+    tags = Tag.objects.all()
+    return render(request,'index.html', \
+    {'courses': courses, \
+    'last_lessons': last_lessons, \
+    'tags': tags \
+    })
 
 
 

@@ -30,9 +30,10 @@
         </div>     
         
             <div class="row course-item">
-                <div class="col-md-9">
+                <div class="col-md-6">
                     <h3>Работы студентов</h3>
-                    <p>Фронтенд:
+                    <p>Фронтенд:</p>
+                    <p>
                         <a href="http://quiz.webmonstr.com" target="_blanck"> 
                             Чат-викторина (React+Django). 
                         </a>
@@ -40,7 +41,8 @@
                             Карточная игра Блек-Джек (Angular+NodeJs).
                         </a>
                     </p>
-                    <p>Бекенд:
+                    <p>Бекенд:</p>
+                    <p>
                     <a href="http://quizapi.webmonstr.com" target="_blanck"> 
                         REST API для викторины.
                     </a>           
@@ -48,6 +50,15 @@
                         REST API для программы "Попутчик".
                     </a>  
                     </p>        
+                </div>
+                <div class="col-md-6">
+                    <h3>Теги</h3>
+                    <div class="tag-div">
+                     {% for tag in tags %}
+                       <a href="{% url 'show-tag' tag=tag.name%}">{{ tag }}</a>
+                     {% endfor %}
+                    </div>
+
                 </div>
             </div>   
         {% for course in courses %}

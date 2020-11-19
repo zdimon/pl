@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'social_django',
     'mptt',
     'cabinet',
-    'crispy_forms'
+    'crispy_forms',
+    'tagging'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -131,7 +132,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
 
-
+FORCE_LOWERCASE_TAGS = True
 
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/cabinet/'

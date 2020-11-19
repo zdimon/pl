@@ -1,7 +1,7 @@
 from django.urls import path, include
 from course.views import course_detail, lesson_detail, pay, my_cabinet, save_comment, discussion, subscribe, unsubscribe
 from course.views import articles
-from course.views import article_detail, pay_success, comment_detail, sitemap
+from course.views import article_detail, pay_success, comment_detail, sitemap, show_tag
 
 urlpatterns = [ 
     path('detail/<slug:slug>',course_detail, name="course_detail"),
@@ -21,6 +21,6 @@ urlpatterns = [
     path('comment/detail/<int:id>',comment_detail, name="comment_detail"),
     path('map',sitemap, name="map"),
 
-    
+    path('tag/<slug:tag>',show_tag, name="show-tag"),
 
 ]

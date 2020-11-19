@@ -169,3 +169,7 @@ def unsubscribe(request):
         messages.info(request, 'Емейл %s не подписаны на рассылку.' % request.user.username)
 
     return redirect('/')
+
+def show_tag(request,tag):
+    courses = Course.objects.all().order_by('-id')
+    return render(request,'map.html',{'courses': courses})
