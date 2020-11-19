@@ -30,13 +30,14 @@
         </div>     
         
             <div class="row course-item">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <h3>Работы студентов</h3>
                     <p>Фронтенд:</p>
                     <p>
                         <a href="http://quiz.webmonstr.com" target="_blanck"> 
                             Чат-викторина (React+Django). 
                         </a>
+                    </p><p>
                         <a href="http://bj.webmonstr.com" target="_blanck"> 
                             Карточная игра Блек-Джек (Angular+NodeJs).
                         </a>
@@ -45,13 +46,14 @@
                     <p>
                     <a href="http://quizapi.webmonstr.com" target="_blanck"> 
                         REST API для викторины.
-                    </a>           
+                    </a>   
+                    </p><p>        
                     <a href="http://taxiapi.webmonstr.com" target="_blanck"> 
                         REST API для программы "Попутчик".
                     </a>  
                     </p>        
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <h3>Теги</h3>
                     <div class="tag-div">
                      {% for tag in tags %}
@@ -61,6 +63,7 @@
 
                 </div>
             </div>   
+        <h3>Курсы</h3>
         {% for course in courses %}
         <div class="row course-item">
             <div class="col-md-7">
