@@ -2299,4 +2299,5 @@ section.inner_banner h3 {
 .full h3 {
 	font-weight: bold;
 	color: #323262;
+	margin-top: 10px;
 }
