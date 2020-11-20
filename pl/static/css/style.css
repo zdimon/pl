@@ -2290,3 +2290,8 @@ section.inner_banner h3 {
 	height: 10px;
 	margin-top: 10px;
 }
+
+.full p {
+	color: black;
+	font-size: 18px;
+}
