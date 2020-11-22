@@ -2302,3 +2302,21 @@ section.inner_banner h3 {
 	color: #323262;
 	margin-top: 20px;
 }
+
+.full ul li {
+	font-weight: bold;
+	color: #323262;
+	margin-left: 10px;
+	list-style: circle;
+}
+
+.full ul {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.full pre {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
