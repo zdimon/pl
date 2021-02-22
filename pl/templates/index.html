@@ -28,48 +28,7 @@
             </div>
         </div>     
         
-            <div class="row course-item">
-                <div class="col-md-5">
-                    <h3>Работы студентов</h3>
-                    <p>Фронтенд:</p>
-                    <p>
-                        <a href="http://quiz.webmonstr.com" target="_blank"> 
-                            Чат-викторина (React+Django). 
-                        </a>
-                    </p><p>
-                        <a href="http://bj.webmonstr.com" target="_blank"> 
-                            Карточная игра Блек-Джек (Angular+NodeJs).
-                        </a>
-                    </p>
-                    <p>Бекенд:</p>
-                    <p>
-                    <a href="http://quizapi.webmonstr.com" target="_blank"> 
-                        REST API для викторины.
-                    </a>   
-                    </p>
-                    <p>        
-                    <a href="http://taxiapi.webmonstr.com" target="_blank"> 
-                        REST API для программы "Попутчик".
-                    </a>  
-                    </p>  
-                    
-                    <p>        
-                        <a href="https://t.me/WezomPythonBot" target="_blank"> 
-                            Телеграм бот. Игра в карты.
-                        </a>  
-                        </p>                      
-                    
-                </div>
-                <div class="col-md-7">
-                    <h3>Теги</h3>
-                    <div class="tag-div">
-                     {% for tag in tags %}
-                       <a href="{% url 'show-tag' tag=tag.name%}">{{ tag }}</a>
-                     {% endfor %}
-                    </div>
 
-                </div>
-            </div>   
         <h3>Курсы</h3>
         {% for course in courses %}
         <div class="row course-item">
@@ -126,6 +85,53 @@
                 {% endfor %}
                 </div>
             </div>
+
+
+
+            <div class="row course-item">
+                <div class="col-md-5">
+                    <h3>Работы студентов</h3>
+                    <p>Фронтенд:</p>
+                    <p>
+                        <a href="http://quiz.webmonstr.com" target="_blank"> 
+                            Чат-викторина (React+Django). 
+                        </a>
+                    </p><p>
+                        <a href="http://bj.webmonstr.com" target="_blank"> 
+                            Карточная игра Блек-Джек (Angular+NodeJs).
+                        </a>
+                    </p>
+                    <p>Бекенд:</p>
+                    <p>
+                    <a href="http://quizapi.webmonstr.com" target="_blank"> 
+                        REST API для викторины.
+                    </a>   
+                    </p>
+                    <p>        
+                    <a href="http://taxiapi.webmonstr.com" target="_blank"> 
+                        REST API для программы "Попутчик".
+                    </a>  
+                    </p>  
+                    
+                    <p>        
+                        <a href="https://t.me/WezomPythonBot" target="_blank"> 
+                            Телеграм бот. Игра в карты.
+                        </a>  
+                        </p>                      
+                    
+                </div>
+                <div class="col-md-7">
+                    <h3>Теги</h3>
+                    <div class="tag-div">
+                     {% for tag in tags %}
+                       <a href="{% url 'show-tag' tag=tag.name%}">{{ tag }}</a>
+                     {% endfor %}
+                    </div>
+
+                </div>
+            </div>   
+
+
         </div>
         {% endfor %}
     </div>
