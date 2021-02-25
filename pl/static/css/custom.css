@@ -127,3 +127,7 @@ b, strong {
     border-radius: 10px;
     background-color: white;
 }
+
+h3 {
+    padding-top: 10px;
+}

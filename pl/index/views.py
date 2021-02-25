@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from course.models import Course, Lesson
+from course.models import Course, Lesson, Topic
 
 from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
@@ -14,10 +14,14 @@ def index(request):
     courses = Course.objects.all().order_by('-order')
     last_lessons = Lesson.objects.all().order_by('-id')[0:9]
     tags = Tag.objects.all().order_by('name')
+    last_topics = Topic.objects.all().order_by('-created_at')[0:10]
+    last_lessons = Lesson.objects.all().order_by('-created_at')[0:10]
     return render(request,'index.html', \
     {'courses': courses, \
     'last_lessons': last_lessons, \
-    'tags': tags \
+    'tags': tags, \
+    'last_topics': last_topics, \
+    'last_lessons': last_lessons \
     })
 
 

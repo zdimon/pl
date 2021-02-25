@@ -1,0 +1,18 @@
+  version: '3.5'
+  services: 
+      pl-django:
+          build: .
+          ports:
+              - 8001:8001
+          working_dir: /app
+          container_name: pl-django-server
+          command: ./manage.py runserver 0.0.0.0:8001
+          volumes:
+              - ./pl:/app
+          networks: 
+              - pl_network
+
+
+  networks:
+      pl_network:
+        driver: bridge

@@ -70,7 +70,8 @@ class Lesson(models.Model):
     meta_description = models.TextField(blank=True, null = True)
     is_new = models.BooleanField(verbose_name=_('Is new?'), default=False)
     created = models.DateTimeField(auto_now_add=True)
-
+    created_at = models.DateField()
+    
     @property
     def get_image(self):
         clear_name = self.name_slug.split('--')[1]
@@ -147,6 +148,7 @@ class Topic(models.Model):
     has_video = models.BooleanField(default=False)
     is_youtube = models.BooleanField(default=False)
     order = models.IntegerField(default=0)
+    created_at = models.DateField()
 
     def get_clear_lesson_slug(self):
         return self.lesson.name_slug.split('--')[1]

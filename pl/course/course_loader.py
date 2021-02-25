@@ -82,6 +82,12 @@ class CourseLoader(object):
                     lesson.desc = data['desc']
                 except:
                     print('Error with desc in %s' % lesson_yml_path)
+
+                try:
+                    lesson.created_at = data['created']
+                except:
+                    pass
+
                 lesson.meta_keywords = data['meta_keywords']
                 lesson.meta_title = data['meta_title']
                 lesson.meta_description = data['meta_description']
@@ -105,6 +111,14 @@ class CourseLoader(object):
                         topic.save()
                     except:
                         pass
+
+                    try:
+                        order = f['created']
+                        topic.created_at = f['created']
+                        topic.save()
+                    except:
+                        pass
+
                     print('Saving topic %s' % f['file'])
                     topic.check_video(f)
 
