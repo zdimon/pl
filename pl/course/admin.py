@@ -39,7 +39,7 @@ class LessonAdmin(admin.ModelAdmin):
     list_editable = ['is_new']
     actions = [create_letter, ]
     inlines = [TopicInline]
-
+    search_fields = ['title']
     
 
     def subscribe_link(self, obj):
@@ -77,6 +77,7 @@ class TopicAdmin(admin.ModelAdmin):
     list_display = ['title', 'filename', 'course', 'lesson', 'video', 'has_video', 'is_youtube', 'order']
     list_filter = ['has_video']
     list_editable = ['order']
+    search_fields = ['filename']
 
 
 
