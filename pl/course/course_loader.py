@@ -103,7 +103,7 @@ class CourseLoader(object):
                     try:
                         topic = Topic.objects.get(lesson=lesson,filename=f['file'])
                     except Exception as e:
-                        topic = Topic.objects.create(filename=f['file'], course=self.course, title=f['title'], lesson=lesson)
+                        topic = Topic.objects.create(filename=f['file'], course=self.course, title=f['title'], lesson=lesson, created_at='2000-01-01')
                     ## make order
                     try:
                         order = f['order']
