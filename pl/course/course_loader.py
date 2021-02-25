@@ -86,7 +86,7 @@ class CourseLoader(object):
                 try:
                     lesson.created_at = data['created']
                 except:
-                    pass
+                    lesson.created_at = '2000-01-01'
 
                 lesson.meta_keywords = data['meta_keywords']
                 lesson.meta_title = data['meta_title']
