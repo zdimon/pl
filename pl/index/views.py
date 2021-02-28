@@ -12,9 +12,9 @@ from tagging.models import Tag
 
 def index(request):
     courses = Course.objects.all().order_by('-order')
-    last_lessons = Lesson.objects.all().order_by('-id')[0:9]
+    last_lessons = Lesson.objects.all().order_by('-id')[0:5]
     tags = Tag.objects.all().order_by('name')
-    last_topics = Topic.objects.all().order_by('-created_at')[0:10]
+    last_topics = Topic.objects.all().order_by('-created_at')[0:3]
     #last_topics = last_topics.reverse()
     last_lessons = Lesson.objects.all().order_by('-created_at')[0:10]
     #last_lessons = last_lessons.reverse()
