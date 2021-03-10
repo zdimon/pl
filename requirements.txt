@@ -6,7 +6,7 @@ pyaml
 django-grappelli
 Pillow
 markdown
-cryptography==3.1
+cryptography==3.3.2
 social-auth-core==3.3.3
 social-auth-app-django
 
