@@ -33,21 +33,38 @@
                 <h3>Последние посты.</h3>
                 {% for t in last_topics %}
                     <div class="row">
-                        <div class="col-md-2">
-                          {{ t.lesson.get_image }}
+                        <div class="col-md-6">
+                            <div class="col-md-2">
+                            {{ t.lesson.get_image }}
+                            </div>
+                            <div class="col-md-10">
+                            <p> Курс: 
+                                <a  href="{{ t.lesson.course.get_absolute_url }}">
+                                        {{ t.lesson.course.name }}
+                                </a>
+                            </p>
+                                <a  href="{{ t.lesson.get_absolute_url }}">
+                                        {{ t.title }}
+                                </a>
+                                <p> {{ t.lesson.desc }}</p>
+                            </div>
                         </div>
-                        <div class="col-md-10">
-                        <p> Курс: 
-                            <a  href="{{ t.lesson.course.get_absolute_url }}">
-                                    {{ t.lesson.course.name }}
-                            </a>
-                        </p>
-                            <a  href="{{ t.lesson.get_absolute_url }}">
-                                    {{ t.title }}
-                            </a>
-                            <p> {{ t.lesson.desc }}</p>
+                        <div class="col-md-6">
+                            <div class="col-md-2">
+                            {{ t.lesson.get_image }}
+                            </div>
+                            <div class="col-md-10">
+                            <p> Курс: 
+                                <a  href="{{ t.lesson.course.get_absolute_url }}">
+                                        {{ t.lesson.course.name }}
+                                </a>
+                            </p>
+                                <a  href="{{ t.lesson.get_absolute_url }}">
+                                        {{ t.title }}
+                                </a>
+                                <p> {{ t.lesson.desc }}</p>
+                            </div>
                         </div>
-
                     </div>
                 {% endfor %}
             </div>
