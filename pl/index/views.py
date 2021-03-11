@@ -22,6 +22,7 @@ def index(request):
     'last_lessons': last_lessons, \
     'tags': tags, \
     'last_topics': last_topics, \
+	'last_topics2': last_topics2, \
     'last_lessons': last_lessons \
     })
 
