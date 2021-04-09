@@ -5,7 +5,7 @@ from ij.serializers.subcategory import SubCategorySerializer
 
 class ControlSerializer(serializers.ModelSerializer):
     option = OptionSerializer(many=True,source='option_set')
-    subcategory = SubCategorySerializer(many=True)
+    #subcategory = SubCategorySerializer(many=True)
     class Meta:
         model = Control
         fields = ['id', 'name', 'alias', 'type', 'option' ,'subcategory']

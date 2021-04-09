@@ -6,7 +6,6 @@ requests
 django-filter
 Pillow
 wheel
-pygraphviz
 django-extensions
 django-schema-graph
 email-validator

@@ -51,12 +51,22 @@
             <input formControlName="{{item.alias}}" matInput >
           </mat-form-field>
 
-          <mat-form-field appearance="fill" *ngIf="item.type === 'Checkbox'">
+          <mat-form-field appearance="fill" *ngIf="item.type === 'Container'">
             <mat-label>{{ item.name }} </mat-label>
-            <input formControlName="{{item.alias}}" matInput >
-            <mat-checkbox *ngFor="let opt of item.option"
-            formControlName="{{opt.alias}}">{{ opt.text }}</mat-checkbox>
+            <textarea formControlName="{{item.alias}}" matInput ></textarea>
+            
           </mat-form-field>
+
+          <div
+          *ngIf="item.type === 'Checkbox'"
+          formGroupName="{{item.alias}}"
+          fxLayout="column" fxLayoutGap="10px"
+          >
+            <p>{{ item.name }} </p>
+ 
+            <mat-checkbox *ngFor="let opt of item.option; let i=index"
+            formControlName="{{i}}">{{ opt.text }}</mat-checkbox>
+        </div>
       </ng-container>
       
 

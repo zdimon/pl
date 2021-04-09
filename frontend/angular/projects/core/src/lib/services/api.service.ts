@@ -54,4 +54,8 @@ export class ApiService {
     return this.http.get(`${environment.backendUrl}v1/ij/control/list?category=${catId}`);
   }
 
+  saveOrder(data: any){
+    return this.http.post(`${environment.backendUrl}v1/ij/order/create`,data);
+  }
+
 }

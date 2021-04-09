@@ -1,13 +1,14 @@
-from ij.models import Order, Order2Control
+from ij.models import Order, Order2Control, Option, Control
 from rest_framework import serializers
 from ij.serializers import ControlSerializer
 from ij.utils.account import get_or_create_user_by_email
 
 class Order2ControlSerializer(serializers.ModelSerializer):
     order = serializers.IntegerField(read_only=True)
+    type = serializers.CharField()
     class Meta:
         model = Order2Control
-        fields = ['id', 'order', 'control', 'option', 'value']
+        fields = ['order', 'control', 'option', 'value', 'type']
 
 
 class OrderCreateSerializer(serializers.ModelSerializer):
@@ -37,11 +38,17 @@ class OrderCreateSerializer(serializers.ModelSerializer):
         order.save()
         # сохраняем контролы
         for cntrl in self.validated_data['controls']:
-            o2c = Order2Control()
-            o2c.order = order
-            o2c.control = cntrl['control']
-            o2c.option = cntrl['option']
-            o2c.save()
+            print(cntrl)
+            #ctrl = Control.objects.get(pk=cntrl['control'])
+            if cntrl['type'] == 'NumericTextbox' or cntrl['type'] == 'Select':
+                #import pdb; pdb.set_trace()
+                ##opt = Option.objects.get(control=cntrl['control'],value=cntrl['value'])
+                o2c = Order2Control()
+                o2c.order = order
+                o2c.control = cntrl['control']
+                o2c.value = cntrl['value']
+                o2c.save()
+          
             #print(cntrl)
 
         #import pdb; pdb.set_trace()
