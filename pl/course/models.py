@@ -128,8 +128,8 @@ class Lesson(models.Model):
         cnt = Topic.objects.filter(lesson=self,has_video=True).count()
         if cnt == 0:
             return True
-        # if user.is_superuser:
-        #     return True
+        if user.is_superuser:
+            return True
   
         try:
             LogShow.objects.get(user=user,lesson=self, is_paid=True)
