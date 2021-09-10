@@ -123,8 +123,8 @@ class Lesson(models.Model):
         from cabinet.models import LogShow
         if ALL_FREE:
             return True
-        # if self.number == 1:
-        #     return True
+        if self.number == 1:
+            return True
         cnt = Topic.objects.filter(lesson=self,has_video=True).count()
         if cnt == 0:
             return True
