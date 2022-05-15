@@ -76,6 +76,7 @@ class Lesson(models.Model):
     def get_image(self):
         clear_name = self.name_slug.split('--')[1]
         path = '%s%s/%s/images/1.png' % (DATA_DIR,self.course.name_slug,clear_name)
+        print(path)
         url = '/static/course/%s/%s/images/1.png' % (self.course.name_slug,clear_name)
         if isfile(path):
             # return path
