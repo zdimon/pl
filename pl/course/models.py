@@ -122,6 +122,7 @@ class Lesson(models.Model):
 
     def is_paid(self,user):
         from cabinet.models import LogShow
+        return False
         if ALL_FREE:
             return True
         if self.number == 1:
@@ -137,6 +138,7 @@ class Lesson(models.Model):
             return True
         except:
             return False
+        
 
 register(Lesson)
 
