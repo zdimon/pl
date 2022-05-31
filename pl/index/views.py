@@ -11,7 +11,7 @@ from course.models import parse_md
 from tagging.models import Tag
 
 def index(request):
-    courses = Course.objects.all().order_by('-order')
+    courses = Course.objects.filter(is_active=True).order_by('-order')
     last_lessons = Lesson.objects.all().order_by('-id')[0:5]
     tags = Tag.objects.all().order_by('name')
     last_topics = Topic.objects.all().order_by('-id')[0:6]
