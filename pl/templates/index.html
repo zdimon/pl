@@ -4,82 +4,9 @@
 
 <div class="section margin-top_50">
     <div class="container">
-        <div class="row course-item">
-            <div class="col-md-9">
-                <img align="right" class="myimg" src="/static/images/me.jpg" />
-                    <span style="margin-left: 10px;">Привет.</span>
-                    Меня зовут Дмитрий Жариков и я уже много лет практикую веб-разработку. 
-                    На этом сайте я пытаюсь систематизировать свои знания и опыт в виде курсов.
-                    Упор я делаю на практику и в основном материал оформлен в виде руководств.
-                    Помимо онлайн курсов, я так же провожу индивидуальные уроки по PHP, Python и Javascript 
-                    и буду рад помочь как в освоении веб-программирования, 
-                    так и в разработке веб-сайтов на этих языках.
-                    <p>
-                       
-                    </p>
-            </div>
-            <div class="col-md-3">
-                <a href="http://t.me/zdimonClub" target="_blank">
-                    <img width="50" src="/static/images/telega.png" />
-                    Мой телеграм канал
-                </a>
-                <p>
-                    <a href="https://meet.google.com/drj-ueia-xmk" target="_blank">
-                        <img width="50" src="/static/images/meet.png" />
-                        Ссылка на лекции онлайн
-                    </a>
-                </p>
-            </div>
-        </div>     
+ 
         
-        <div class="row course-item">
-            <div class="col-md-12">
-                <h3>Последние посты.</h3>
-                <div class="row">
-                    {% for t in last_topics %}
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-md-4">
-                                {{ t.lesson.get_image }}
-                                </div>
-                                <div class="col-md-8">
-                                <p> Курс: 
-                                    <a  href="{{ t.lesson.course.get_absolute_url }}">
-                                            {{ t.lesson.course.name }}
-                                    </a>
-                                </p>
-                                    <a  href="{{ t.lesson.get_absolute_url }}">
-                                            {{ t.title }}
-                                    </a>
-                                    <p> {{ t.lesson.desc }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                        {% for t in last_topics2 %}
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                    {{ t.lesson.get_image }}
-                                    </div>
-                                    <div class="col-md-8">
-                                    <p> Курс: 
-                                        <a  href="{{ t.lesson.course.get_absolute_url }}">
-                                                {{ t.lesson.course.name }}
-                                        </a>
-                                    </p>
-                                        <a  href="{{ t.lesson.get_absolute_url }}">
-                                                {{ t.title }}
-                                        </a>
-                                        <p> {{ t.lesson.desc }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                
-            </div>
-        </div>
+
         <!-- 
         <div class="row course-item">
             <div class="col-md-5">
@@ -127,8 +54,11 @@
                             <div class="full">
                                 <strong>Уроков: {{ course.count_lessons }}</strong>
 
+                                {% if course.cost > 0 %}
+                                <strong>Стоимость: {{ course.cost }} грн.</strong>
 
-                                
+                                <a style="float: right" href="#" class="btn btn-success">Купить</a>
+                                {% endif %}
 
                             </div>
                         </div>
@@ -167,6 +97,58 @@
         </div>
         {% endfor %}
 
+
+
+            <div class="row course-item">
+                <div class="col-md-12">
+                    <h3>Последние посты.</h3>
+                    <div class="row">
+                        {% for t in last_topics %}
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                    {{ t.lesson.get_image }}
+                                    </div>
+                                    <div class="col-md-8">
+                                    <p> Курс: 
+                                        <a  href="{{ t.lesson.course.get_absolute_url }}">
+                                                {{ t.lesson.course.name }}
+                                        </a>
+                                    </p>
+                                        <a  href="{{ t.lesson.get_absolute_url }}">
+                                                {{ t.title }}
+                                        </a>
+                                        <p> {{ t.lesson.desc }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                            {% for t in last_topics2 %}
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                        {{ t.lesson.get_image }}
+                                        </div>
+                                        <div class="col-md-8">
+                                        <p> Курс: 
+                                            <a  href="{{ t.lesson.course.get_absolute_url }}">
+                                                    {{ t.lesson.course.name }}
+                                            </a>
+                                        </p>
+                                            <a  href="{{ t.lesson.get_absolute_url }}">
+                                                    {{ t.title }}
+                                            </a>
+                                            <p> {{ t.lesson.desc }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    
+                </div>
+            </div>
+
+
             <div class="row course-item">
                 <div class="col-md-5">
                     <h3>Работы студентов</h3>
@@ -180,6 +162,7 @@
                             Карточная игра Блек-Джек (Angular+NodeJs).
                         </a>
                     </p>
+                    <!-- 
                     <p>Бекенд:</p>
                     <p>
                     <a href="http://quizapi.webmonstr.com" target="_blank"> 
@@ -196,7 +179,8 @@
                         <a href="https://t.me/WezomPythonBot" target="_blank"> 
                             Телеграм бот. Игра в карты.
                         </a>  
-                        </p>                      
+                        </p> 
+                    -->                     
                     
                 </div>
                 <div class="col-md-7">
@@ -209,6 +193,9 @@
 
                 </div>
             </div>
+
+
+
     </div>
 
  
