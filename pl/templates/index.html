@@ -57,7 +57,8 @@
                                 {% if course.cost > 0 %}
                                 <strong>Стоимость: {{ course.cost }} грн.</strong>
 
-                                <a style="float: right" href="#" class="btn btn-success">Купить</a>
+                                <a style="float: right" 
+                                href="http://localhost:8001/ru/student/pay_course/{{course.name_slug}}" class="btn btn-success">Купить</a>
                                 {% endif %}
 
                             </div>
