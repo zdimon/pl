@@ -22,6 +22,16 @@
                             {{ course.desc | safe }}
                         </div>
                     </div>
+                    <div class="full">
+                        <strong>Уроков: {{ course.count_lessons }}</strong>
+
+                        {% if course.cost > 0 %}
+                        <strong>Стоимость: {{ course.cost }} грн.</strong>
+
+                        <a style="float: right" 
+                        href="https://mentor.webmonstr.com/ru/student/pay_course/{{course.name_slug}}" class="btn btn-success">Купить</a>
+                        {% endif %}
+                    </div>
                     {% for lesson in lessons %}
                     <div style="clear: both;"></div>
                     <div class="lesson-item">
