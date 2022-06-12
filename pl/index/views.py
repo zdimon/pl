@@ -6,7 +6,7 @@ from django.views.generic import View
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 
-from pl.settings import DATA_DIR
+from pl.settings import DATA_DIR, SB_DOMAIN
 from course.models import parse_md
 from tagging.models import Tag
 
@@ -23,7 +23,8 @@ def index(request):
     'tags': tags, \
     'last_topics': last_topics, \
 	'last_topics2': last_topics2, \
-    'last_lessons': last_lessons \
+    'last_lessons': last_lessons, \
+    'sb_domain': SB_DOMAIN \
     })
 
 
