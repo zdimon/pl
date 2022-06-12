@@ -1,21 +1,10 @@
 
-<div class="full">
-    <div class="alert alert-danger" role="alert">
-        Для просмотра полного урока нужно простимулировать преподавателя, и потратить 2 кредита.
-    </div>
-    <a href="{% url 'pay' lesson_id=lesson.id  %}" class="btn btn-primary btn-lg">
-        Потратить 2 кредита и начать обучение!
-        У вас {{ user.userprofile.account }} кредитов(а)
-    </a>
-  </div>
-
-
 
 <div class="full">
     <div class="alert alert-danger" role="alert">
         Для просмотра урока необходимо перейти в раздел "Обучающая платформа".
     </div>
-    <a href="https://mentor.webmonstr.com" class="btn btn-primary btn-lg">
+    <a href="https://mentor.webmonstr.com/student/detail/lesson/{{ item.pk }}" class="btn btn-primary btn-lg">
         Обучающая платформа.
     </a>
   </div>

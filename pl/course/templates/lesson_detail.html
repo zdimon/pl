@@ -11,6 +11,7 @@
 {% block content %}
 <div class="section margin-top_50">
     <div class="container">
+        {% include 'includes/pay_block.html' with item=lesson%}
         <div class="row">
             <div class="col-md-12 layout_padding_2">
                 {% if is_free %}
@@ -58,7 +59,7 @@
                     </div>
 
                   
-                    {% include 'includes/pay_block.html' %}
+                    {% include 'includes/pay_block.html' with item=lesson %}
                 {% endif %}
 
                 <div class="text_align_right">
