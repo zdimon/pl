@@ -2,9 +2,9 @@
 
 <div class="full">
     <div class="alert alert-danger" role="alert">
-        Для просмотра урока необходимо перейти в раздел "Обучающая платформа".
+        Для просмотра урока необходимо перейти в раздел "Обучающая платформа" и оплатить курс.
     </div>
-    <a href="https://mentor.webmonstr.com/student/detail/lesson/{{ item.pk }}" class="btn btn-primary btn-lg">
+    <a href="https://mentor.webmonstr.com/student/pay_course/{{ item.course.name_slug }}" class="btn btn-primary btn-lg">
         Обучающая платформа.
     </a>
   </div>
